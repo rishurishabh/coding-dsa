@@ -1,0 +1,173 @@
+<title>DSA Roadmap — Progress Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16px; line-height: 1.65; color: var(--ink-soft); max-width: 68ch; margin: 0 0 28px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; margin-bottom: 32px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .swatch.done { background: var(--add); }
+  .swatch.pending { background: var(--surface); border: 1.4px solid var(--line); }
+
+  .progress-label { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; }
+  .progress-track { background: var(--surface); border: 1.5px solid var(--line); border-radius: 11px; height: 22px; overflow: hidden; margin-bottom: 44px; }
+  .progress-fill { background: var(--add); height: 100%; width: 57%; border-radius: 11px 0 0 11px; }
+
+  section.group { margin-bottom: 34px; }
+  .group-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; color: var(--ink); margin: 0 0 12px; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .chip {
+    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    width: 168px; min-height: 60px; padding: 10px 14px;
+    border-radius: 10px; position: relative;
+    font-family: var(--font-mono); font-size: 12.5px; line-height: 1.3;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .chip .num { position: absolute; top: 8px; left: 12px; font-size: 10px; }
+  .chip .status { position: absolute; top: 7px; right: 12px; font-size: 12px; }
+  .chip .label { margin-top: 14px; }
+
+  .chip.done { background: var(--add-soft); border: 2px solid var(--add); color: var(--add); cursor: pointer; }
+  .chip.done .label { color: var(--ink); }
+  .chip.done:hover { transform: translateY(-2px); box-shadow: 0 6px 16px -8px var(--add); }
+
+  .chip.pending { background: var(--surface); border: 1.4px solid var(--line); color: var(--ink-soft); cursor: default; }
+  .chip.pending .label { color: var(--ink-soft); }
+
+  footer { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 40px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">coding_dsa / 28 modules, Grokking-style order</p>
+  <h1>DSA Roadmap: where to start, and what's next</h1>
+  <p class="lede">
+    Work top to bottom, section by section — each pattern builds on ones
+    before it more than it builds on the ones after. Click a done pattern to
+    open its README (theory + diagrams); every folder also has a
+    <code>problems.md</code> practice list and runnable <code>.js</code> for
+    every variant.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch done"></span>done — click to open</div>
+    <div class="legend-item"><span class="swatch pending"></span>not started yet</div>
+  </div>
+
+  <p class="progress-label">16 of 28 modules complete</p>
+  <div class="progress-track"><div class="progress-fill"></div></div>
+
+  <section class="group">
+    <p class="group-label">PREREQUISITE</p>
+    <div class="chip-row">
+      <a class="chip done" href="00-sorting-algorithms/README.md"><span class="num">00</span><span class="status">✓</span><span class="label">Sorting Algorithms</span></a>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">FOUNDATIONS</p>
+    <div class="chip-row">
+      <a class="chip done" href="01-sliding-window/README.md"><span class="num">01</span><span class="status">✓</span><span class="label">Sliding Window</span></a>
+      <a class="chip done" href="02-two-pointers/README.md"><span class="num">02</span><span class="status">✓</span><span class="label">Two Pointers</span></a>
+      <a class="chip done" href="03-fast-slow-pointers/README.md"><span class="num">03</span><span class="status">✓</span><span class="label">Fast &amp; Slow Pointers</span></a>
+      <a class="chip done" href="04-merge-intervals/README.md"><span class="num">04</span><span class="status">✓</span><span class="label">Merge Intervals</span></a>
+      <a class="chip done" href="05-cyclic-sort/README.md"><span class="num">05</span><span class="status">✓</span><span class="label">Cyclic Sort</span></a>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">LINKED LISTS &amp; STACKS</p>
+    <div class="chip-row">
+      <a class="chip done" href="06-in-place-linked-list-reversal/README.md"><span class="num">06</span><span class="status">✓</span><span class="label">In-place LL Reversal</span></a>
+      <a class="chip done" href="07-monotonic-stack/README.md"><span class="num">07</span><span class="status">✓</span><span class="label">Monotonic Stack</span></a>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">TREES &amp; GRAPHS</p>
+    <div class="chip-row">
+      <a class="chip done" href="08-tree-bfs/README.md"><span class="num">08</span><span class="status">✓</span><span class="label">Tree BFS</span></a>
+      <a class="chip done" href="09-tree-dfs/README.md"><span class="num">09</span><span class="status">✓</span><span class="label">Tree DFS</span></a>
+      <a class="chip done" href="10-graph-bfs-dfs/README.md"><span class="num">10</span><span class="status">✓</span><span class="label">Graph BFS/DFS</span></a>
+      <a class="chip done" href="11-topological-sort/README.md"><span class="num">11</span><span class="status">✓</span><span class="label">Topological Sort</span></a>
+      <a class="chip done" href="12-union-find/README.md"><span class="num">12</span><span class="status">✓</span><span class="label">Union Find</span></a>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">HEAPS &amp; SELECTION</p>
+    <div class="chip-row">
+      <a class="chip done" href="13-two-heaps/README.md"><span class="num">13</span><span class="status">✓</span><span class="label">Two Heaps</span></a>
+      <a class="chip done" href="14-top-k-elements/README.md"><span class="num">14</span><span class="status">✓</span><span class="label">Top K Elements</span></a>
+      <div class="chip pending"><span class="num">15</span><span class="status">○</span><span class="label">K-way Merge</span></div>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">SEARCH</p>
+    <div class="chip-row">
+      <div class="chip pending"><span class="num">16</span><span class="status">○</span><span class="label">Modified Binary Search</span></div>
+      <div class="chip pending"><span class="num">17</span><span class="status">○</span><span class="label">Subsets / Backtracking</span></div>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">BIT MANIPULATION</p>
+    <div class="chip-row">
+      <a class="chip done" href="18-bitwise-xor/README.md"><span class="num">18</span><span class="status">✓</span><span class="label">Bitwise XOR</span></a>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">DYNAMIC PROGRAMMING</p>
+    <div class="chip-row">
+      <div class="chip pending"><span class="num">19</span><span class="status">○</span><span class="label">0/1 Knapsack</span></div>
+      <div class="chip pending"><span class="num">20</span><span class="status">○</span><span class="label">Unbounded Knapsack</span></div>
+      <div class="chip pending"><span class="num">21</span><span class="status">○</span><span class="label">LCS Family</span></div>
+      <div class="chip pending"><span class="num">22</span><span class="status">○</span><span class="label">Palindromic Subseq</span></div>
+      <div class="chip pending"><span class="num">23</span><span class="status">○</span><span class="label">DP on Grids</span></div>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">GREEDY</p>
+    <div class="chip-row">
+      <div class="chip pending"><span class="num">24</span><span class="status">○</span><span class="label">Greedy</span></div>
+    </div>
+  </section>
+
+  <section class="group">
+    <p class="group-label">ADVANCED STRUCTURES</p>
+    <div class="chip-row">
+      <div class="chip pending"><span class="num">25</span><span class="status">○</span><span class="label">Trie</span></div>
+      <div class="chip pending"><span class="num">26</span><span class="status">○</span><span class="label">Segment / Fenwick Tree</span></div>
+      <div class="chip pending"><span class="num">27</span><span class="status">○</span><span class="label">Graph Shortest Path</span></div>
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg
+  </footer>
+</div>

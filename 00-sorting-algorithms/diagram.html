@@ -1,0 +1,282 @@
+<title>Sorting Algorithms — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 00-sorting-algorithms/</p>
+  <h1>Sorting: compare-and-swap, or just count</h1>
+  <p class="lede">
+    Six algorithms here only ever ask "is A bigger than B?" — that question
+    alone caps them at O(n log n). The seventh sidesteps the question
+    entirely. Code lives in <code>00-sorting-algorithms/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>out of order / being moved</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>compared / active</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>placed / final</div>
+  </div>
+
+  <section>
+    <h2>The core split</h2>
+    <p class="section-title">Comparison sorts vs. the one exception</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="Left side: two array cells connected by a bidirectional compare arrow, feeding a swap decision. Right side: array cells feeding directly into count buckets with no comparison arrows at all." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+        <text x="150" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--add)">COMPARISON SORTS</text>
+        <rect x="90" y="50" width="60" height="44" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+        <text x="120" y="78" fill="var(--add)">5</text>
+        <rect x="180" y="50" width="60" height="44" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+        <text x="210" y="78" fill="var(--add)">2</text>
+        <path d="M154,72 L176,72" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)" marker-start="url(#arrow-add)"></path>
+        <text x="165" y="60" text-anchor="middle" font-size="11" fill="var(--add)">compare</text>
+        <text x="165" y="130" text-anchor="middle" font-size="12" fill="var(--remove)">5 &gt; 2 → swap</text>
+        <text x="165" y="150" text-anchor="middle" font-size="11" fill="var(--ink-soft)">bubble, selection, insertion,</text>
+        <text x="165" y="166" text-anchor="middle" font-size="11" fill="var(--ink-soft)">merge, quick, heap</text>
+
+        <line x1="380" y1="30" x2="380" y2="190" stroke="var(--line)" stroke-width="1.4"></line>
+
+        <text x="590" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--result)">COUNTING SORT</text>
+        <rect x="500" y="50" width="44" height="34" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+        <text x="522" y="72" fill="var(--ink)">2</text>
+        <rect x="554" y="50" width="44" height="34" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+        <text x="576" y="72" fill="var(--ink)">5</text>
+        <rect x="608" y="50" width="44" height="34" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+        <text x="630" y="72" fill="var(--ink)">2</text>
+        <path d="M522,88 L522,110" fill="none" stroke="var(--result)" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+        <path d="M576,88 L576,110" fill="none" stroke="var(--result)" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+        <path d="M630,88 L630,110" fill="none" stroke="var(--result)" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+        <text x="576" y="130" text-anchor="middle" font-size="12" fill="var(--result)">tally: 2→×2, 5→×1</text>
+        <text x="576" y="160" text-anchor="middle" font-size="11" fill="var(--ink-soft)">no comparisons anywhere</text>
+      </svg>
+    </figure>
+    <figcaption>
+      log₂(n!) ≈ n log n is the proven floor for anything that only
+      compares — counting sort isn't faster at the same game, it's playing
+      a different one.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Seven variants</h2>
+    <p class="section-title">Six comparison shapes, one non-comparison exception</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-bubble-sort.js</span>
+        <h3>Repeated adjacent swaps</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A row of values with two adjacent out-of-order neighbors swapping places, and the largest value having already bubbled to the end from a prior pass." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="30" y="70" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="52" y="92" fill="var(--add)">5</text>
+            <rect x="78" y="70" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="100" y="92" fill="var(--add)">2</text>
+            <path d="M52,60 Q75,40 98,60" fill="none" stroke="var(--add)" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+            <text x="75" y="30" text-anchor="middle" fill="var(--add)">swap: 5 &gt; 2</text>
+            <rect x="126" y="70" width="44" height="34" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="148" y="92" fill="var(--ink)">6</text>
+            <rect x="230" y="70" width="44" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="252" y="92" fill="var(--result)">9</text>
+            <text x="252" y="120" text-anchor="middle" fill="var(--result)">placed by a prior pass</text>
+          </svg>
+        </div>
+        <p>Every full pass without a swap means the array is already sorted — that's the early exit.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-selection-sort.js</span>
+        <h3>Repeated find-min-and-place</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="The minimum value found somewhere in the unsorted region being swapped directly into the front of that region." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="30" y="70" width="44" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="52" y="92" fill="var(--result)">1</text>
+            <text x="52" y="60" text-anchor="middle" fill="var(--result)">placed</text>
+            <rect x="90" y="70" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="112" y="92" fill="var(--add)">5</text>
+            <rect x="138" y="70" width="44" height="34" rx="6" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+            <text x="160" y="92" fill="var(--remove)">2</text>
+            <text x="160" y="60" text-anchor="middle" fill="var(--remove)">min found here</text>
+            <path d="M112,110 Q135,130 158,110" fill="none" stroke="var(--remove)" stroke-width="1.6" marker-end="url(#arrow-remove)"></path>
+            <text x="135" y="145" text-anchor="middle" fill="var(--remove)">swap min to front of unsorted region</text>
+          </svg>
+        </div>
+        <p>Exactly one swap per position, no matter the input — n-1 swaps total, always.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-insertion-sort.js</span>
+        <h3>Grow a sorted prefix</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A sorted prefix with a new element shifting leftward past bigger elements until it finds its correct slot." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="30" y="70" width="44" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.8"></rect>
+            <text x="52" y="92" fill="var(--result)">2</text>
+            <rect x="78" y="70" width="44" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.8"></rect>
+            <text x="100" y="92" fill="var(--result)">5</text>
+            <text x="65" y="55" text-anchor="middle" fill="var(--result)">sorted prefix</text>
+            <rect x="126" y="70" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+            <text x="148" y="92" fill="var(--add)">3</text>
+            <path d="M148,110 Q100,140 60,120" fill="none" stroke="var(--add)" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+            <text x="100" y="155" text-anchor="middle" fill="var(--add)">shift right past bigger values, insert into the gap</text>
+          </svg>
+        </div>
+        <p>Cost is proportional to how unsorted the input is — O(n) if it's already sorted.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-merge-sort.js</span>
+        <h3>Divide, merge on the way back up</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="An array split into two sorted halves, merged back together by always taking the smaller of the two fronts." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="30" y="40" width="34" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="47" y="60" fill="var(--ink)">2</text>
+            <rect x="64" y="40" width="34" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="81" y="60" fill="var(--ink)">5</text>
+            <text x="64" y="28" text-anchor="middle" fill="var(--ink-soft)">left (sorted)</text>
+            <rect x="190" y="40" width="34" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="207" y="60" fill="var(--ink)">1</text>
+            <rect x="224" y="40" width="34" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="241" y="60" fill="var(--ink)">6</text>
+            <text x="224" y="28" text-anchor="middle" fill="var(--ink-soft)">right (sorted)</text>
+            <path d="M47,75 Q120,120 130,140" fill="none" stroke="var(--result)" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+            <path d="M207,75 Q150,120 145,140" fill="none" stroke="var(--result)" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+            <text x="140" y="165" text-anchor="middle" fill="var(--result)">merged: [1,2,5,6] — smaller front wins each step</text>
+          </svg>
+        </div>
+        <p>Two sorted halves merge in one linear pass — same two-pointer idea as merging intervals.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-quick-sort.js</span>
+        <h3>Divide via partition, not midpoint</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="An array partitioned around a pivot value, with smaller elements moved to its left and larger elements to its right, the pivot landing at its final sorted index." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="30" y="80" width="40" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+            <text x="50" y="102" fill="var(--add)">3</text>
+            <rect x="74" y="80" width="40" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+            <text x="94" y="102" fill="var(--add)">2</text>
+            <rect x="118" y="80" width="40" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></rect>
+            <text x="138" y="102" fill="var(--result)">5</text>
+            <rect x="162" y="80" width="40" height="34" rx="6" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+            <text x="182" y="102" fill="var(--remove)">9</text>
+            <rect x="206" y="80" width="40" height="34" rx="6" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+            <text x="226" y="102" fill="var(--remove)">6</text>
+            <text x="70" y="70" text-anchor="middle" fill="var(--add)">≤ pivot</text>
+            <text x="138" y="60" text-anchor="middle" fill="var(--result)">pivot (final index)</text>
+            <text x="204" y="70" text-anchor="middle" fill="var(--remove)">&gt; pivot</text>
+            <text x="138" y="140" text-anchor="middle" fill="var(--ink-soft)">recurse on BOTH sides (quickselect only needs one)</text>
+          </svg>
+        </div>
+        <p>The same partition step as quickselect — sorting both sides instead of discarding one.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <span class="card-tag">06-heap-sort.js</span>
+        <h3>Heapify, then repeated extract-max</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A max-heap's root swapped to the end of the array, shrinking the heap by one and sifting the new root down to restore the heap property." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="130" y1="55" x2="90" y2="100" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="130" y1="55" x2="170" y2="100" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="130" cy="45" r="18" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></circle>
+            <text x="130" y="50" fill="var(--add)">9</text>
+            <circle cx="90" cy="110" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="90" y="114" fill="var(--ink)">5</text>
+            <circle cx="170" cy="110" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="170" y="114" fill="var(--ink)">6</text>
+            <path d="M148,50 Q250,30 270,110" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <rect x="248" y="110" width="44" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="270" y="132" fill="var(--result)">9</text>
+            <text x="270" y="160" text-anchor="middle" fill="var(--result)">placed, heap shrinks by one</text>
+          </svg>
+        </div>
+        <p>The array IS the heap — no separate structure, unlike the Heap class used elsewhere in this repo.</p>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card">
+        <span class="card-tag">07-counting-sort.js</span>
+        <h3>Count values, never compare them</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Values tallied into count buckets by their own value, then read back out in bucket order to produce a fully sorted result with no comparisons." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="70" y="50" fill="var(--ink)">value 1: ×1</text>
+            <text x="70" y="72" fill="var(--ink)">value 2: ×2</text>
+            <text x="70" y="94" fill="var(--ink)">value 3: ×1</text>
+            <path d="M150,70 L200,70" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="250" y="70" text-anchor="middle" fill="var(--result)">read out:</text>
+            <text x="250" y="90" text-anchor="middle" fill="var(--result)">[1,2,2,3]</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--ink-soft)">no element is ever compared to another</text>
+          </svg>
+        </div>
+        <p>Sidesteps the O(n log n) comparison floor entirely — but only works when the value range is small.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/00-sorting-algorithms/ — README.md (theory) · problems.md (8 practice problems) · 01–07*.js (runnable code)
+  </footer>
+
+</div>

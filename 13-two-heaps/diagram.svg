@@ -1,0 +1,122 @@
+<svg width="1040" height="1040" viewBox="0 0 1040 1040" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two heaps mechanism map: a max-heap and min-heap sharing a boundary, and three variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1040" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Two Heaps — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 13-TWO-HEAPS</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">A max-heap holds everything below the median, a min-heap holds everything above it.</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Keep them the same size and the median is always sitting at one of their tops.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">small / max-heap (lower half)</text>
+  <rect x="290" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="312" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">large / min-heap (upper half)</text>
+  <rect x="550" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="572" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">result / boundary</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Two roots, one boundary</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,286)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <line x1="250" y1="80" x2="180" y2="140" stroke="#d7dee8" stroke-width="1.6"></line>
+    <line x1="250" y1="80" x2="320" y2="140" stroke="#d7dee8" stroke-width="1.6"></line>
+    <circle cx="250" cy="60" r="22" fill="#b3467c14" stroke="#b3467c" stroke-width="2.4"></circle>
+    <text x="250" y="65" fill="#b3467c">4</text>
+    <circle cx="170" cy="150" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="170" y="155" fill="#14202e">2</text>
+    <circle cx="330" cy="150" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="330" y="155" fill="#14202e">3</text>
+    <text x="250" y="195" text-anchor="middle" font-size="12" fill="#b3467c">max-heap: small half</text>
+
+    <line x1="510" y1="80" x2="440" y2="140" stroke="#d7dee8" stroke-width="1.6"></line>
+    <line x1="510" y1="80" x2="580" y2="140" stroke="#d7dee8" stroke-width="1.6"></line>
+    <circle cx="510" cy="60" r="22" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.4"></circle>
+    <text x="510" y="65" fill="#0f7a72">5</text>
+    <circle cx="440" cy="150" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="440" y="155" fill="#14202e">7</text>
+    <circle cx="580" cy="150" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="580" y="155" fill="#14202e">6</text>
+    <text x="510" y="195" text-anchor="middle" font-size="12" fill="#0f7a72">min-heap: large half</text>
+
+    <path d="M272,60 L488,60" fill="none" stroke="#a8710a" stroke-width="2" stroke-dasharray="4 3"></path>
+    <text x="380" y="45" text-anchor="middle" fill="#a8710a">median = (4+5)/2 = 4.5</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Every value in the max-heap is ≤ every value in the min-heap, and their sizes are</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">equal — so the median just reads off both roots.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THREE VARIANTS</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">A narrow pattern — three genuinely distinct jobs</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-running-median.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Two balanced heaps</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="110" cy="50" r="18" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></circle>
+      <text x="110" y="55" fill="#b3467c">4</text>
+      <circle cx="220" cy="50" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="220" y="55" fill="#0f7a72">5</text>
+      <path d="M126,42 Q165,10 204,42" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="165" y="20" text-anchor="middle" fill="#a8710a">push new num, pop max over</text>
+      <text x="160" y="150" text-anchor="middle" fill="#4a5a70">rebalance sizes, then peek both tops</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Insert, shuffle one element across</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">to keep the ordering guarantee,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">then peek — O(log n) per number.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-sliding-window-median.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Balanced heaps + lazy deletion</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="160" cy="40" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <text x="160" y="45" fill="#14202e">7</text>
+      <circle cx="110" cy="100" r="18" fill="none" stroke="#b3467c" stroke-width="2" stroke-dasharray="3 2"></circle>
+      <text x="110" y="105" fill="#b3467c">3✕</text>
+      <circle cx="210" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <text x="210" y="105" fill="#14202e">5</text>
+      <text x="110" y="135" text-anchor="middle" fill="#b3467c">marked, not removed yet</text>
+      <text x="160" y="170" text-anchor="middle" fill="#4a5a70">discarded once it reaches the top</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The outgoing element can't be</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">plucked from the middle of a heap</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">— it's marked, swept away lazily.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-ipo-greedy-unlock.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Gate heap + pick heap</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" text-anchor="middle">
+      <rect x="20" y="50" width="110" height="60" rx="8" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+      <text x="75" y="72" fill="#4a5a70">gate: min-heap</text>
+      <text x="75" y="90" fill="#4a5a70">by capital needed</text>
+      <path d="M132,80 Q170,80 190,80" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <text x="160" y="65" fill="#0f7a72">now affordable</text>
+      <rect x="192" y="50" width="110" height="60" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="247" y="72" fill="#0f7a72">pick: max-heap</text>
+      <text x="247" y="90" fill="#0f7a72">by profit</text>
+      <text x="160" y="150" text-anchor="middle" fill="#a8710a">take the best pick; capital grows; repeat</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">One heap orders what's locked,</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the other what's currently open —</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">capital only grows, never shrinks.</text>
+  </g>
+
+  <text x="32" y="1000" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/13-two-heaps/ — README.md · problems.md · 01–03*.js</text>
+</svg>

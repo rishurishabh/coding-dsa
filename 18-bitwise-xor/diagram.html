@@ -1,0 +1,215 @@
+<title>Bitwise XOR — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 18-bitwise-xor/</p>
+  <h1>XOR: pairs cancel, survivors don't</h1>
+  <p class="lede">
+    `a ^ a = 0`. XOR every element in a sequence together and every
+    duplicate pair vanishes — whatever's left over is the answer. Code
+    lives in <code>18-bitwise-xor/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>cancels with its pair</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>active / being processed</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>survivor / result</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">XOR the whole array; duplicates vanish</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="An array of five values where the two 1s and the two 2s each cancel out via XOR, leaving 4 as the sole survivor." font-family="var(--font-mono)" font-size="16" text-anchor="middle">
+        <rect x="100" y="80" width="60" height="44" rx="8" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.4"></rect>
+        <text x="130" y="108" fill="var(--result)">4</text>
+        <rect x="180" y="80" width="60" height="44" rx="8" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+        <text x="210" y="108" fill="var(--remove)">1</text>
+        <rect x="260" y="80" width="60" height="44" rx="8" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+        <text x="290" y="108" fill="var(--remove)">2</text>
+        <rect x="340" y="80" width="60" height="44" rx="8" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+        <text x="370" y="108" fill="var(--remove)">1</text>
+        <rect x="420" y="80" width="60" height="44" rx="8" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+        <text x="450" y="108" fill="var(--remove)">2</text>
+        <path d="M210,72 Q290,20 370,72" fill="none" stroke="var(--remove)" stroke-width="1.8"></path>
+        <text x="290" y="30" text-anchor="middle" font-size="12" fill="var(--remove)">1 ^ 1 = 0</text>
+        <path d="M290,140 Q370,180 450,140" fill="none" stroke="var(--remove)" stroke-width="1.8"></path>
+        <text x="370" y="196" text-anchor="middle" font-size="12" fill="var(--remove)">2 ^ 2 = 0</text>
+        <text x="130" y="60" text-anchor="middle" font-size="12" fill="var(--result)">survives — no pair</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Order doesn't matter — XOR is commutative and associative, so pairs
+      cancel no matter how far apart they sit in the array.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Six variants</h2>
+    <p class="section-title">One identity, pushed six different ways</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-single-number-cancellation.js</span>
+        <h3>XOR cancellation</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A running XOR accumulator absorbing values one at a time, with a duplicate canceling itself out." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="120" y="70" width="80" height="40" rx="7" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="160" y="95" fill="var(--result)">acc = 4</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">4 ^ 1 ^ 2 ^ 1 ^ 2 = 4</text>
+          </svg>
+        </div>
+        <p>One running XOR, one pass — no hashset needed to track what's been seen.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-single-number-two-uniques.js</span>
+        <h3>Partition by a differing bit</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Elements split into two groups based on whether a specific bit is set, isolating the two unique survivors into separate groups." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="30" y="40" width="110" height="50" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="85" y="62" fill="var(--add)">bit set</text>
+            <text x="85" y="80" fill="var(--add)">XOR → 3</text>
+            <rect x="180" y="40" width="110" height="50" rx="8" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.8"></rect>
+            <text x="235" y="62" fill="var(--result)">bit clear</text>
+            <text x="235" y="80" fill="var(--result)">XOR → 5</text>
+            <text x="160" y="130" text-anchor="middle" fill="var(--ink-soft)">a's pair and b's pair land in the SAME group as each other</text>
+          </svg>
+        </div>
+        <p>The lowest set bit of (a^b) is where a and b differ — split there, then variant 1 works on each half.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-single-number-triple-appearing.js</span>
+        <h3>Bit-count state machine</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Three copies of the same value failing to cancel under plain XOR, requiring a state machine that tracks bit counts modulo three instead." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <text x="100" y="60" fill="var(--ink)">2 ^ 2 ^ 2 = 2</text>
+            <text x="100" y="82" fill="var(--remove)">(doesn't cancel!)</text>
+            <text x="220" y="60" fill="var(--result)">ones/twos track</text>
+            <text x="220" y="82" fill="var(--result)">count mod 3 per bit</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">a bit survives in `ones` only if seen ≡ 1 (mod 3)</text>
+          </svg>
+        </div>
+        <p>Plain XOR assumes pairs. Three copies need a real counter, tracked per bit position instead of per value.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-missing-number-xor.js</span>
+        <h3>XOR indices against values</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Each array value XORed against its index, with matching pairs canceling and the missing number's index surviving alone." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="80" y="50" fill="var(--ink-soft)">idx 0 ^ val 3</text>
+            <text x="80" y="72" fill="var(--ink-soft)">idx 1 ^ val 0</text>
+            <text x="80" y="94" fill="var(--ink-soft)">idx 2 ^ val 1</text>
+            <text x="230" y="50" fill="var(--remove)">0,3 pair off</text>
+            <text x="230" y="72" fill="var(--remove)">1,1 pair off</text>
+            <text x="230" y="94" fill="var(--result)">idx 3, idx 2: leftover → 2 missing</text>
+          </svg>
+        </div>
+        <p>Same cancellation, but the "duplicate" being matched is an index from the expected range, not a repeated value.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-complement-flip-bits.js</span>
+        <h3>Mask + XOR to flip</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="The binary representation of 5 XORed against a mask of all ones matching its bit width, flipping only its significant bits." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+            <text x="160" y="60" fill="var(--ink)">101</text>
+            <text x="160" y="85" fill="var(--add)">^ 111 (mask)</text>
+            <line x1="100" y1="95" x2="220" y2="95" stroke="var(--line)" stroke-width="1.4"></line>
+            <text x="160" y="115" fill="var(--result)">010</text>
+            <text x="160" y="145" text-anchor="middle" font-size="11" fill="var(--ink-soft)">mask grows until it covers every significant bit</text>
+          </svg>
+        </div>
+        <p>~num flips leading zeros too — a purpose-built mask confines the flip to bits that actually matter.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <span class="card-tag">06-counting-bits-kernighan.js</span>
+        <h3>n &amp; (n-1) clears the lowest bit</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="The binary representation of a number having its lowest set bit removed by ANDing it with itself minus one, repeated until the number reaches zero while counting the steps." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+            <text x="160" y="50" fill="var(--ink)">1011 (n)</text>
+            <text x="160" y="72" fill="var(--add)">1010 (n-1)</text>
+            <line x1="110" y1="82" x2="210" y2="82" stroke="var(--line)" stroke-width="1.4"></line>
+            <text x="160" y="102" fill="var(--result)">1010 (n &amp; n-1)</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">repeat until 0 — step count = set bits</text>
+          </svg>
+        </div>
+        <p>n-1 flips everything below the lowest set bit; ANDing with n erases just that one bit, cleanly.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/18-bitwise-xor/ — README.md (theory) · problems.md (7 practice problems) · 01–06*.js (runnable code)
+  </footer>
+
+</div>

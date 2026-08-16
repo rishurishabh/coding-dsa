@@ -1,0 +1,179 @@
+<svg width="1040" height="1380" viewBox="0 0 1040 1380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Topological sort mechanism map: the in-degree-zero release loop, and six variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1380" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Topological Sort — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 11-TOPOLOGICAL-SORT</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">A node with in-degree 0 owes nothing to anyone — it's always safe to output. Outputting</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">it frees its neighbors of one dependency each, which may make them safe too.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">in-degree 0 — ready now</text>
+  <rect x="260" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="282" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">unmet prerequisites</text>
+  <rect x="470" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="492" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">output order</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Release, decrement, repeat</text>
+
+  <rect x="32" y="266" width="976" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,286)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <line x1="380" y1="55" x2="300" y2="115" stroke="#4a5a70" stroke-width="2" marker-end="url(#arrow-ink)"></line>
+    <line x1="380" y1="55" x2="460" y2="115" stroke="#4a5a70" stroke-width="2" marker-end="url(#arrow-ink)"></line>
+    <line x1="300" y1="130" x2="370" y2="175" stroke="#d7dee8" stroke-width="1.8" marker-end="url(#arrow-ink)"></line>
+    <line x1="460" y1="130" x2="390" y2="175" stroke="#d7dee8" stroke-width="1.8" marker-end="url(#arrow-ink)"></line>
+    <circle cx="380" cy="40" r="22" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.4"></circle>
+    <text x="380" y="45" fill="#0f7a72">0</text>
+    <text x="380" y="14" text-anchor="middle" font-size="11" fill="#0f7a72">in=0: ready</text>
+    <circle cx="300" cy="120" r="20" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></circle>
+    <text x="300" y="125" fill="#b3467c">1</text>
+    <text x="300" y="152" text-anchor="middle" font-size="11" fill="#b3467c">in=1→0</text>
+    <circle cx="460" cy="120" r="20" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></circle>
+    <text x="460" y="125" fill="#b3467c">2</text>
+    <text x="460" y="152" text-anchor="middle" font-size="11" fill="#b3467c">in=1→0</text>
+    <circle cx="380" cy="190" r="20" fill="#ffffff" stroke="#d7dee8" stroke-width="1.8"></circle>
+    <text x="380" y="195" fill="#14202e">3</text>
+    <text x="380" y="222" text-anchor="middle" font-size="11" fill="#4a5a70">in=2 — still waiting on both</text>
+  </g>
+
+  <text x="32" y="594" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Releasing 0 drops both 1 and 2 to in-degree 0 — both become ready in the same step.</text>
+  <text x="32" y="612" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Node 3 still needs both of them gone first.</text>
+
+  <text x="32" y="652" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">SIX VARIANTS</text>
+  <text x="32" y="678" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Two base algorithms, four ways to steer them</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,698)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-kahns-bfs.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Kahn's algorithm</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="100" y="40" width="40" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="120" y="62" fill="#0f7a72">0</text>
+      <text x="120" y="28" text-anchor="middle" fill="#0f7a72">queue</text>
+      <line x1="120" y1="80" x2="120" y2="105" stroke="#4a5a70" stroke-width="1.8" marker-end="url(#arrow-ink)"></line>
+      <rect x="30" y="115" width="260" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="160" y="137" fill="#a8710a">order so far: [0, 1, 2, 3]</text>
+      <text x="160" y="170" text-anchor="middle" fill="#4a5a70">decrement neighbors, push new zeros</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Output, decrement, check for new</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">zeros — the plain version every</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">other variant modifies.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,698)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-dfs-postorder.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">DFS postorder, reversed</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="30" y="70" width="30" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.6"></rect>
+      <rect x="65" y="70" width="30" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.6"></rect>
+      <rect x="100" y="70" width="30" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.6"></rect>
+      <rect x="135" y="70" width="30" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.6"></rect>
+      <text x="45" y="90" fill="#a8710a">3</text><text x="80" y="90" fill="#a8710a">1</text><text x="115" y="90" fill="#a8710a">2</text><text x="150" y="90" fill="#a8710a">0</text>
+      <text x="97" y="55" text-anchor="middle" fill="#4a5a70">finish order (DFS returns)</text>
+      <path d="M180,85 Q220,85 220,120 Q220,150 180,150" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <text x="245" y="120" text-anchor="middle" fill="#0f7a72">reverse</text>
+      <text x="97" y="165" text-anchor="middle" fill="#0f7a72">[0, 2, 1, 3]</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A node finishes only after</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">everything it points to has —</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">finish order is backwards.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,698)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-course-schedule-levels.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Kahn's, drained level by level</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="30" y="20" width="60" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="60" y="42" fill="#0f7a72">{0}</text>
+      <text x="140" y="42" fill="#4a5a70">semester 1</text>
+      <rect x="30" y="70" width="120" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="90" y="92" fill="#0f7a72">{1, 2}</text>
+      <text x="200" y="92" fill="#4a5a70">semester 2</text>
+      <rect x="30" y="120" width="60" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="60" y="142" fill="#0f7a72">{3}</text>
+      <text x="140" y="142" fill="#4a5a70">semester 3</text>
+      <text x="160" y="175" text-anchor="middle" fill="#a8710a">3 semesters minimum</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Everything drained in one</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">queue-size snapshot has no</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">dependency on the rest of it.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,1022)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-lexicographically-smallest-order.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Kahn's + min-heap</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="60" cy="60" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="60" y="65" fill="#0f7a72">0</text>
+      <circle cx="130" cy="60" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="130" y="65" fill="#0f7a72">1</text>
+      <circle cx="200" cy="60" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="200" y="65" fill="#0f7a72">2</text>
+      <text x="130" y="30" text-anchor="middle" fill="#4a5a70">all three ready at once</text>
+      <path d="M60,80 Q130,120 130,140" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="130" y="160" text-anchor="middle" fill="#a8710a">heap always pops the smallest: 0, then 1, then 2</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same three choices every time —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the heap guarantees the smallest</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">is taken first, deterministically.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,1022)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-all-topological-orders.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Kahn's, backtracked</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" text-anchor="middle">
+      <circle cx="160" cy="30" r="16" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <text x="160" y="34" fill="#14202e">start</text>
+      <path d="M148,44 Q100,80 90,110" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <path d="M172,44 Q220,80 230,110" fill="none" stroke="#b3467c" stroke-width="1.8" marker-end="url(#arrow-remove)"></path>
+      <text x="90" y="130" text-anchor="middle" fill="#0f7a72">choose 0 first</text>
+      <text x="90" y="145" fill="#0f7a72">→ [0,1,2]</text>
+      <text x="230" y="130" text-anchor="middle" fill="#b3467c">choose 1 first</text>
+      <text x="230" y="145" fill="#b3467c">→ [1,0,2]</text>
+      <text x="160" y="175" text-anchor="middle" fill="#4a5a70">try each, undo, try the next</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Every simultaneously-ready node</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">is a real fork — explore each fully,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">then backtrack and try the next.</text>
+  </g>
+
+  <!-- CARD 6 -->
+  <g transform="translate(712,1022)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">06-alien-dictionary.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Build the graph, then sort it</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <text x="90" y="50" fill="#14202e">w r t</text>
+      <text x="90" y="80" fill="#14202e">w r f</text>
+      <rect x="112" y="65" width="16" height="20" fill="#b3467c14" stroke="#b3467c" stroke-width="1.6"></rect>
+      <text x="180" y="65" text-anchor="middle" fill="#b3467c">first diff: t vs f</text>
+      <text x="180" y="85" text-anchor="middle" fill="#a8710a">edge: t → f</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">repeat for every adjacent word pair,</text>
+      <text x="160" y="158" text-anchor="middle" fill="#4a5a70">then run Kahn's on the extracted edges</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The graph isn't given — every</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">adjacent word pair contributes at</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">most one edge, from its first diff.</text>
+  </g>
+
+  <text x="32" y="1344" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/11-topological-sort/ — README.md · problems.md · 01–06*.js</text>
+</svg>

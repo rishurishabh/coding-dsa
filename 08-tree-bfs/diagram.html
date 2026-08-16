@@ -1,0 +1,276 @@
+<title>Tree BFS — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 08-tree-bfs/</p>
+  <h1>Tree BFS: know where a level ends</h1>
+  <p class="lede">
+    A queue alone gives breadth-first order. Snapshotting its size before
+    draining a level is what turns that into "process exactly this depth,
+    then stop." Code lives in <code>08-tree-bfs/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>this level, draining now</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>pushed for the next level</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Snapshot the queue's size, then drain exactly that many</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 260" role="img" aria-label="A small tree with its second level's two nodes shown as a queue snapshot of size two, about to be drained while their children get pushed for the next level." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+        <line x1="380" y1="50" x2="280" y2="110" stroke="var(--line)" stroke-width="1.6"></line>
+        <line x1="380" y1="50" x2="480" y2="110" stroke="var(--line)" stroke-width="1.6"></line>
+        <line x1="480" y1="120" x2="430" y2="180" stroke="var(--line)" stroke-width="1.6"></line>
+        <line x1="480" y1="120" x2="530" y2="180" stroke="var(--line)" stroke-width="1.6"></line>
+        <circle cx="380" cy="40" r="20" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="380" y="45" fill="var(--ink)">3</text>
+        <circle cx="280" cy="110" r="20" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.2"></circle>
+        <text x="280" y="115" fill="var(--add)">9</text>
+        <circle cx="480" cy="110" r="20" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.2"></circle>
+        <text x="480" y="115" fill="var(--add)">20</text>
+        <circle cx="430" cy="180" r="20" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></circle>
+        <text x="430" y="185" fill="var(--remove)">15</text>
+        <circle cx="530" cy="180" r="20" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></circle>
+        <text x="530" y="185" fill="var(--remove)">7</text>
+        <path d="M255,88 Q380,60 505,88" fill="none" stroke="var(--add)" stroke-width="1.6" stroke-dasharray="4 3"></path>
+        <text x="380" y="70" text-anchor="middle" font-size="12" fill="var(--add)">size = 2 → drain exactly 2 this level</text>
+        <text x="480" y="225" text-anchor="middle" font-size="12" fill="var(--remove)">pushed while draining: belongs to the NEXT level</text>
+      </svg>
+    </figure>
+    <figcaption>
+      9 and 20 are this level. While popping them, their children (15 and 7)
+      get pushed — but the size was snapshotted BEFORE that push, so they
+      won't leak into the current level's count.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Six variants</h2>
+    <p class="section-title">One snapshot trick, six different jobs</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-level-order-traversal.js</span>
+        <h3>Queue + level-size snapshot</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A small tree with each depth boxed separately, showing nodes grouped into one array per level." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="35" x2="100" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="160" y1="35" x2="220" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="190" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="250" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="160" cy="30" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="100" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="220" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="190" cy="135" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="250" cy="135" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <rect x="135" y="10" width="50" height="40" rx="10" fill="none" stroke="var(--result)" stroke-width="1.6" stroke-dasharray="3 2"></rect>
+            <rect x="75" y="60" width="170" height="40" rx="10" fill="none" stroke="var(--result)" stroke-width="1.6" stroke-dasharray="3 2"></rect>
+            <rect x="165" y="115" width="105" height="40" rx="10" fill="none" stroke="var(--result)" stroke-width="1.6" stroke-dasharray="3 2"></rect>
+            <text x="160" y="175" text-anchor="middle" fill="var(--result)">[[3],[9,20],[15,7]]</text>
+          </svg>
+        </div>
+        <p>Each level's drain loop produces exactly one array. This is the foundation every other variant builds on.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-level-order-sentinel.js</span>
+        <h3>Queue + sentinel marker</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A row of queue boxes with a diamond-shaped sentinel marker separating one level's nodes from the next." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="30" y="80" width="36" height="32" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+            <rect x="72" y="80" width="36" height="32" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+            <polygon points="140,76 160,96 140,116 120,96" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.8"></polygon>
+            <rect x="180" y="80" width="36" height="32" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+            <rect x="222" y="80" width="36" height="32" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+            <text x="48" y="100" fill="var(--add)">9</text>
+            <text x="90" y="100" fill="var(--add)">20</text>
+            <text x="140" y="100" fill="var(--result)">•</text>
+            <text x="198" y="100" fill="var(--remove)">15</text>
+            <text x="240" y="100" fill="var(--remove)">7</text>
+            <text x="140" y="140" text-anchor="middle" fill="var(--result)">pop the marker → level done, re-enqueue it</text>
+          </svg>
+        </div>
+        <p>No size math — popping the marker itself IS the level boundary.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-zigzag-level-order.js</span>
+        <h3>Snapshot + direction toggle</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tree where the second level's array is recorded reversed, alternating the reading direction each level." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="35" x2="100" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="160" y1="35" x2="220" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="160" cy="30" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="160" y="34" fill="var(--ink)">3</text>
+            <circle cx="100" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="100" y="84" fill="var(--ink)">9</text>
+            <circle cx="220" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="220" y="84" fill="var(--ink)">20</text>
+            <path d="M100,105 Q160,130 220,105" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+            <text x="160" y="150" text-anchor="middle" fill="var(--add)">discovered left→right, RECORDED reversed</text>
+            <text x="160" y="170" text-anchor="middle" fill="var(--result)">level 2 → [20, 9]</text>
+          </svg>
+        </div>
+        <p>The queue order never changes — only whether the finished level array gets reversed before saving.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-right-side-view.js</span>
+        <h3>Snapshot, keep one node</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tree with the rightmost node at each depth highlighted, since it is the last node dequeued during that level's drain loop." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="35" x2="100" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="160" y1="35" x2="220" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="100" y1="90" x2="130" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="250" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="160" cy="30" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></circle>
+            <text x="160" y="34" fill="var(--result)">1</text>
+            <circle cx="100" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="100" y="84" fill="var(--ink)">2</text>
+            <circle cx="220" cy="80" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></circle>
+            <text x="220" y="84" fill="var(--result)">3</text>
+            <circle cx="130" cy="135" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="130" y="139" fill="var(--ink)">5</text>
+            <circle cx="250" cy="135" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></circle>
+            <text x="250" y="139" fill="var(--result)">4</text>
+            <text x="160" y="175" text-anchor="middle" fill="var(--result)">right side view: [1, 3, 4]</text>
+          </svg>
+        </div>
+        <p>The last node popped in each level's loop is provably the rightmost — no need to keep the rest.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-minimum-depth.js</span>
+        <h3>Snapshot + early exit</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tree where the first leaf found during breadth-first search is highlighted as the answer, while deeper unvisited nodes are grayed out and never explored." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="35" x2="100" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="160" y1="35" x2="220" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="190" y2="135" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 2"></line>
+            <line x1="220" y1="90" x2="250" y2="135" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 2"></line>
+            <circle cx="160" cy="30" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="160" y="34" fill="var(--ink)">3</text>
+            <circle cx="100" cy="80" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></circle>
+            <text x="100" y="84" fill="var(--result)">9</text>
+            <circle cx="220" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="220" y="84" fill="var(--ink)">20</text>
+            <circle cx="190" cy="135" r="15" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 2"></circle>
+            <text x="190" y="139" fill="var(--ink-soft)">15</text>
+            <circle cx="250" cy="135" r="15" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 2"></circle>
+            <text x="250" y="139" fill="var(--ink-soft)">7</text>
+            <text x="160" y="175" text-anchor="middle" fill="var(--result)">leaf found at depth 2 — stop, never visit 15 or 7</text>
+          </svg>
+        </div>
+        <p>9 is a leaf found at depth 2. BFS returns immediately — 15 and 7 are never even dequeued.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <span class="card-tag">06-connect-level-pointers.js</span>
+        <h3>Snapshot, mutate not collect</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tree with dashed horizontal arrows connecting sibling nodes at the same depth, representing next pointers being set as the queue drains each level." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="35" x2="100" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="160" y1="35" x2="220" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="100" y1="90" x2="70" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="100" y1="90" x2="130" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="190" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="250" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="160" cy="30" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="160" y="34" fill="var(--ink)">1</text>
+            <circle cx="100" cy="80" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="100" y="84" fill="var(--ink)">2</text>
+            <circle cx="220" cy="80" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="220" y="84" fill="var(--ink)">3</text>
+            <path d="M114,80 L206,80" fill="none" stroke="var(--add)" stroke-width="1.6" stroke-dasharray="3 2" marker-end="url(#arrow-add)"></path>
+            <circle cx="70" cy="135" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="70" y="139" fill="var(--ink)">4</text>
+            <circle cx="130" cy="135" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="130" y="139" fill="var(--ink)">5</text>
+            <circle cx="190" cy="135" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="190" y="139" fill="var(--ink)">6</text>
+            <circle cx="250" cy="135" r="14" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="250" y="139" fill="var(--ink)">7</text>
+            <path d="M84,135 L116,135" fill="none" stroke="var(--add)" stroke-width="1.6" stroke-dasharray="3 2" marker-end="url(#arrow-add)"></path>
+            <path d="M144,135 L176,135" fill="none" stroke="var(--add)" stroke-width="1.6" stroke-dasharray="3 2" marker-end="url(#arrow-add)"></path>
+            <path d="M204,135 L236,135" fill="none" stroke="var(--add)" stroke-width="1.6" stroke-dasharray="3 2" marker-end="url(#arrow-add)"></path>
+          </svg>
+        </div>
+        <p>prev.next = node falls straight out of the drain loop's pop order — no output array needed at all.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/08-tree-bfs/ — README.md (theory) · problems.md (8 practice problems) · 01–06*.js (runnable code)
+  </footer>
+
+</div>

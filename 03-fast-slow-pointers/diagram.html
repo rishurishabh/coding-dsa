@@ -1,0 +1,267 @@
+<title>Fast & Slow Pointers — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e;
+    --ink-soft: #4a5a70;
+    --paper: #eef2f7;
+    --surface: #ffffff;
+    --line: #d7dee8;
+    --add: #0f7a72;
+    --add-soft: #0f7a7214;
+    --remove: #b3467c;
+    --remove-soft: #b3467c14;
+    --result: #a8710a;
+    --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 03-fast-slow-pointers/</p>
+  <h1>Fast & Slow Pointers: one speed trick, five jobs</h1>
+  <p class="lede">
+    One pointer moves 1 step, the other 2, on the <strong>same</strong> forward-only
+    structure. That's the whole mechanism — what changes is what you're using
+    it to find. Code lives in <code>03-fast-slow-pointers/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>slow / trail</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>fast / lead</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result — the node/value found</div>
+  </div>
+
+  <section>
+    <h2>The core loop</h2>
+    <p class="section-title">Same list, different speeds</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 200" role="img" aria-label="A chain of nodes with a slow pointer advancing one step and a fast pointer advancing two steps per tick, from the same starting node.">
+        <g font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+          <g id="chain">
+            <circle cx="40" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="130" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="220" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="310" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="400" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="490" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="580" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="670" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+          </g>
+          <line x1="58" y1="100" x2="662" y2="100" stroke="var(--line)" stroke-width="1.4"></line>
+        </g>
+        <line x1="40" y1="70" x2="220" y2="70" stroke="var(--remove)" stroke-width="2.2" marker-end="url(#arrow-remove)"></line>
+        <text x="130" y="58" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--remove)">slow: +1 per tick</text>
+        <line x1="40" y1="140" x2="400" y2="140" stroke="var(--add)" stroke-width="2.2" marker-end="url(#arrow-add)"></line>
+        <text x="220" y="158" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--add)">fast: +2 per tick</text>
+        <text x="580" y="40" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--ink-soft)">loops → they meet</text>
+        <text x="580" y="175" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--ink-soft)">ends → fast finishes first</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Both pointers start at the same node. Fast's 2x speed either makes it lap
+      slow inside a cycle (they meet), or makes it hit the end first (its
+      position, or slow's, becomes the answer).
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Five variants</h2>
+    <p class="section-title">One trick, applied to different goals and inputs</p>
+
+    <div class="grid">
+
+      <!-- Card 1: cycle detection -->
+      <div class="card">
+        <span class="card-tag">01-cycle-detection.js</span>
+        <h3>Meet-in-the-cycle, reset-to-head</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A lollipop-shaped list: a straight stem leading into a loop. Slow and fast meet inside the loop; a pointer reset to the head and a pointer continuing from the meeting point both advance one step at a time and meet again at the cycle's start.">
+            <circle cx="20" cy="90" r="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="60" cy="90" r="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="100" cy="90" r="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <line x1="30" y1="90" x2="90" y2="90" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="195" cy="90" r="55" fill="none" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="140" cy="90" r="7" fill="var(--result)"></circle>
+            <text x="140" y="72" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--result)">cycle start</text>
+            <circle cx="234" cy="129" r="6" fill="var(--ink)"></circle>
+            <text x="252" y="145" font-family="var(--font-mono)" font-size="10.5" fill="var(--ink-soft)">meet here</text>
+            <path d="M20,90 Q80,130 140,90" fill="none" stroke="var(--remove)" stroke-width="1.8" stroke-dasharray="3 3" marker-end="url(#arrow-remove)"></path>
+            <text x="70" y="150" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--remove)">ptr from head, +1/step</text>
+            <path d="M234,129 Q160,175 140,95" fill="none" stroke="var(--add)" stroke-width="1.8" stroke-dasharray="3 3" marker-end="url(#arrow-add)"></path>
+          </svg>
+        </div>
+        <p>After slow/fast meet, a pointer from head and the meeting point both step by 1 — they meet again exactly at the cycle's start.</p>
+      </div>
+
+      <!-- Card 2: middle of list -->
+      <div class="card">
+        <span class="card-tag">02-middle-of-list.js</span>
+        <h3>Fast runs out first</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A chain of six nodes with a slow pointer's arc reaching the fourth node while a fast pointer's arc reaches the last node, marking the fourth node as the middle.">
+            <g font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+              <circle cx="30" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="80" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="130" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="180" cy="100" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></circle>
+              <circle cx="230" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="280" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <text x="30" y="104" fill="var(--ink)">1</text>
+              <text x="80" y="104" fill="var(--ink)">2</text>
+              <text x="130" y="104" fill="var(--ink)">3</text>
+              <text x="180" y="104" fill="var(--result)">4</text>
+              <text x="230" y="104" fill="var(--ink)">5</text>
+              <text x="280" y="104" fill="var(--ink)">6</text>
+            </g>
+            <line x1="45" y1="65" x2="165" y2="65" stroke="var(--line)" stroke-width="1.2"></line>
+            <path d="M30,80 Q105,55 180,80" fill="none" stroke="var(--remove)" stroke-width="2" marker-end="url(#arrow-remove)"></path>
+            <text x="105" y="45" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--remove)">slow: 3 steps</text>
+            <path d="M30,145 Q155,178 280,145" fill="none" stroke="var(--add)" stroke-width="2" marker-end="url(#arrow-add)"></path>
+            <text x="155" y="180" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--add)">fast: 6 steps — hits the end</text>
+          </svg>
+        </div>
+        <p>Fast covers twice the distance. When it runs out of list, slow is provably at the midpoint — no length count needed.</p>
+      </div>
+
+      <!-- Card 3: cycle in implicit sequence -->
+      <div class="card">
+        <span class="card-tag">03-cycle-in-implicit-sequence.js</span>
+        <h3>Cycle on a virtual list</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="An array where each index points to the index equal to its own value, forming a cycle in index space between the two cells that share the duplicate value.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="31" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="75" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="119" y="90" width="34" height="34" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+              <rect x="163" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="207" y="90" width="34" height="34" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+              <text x="48" y="112" fill="var(--ink)">1</text>
+              <text x="92" y="112" fill="var(--ink)">3</text>
+              <text x="136" y="112" fill="var(--remove)">4</text>
+              <text x="180" y="112" fill="var(--ink)">2</text>
+              <text x="224" y="112" fill="var(--add)">2</text>
+            </g>
+            <path d="M136,84 Q180,60 224,84" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+            <path d="M224,116 Q180,140 136,116" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+            <text x="180" y="158" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="var(--result)">index 2 ↔ index 4: cycle, duplicate = 2</text>
+          </svg>
+        </div>
+        <p>nums[i] IS the next pointer. No real list exists, but Floyd's algorithm doesn't need one — any deterministic "next" rule works.</p>
+      </div>
+
+      <!-- Card 4: cycle length + alt start -->
+      <div class="card">
+        <span class="card-tag">04-cycle-length-and-alt-start.js</span>
+        <h3>Cycle length, then fixed-gap</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A loop with the meeting point marked and a curved arrow sweeping almost all the way around the loop back to the same point, labeled as one full lap equal to the cycle length.">
+            <circle cx="20" cy="95" r="9" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <circle cx="55" cy="95" r="9" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <line x1="29" y1="95" x2="46" y2="95" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="170" cy="95" r="60" fill="none" stroke="var(--line)" stroke-width="1.6"></circle>
+            <circle cx="230" cy="95" r="7" fill="var(--ink)"></circle>
+            <text x="248" y="112" font-family="var(--font-mono)" font-size="10.5" fill="var(--ink-soft)">meeting node</text>
+            <path d="M230,88 A60,60 0 1 1 224,88" fill="none" stroke="var(--result)" stroke-width="2.2" marker-end="url(#arrow-result)"></path>
+            <text x="170" y="28" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--result)">1 full lap = length L</text>
+            <text x="170" y="170" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--ink-soft)">then: lead L steps ahead + walk together = cycle start</text>
+          </svg>
+        </div>
+        <p>Walking from the meeting node back to itself counts one lap. With L known, <a href="../02-two-pointers/10-fixed-gap.js">the fixed-gap technique</a> relocates the start — a second proof of variant 1's result.</p>
+      </div>
+
+      <!-- Card 5: middle + reverse -->
+      <div class="card">
+        <span class="card-tag">05-middle-plus-reverse.js</span>
+        <h3>Fast/slow as a building block</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A five-node chain with the front half in forward order, the middle node marked, and the back half redrawn with reversed arrows; curved comparison arcs link the front nodes to their mirrored counterparts in the reversed back half.">
+            <g font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+              <circle cx="30" cy="90" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="90" cy="90" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="150" cy="90" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></circle>
+              <circle cx="210" cy="90" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="270" cy="90" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <text x="30" y="94" fill="var(--ink)">1</text>
+              <text x="90" y="94" fill="var(--ink)">2</text>
+              <text x="150" y="94" fill="var(--result)">3</text>
+              <text x="210" y="94" fill="var(--ink)">2</text>
+              <text x="270" y="94" fill="var(--ink)">1</text>
+            </g>
+            <line x1="45" y1="90" x2="75" y2="90" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></line>
+            <line x1="255" y1="90" x2="225" y2="90" stroke="var(--ink-soft)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-ink)"></line>
+            <line x1="195" y1="90" x2="165" y2="90" stroke="var(--ink-soft)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-ink)"></line>
+            <text x="150" y="60" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--result)">middle (fast/slow)</text>
+            <path d="M30,106 Q150,155 270,106" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+            <text x="150" y="150" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--add)">compare pairwise while walking</text>
+          </svg>
+        </div>
+        <p>Find the middle (this pattern), reverse the back half (relinking, not swapping), then walk both halves together comparing values.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/03-fast-slow-pointers/ — README.md (theory) · problems.md (8 practice problems) · 01–05*.js (runnable code)
+  </footer>
+
+</div>

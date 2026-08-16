@@ -1,0 +1,249 @@
+<title>Merge Intervals — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 04-merge-intervals/</p>
+  <h1>Merge Intervals: sort first, then one sweep</h1>
+  <p class="lede">
+    Every variant here starts with an ordering decision — sort by start or by
+    end — that turns an all-pairs comparison into a single left-to-right pass.
+    Code lives in <code>04-merge-intervals/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>kept / active</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>dropped / overlap event</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result — merged / peak / gap</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Sort by start, sweep, merge</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="Four intervals drawn as bars in separate lanes; an arrow points down to a single merged lane where the two overlapping bars have been combined into one.">
+        <g font-family="var(--font-mono)" font-size="12">
+          <rect x="75" y="30" width="70" height="22" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+          <rect x="110" y="60" width="140" height="22" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+          <rect x="320" y="90" width="70" height="22" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+          <rect x="565" y="120" width="105" height="22" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+          <text x="110" y="45" text-anchor="middle" fill="var(--ink-soft)">[1,3]</text>
+          <text x="180" y="75" text-anchor="middle" fill="var(--ink-soft)">[2,6]</text>
+          <text x="355" y="105" text-anchor="middle" fill="var(--ink-soft)">[8,10]</text>
+          <text x="617" y="135" text-anchor="middle" fill="var(--ink-soft)">[15,18]</text>
+        </g>
+        <line x1="380" y1="150" x2="380" y2="178" stroke="var(--ink-soft)" stroke-width="2" marker-end="url(#arrow-ink)"></line>
+        <text x="380" y="168" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--ink-soft)">sort by start, sweep-merge</text>
+        <g font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+          <rect x="75" y="185" width="175" height="24" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+          <text x="162" y="201" fill="var(--result)">[1,6]</text>
+          <rect x="320" y="185" width="70" height="24" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+          <text x="355" y="201" fill="var(--ink-soft)">[8,10]</text>
+          <rect x="565" y="185" width="105" height="24" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+          <text x="617" y="201" fill="var(--ink-soft)">[15,18]</text>
+        </g>
+      </svg>
+    </figure>
+    <figcaption>
+      [1,3] and [2,6] overlap (2 ≤ 3), so they collapse into [1,6]. The other
+      two intervals don't touch anything, so they pass through unchanged.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Six variants</h2>
+    <p class="section-title">Same sort-and-sweep shape, different questions</p>
+
+    <div class="grid">
+
+      <!-- Card 1: merge overlapping -->
+      <div class="card">
+        <span class="card-tag">01-merge-overlapping.js</span>
+        <h3>Sort by start, sweep-merge</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two overlapping interval bars in separate lanes merging into one combined bar below.">
+            <rect x="80" y="55" width="60" height="24" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="120" y="85" width="80" height="24" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <text x="110" y="70" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--ink-soft)">[2,5]</text>
+            <text x="160" y="100" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--ink-soft)">[4,8]</text>
+            <line x1="150" y1="118" x2="150" y2="135" stroke="var(--ink-soft)" stroke-width="1.8" marker-end="url(#arrow-ink)"></line>
+            <rect x="80" y="140" width="120" height="26" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="140" y="157" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--result)">[2,8]</text>
+          </svg>
+        </div>
+        <p>start ≤ prev.end means overlap. Extend prev.end to the max, don't just replace it.</p>
+      </div>
+
+      <!-- Card 2: insert interval -->
+      <div class="card">
+        <span class="card-tag">02-insert-interval.js</span>
+        <h3>Three-phase scan, no re-sort</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A sorted row of intervals with a new dashed interval overlapping three of them; the result row shows the untouched intervals unchanged and the overlapping ones merged into a single interval.">
+            <g font-family="var(--font-mono)" font-size="10" text-anchor="middle">
+              <rect x="34" y="70" width="14" height="20" rx="4" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="62" y="70" width="28" height="20" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+              <rect x="104" y="70" width="14" height="20" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+              <rect x="132" y="70" width="28" height="20" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+              <rect x="188" y="70" width="56" height="20" rx="4" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            </g>
+            <rect x="76" y="45" width="56" height="20" rx="4" fill="none" stroke="var(--remove)" stroke-width="1.8" stroke-dasharray="3 2"></rect>
+            <text x="104" y="38" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--remove)">new: [4,8]</text>
+            <text x="41" y="105" text-anchor="middle" font-family="var(--font-mono)" font-size="9.5" fill="var(--ink-soft)">before</text>
+            <text x="118" y="105" text-anchor="middle" font-family="var(--font-mono)" font-size="9.5" fill="var(--result)">overlap → merge</text>
+            <text x="216" y="105" text-anchor="middle" font-family="var(--font-mono)" font-size="9.5" fill="var(--ink-soft)">after</text>
+            <line x1="160" y1="118" x2="160" y2="135" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></line>
+            <g font-family="var(--font-mono)" font-size="10" text-anchor="middle">
+              <rect x="34" y="145" width="14" height="20" rx="4" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="62" y="145" width="98" height="20" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+              <text x="111" y="159" fill="var(--result)">[3,10]</text>
+              <rect x="188" y="145" width="56" height="20" rx="4" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            </g>
+          </svg>
+        </div>
+        <p>No sort needed — the list was already clean. Just split into before / overlapping / after in one pass.</p>
+      </div>
+
+      <!-- Card 3: interval intersection -->
+      <div class="card">
+        <span class="card-tag">03-interval-intersection.js</span>
+        <h3>Two-pointer across two lists</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Interval bars from list A above and list B below, with amber marks showing where they overlap.">
+            <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
+              <rect x="30" y="50" width="80" height="22" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+              <text x="70" y="65" fill="var(--add)">A: [0,4]</text>
+              <rect x="150" y="50" width="80" height="22" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+              <text x="190" y="65" fill="var(--add)">A: [6,10]</text>
+              <rect x="70" y="90" width="120" height="22" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+              <text x="130" y="105" fill="var(--remove)">B: [2,8]</text>
+            </g>
+            <rect x="70" y="130" width="40" height="18" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <rect x="150" y="130" width="40" height="18" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="160" y="168" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--result)">[2,4] and [6,8]</text>
+          </svg>
+        </div>
+        <p>Advance whichever interval ends first — it can't overlap anything further ahead in the other list.</p>
+      </div>
+
+      <!-- Card 4: max overlap sweep -->
+      <div class="card">
+        <span class="card-tag">04-max-overlap-sweep.js</span>
+        <h3>Separate start/end sweep</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A step function rising at each meeting's start time and falling at each end time, with the peak height marked as the number of rooms needed.">
+            <path d="M20,150 L20,125 L60,125 L60,100 L100,100 L100,125 L140,125 L140,100 L180,100 L180,125 L260,125 L260,150"
+                  fill="none" stroke="var(--ink)" stroke-width="2.2"></path>
+            <line x1="20" y1="100" x2="260" y2="100" stroke="var(--result)" stroke-width="1.6" stroke-dasharray="4 3"></line>
+            <text x="240" y="92" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--result)">peak = 2 rooms</text>
+            <text x="20" y="168" font-family="var(--font-mono)" font-size="10" fill="var(--add)">+1 at each start</text>
+            <text x="180" y="180" font-family="var(--font-mono)" font-size="10" fill="var(--remove)">−1 at each end</text>
+          </svg>
+        </div>
+        <p>Sort starts and ends separately; sweep both. The running total's peak is the answer — no need to track which intervals overlap.</p>
+      </div>
+
+      <!-- Card 5: greedy non-overlapping -->
+      <div class="card">
+        <span class="card-tag">05-greedy-non-overlapping.js</span>
+        <h3>Sort by END, greedy keep/drop</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Four intervals stacked in separate lanes, ordered by end time; three are marked kept and one that conflicts is marked dropped with an X.">
+            <g font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
+              <rect x="80" y="40" width="50" height="22" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+              <text x="105" y="55" fill="var(--add)">[1,2] ✓</text>
+              <rect x="130" y="70" width="50" height="22" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+              <text x="155" y="85" fill="var(--add)">[2,3] ✓</text>
+              <rect x="80" y="100" width="100" height="22" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6" stroke-dasharray="3 2"></rect>
+              <text x="130" y="115" fill="var(--remove)">[1,3] ✕</text>
+              <rect x="180" y="130" width="50" height="22" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+              <text x="205" y="145" fill="var(--add)">[3,4] ✓</text>
+            </g>
+            <text x="160" y="170" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--ink-soft)">processed in end-time order</text>
+          </svg>
+        </div>
+        <p>Sorted by end, keeping the soonest-finishing interval always leaves the most room for what comes next.</p>
+      </div>
+
+      <!-- Card 6: free time gaps -->
+      <div class="card">
+        <span class="card-tag">06-free-time-gaps.js</span>
+        <h3>Merge, then read the complement</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two merged busy-time bars with the gap between them highlighted as the free-time result.">
+            <rect x="55" y="80" width="50" height="26" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="80" y="98" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">[1,3]</text>
+            <rect x="105" y="80" width="25" height="26" rx="4" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2" stroke-dasharray="3 2"></rect>
+            <rect x="130" y="80" width="150" height="26" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="205" y="98" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">[4,10]</text>
+            <text x="117" y="70" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--result)">free: [3,4]</text>
+          </svg>
+        </div>
+        <p>Merge every schedule into the true busy periods first — whatever falls strictly between two of them is free by definition.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/04-merge-intervals/ — README.md (theory) · problems.md (9 practice problems) · 01–06*.js (runnable code)
+  </footer>
+
+</div>

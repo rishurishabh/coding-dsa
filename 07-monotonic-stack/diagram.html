@@ -1,0 +1,231 @@
+<title>Monotonic Stack — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 07-monotonic-stack/</p>
+  <h1>Monotonic Stack: popping IS the answer</h1>
+  <p class="lede">
+    Keep the stack sorted by popping anything the new element beats. Every
+    variant reads those pops differently — as a lookup, a pair of lookups,
+    or a greedy build. Code lives in <code>07-monotonic-stack/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>about to be popped</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>arriving / doing the resolving</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">A taller bar resolves every shorter one behind it</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="A row of bars where a new tall bar on the right pops two shorter bars to its left, each pop labeled with the wait distance it resolves." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+        <line x1="30" y1="180" x2="700" y2="180" stroke="var(--line)" stroke-width="1.5"></line>
+        <rect x="40" y="114" width="60" height="66" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+        <rect x="120" y="103" width="60" height="77" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+        <rect x="200" y="91" width="60" height="89" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2.2"></rect>
+        <rect x="280" y="137" width="60" height="43" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+        <rect x="360" y="160" width="60" height="20" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+        <rect x="440" y="126" width="60" height="54" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2.2"></rect>
+        <rect x="520" y="80" width="60" height="100" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.4"></rect>
+        <text x="70" y="200" fill="var(--ink-soft)">73</text>
+        <text x="150" y="200" fill="var(--ink-soft)">74</text>
+        <text x="230" y="200" fill="var(--remove)">75</text>
+        <text x="310" y="200" fill="var(--ink-soft)">71</text>
+        <text x="390" y="200" fill="var(--ink-soft)">69</text>
+        <text x="470" y="200" fill="var(--remove)">72</text>
+        <text x="550" y="200" fill="var(--add)">76</text>
+        <path d="M550,74 Q490,40 470,120" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+        <text x="500" y="30" text-anchor="middle" fill="var(--add)">76 &gt; 72: wait = 1</text>
+        <path d="M550,74 Q390,4 230,85" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+        <text x="390" y="-4" text-anchor="middle" fill="var(--add)">76 &gt; 75: wait = 4</text>
+      </svg>
+    </figure>
+    <figcaption>
+      76 pops both 72 and 75 in the same step — each was still waiting for a
+      warmer day, and 76 answers both at once, at different distances.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Six variants</h2>
+    <p class="section-title">One pop rule, read six different ways</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-next-greater-element.js</span>
+        <h3>Decreasing stack, resolve on pop</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A short bar and a tall bar; the tall bar arriving on the right pops the shorter bar, resolving its next-greater answer." font-family="var(--font-mono)" font-size="11" text-anchor="middle">
+            <line x1="20" y1="150" x2="290" y2="150" stroke="var(--line)" stroke-width="1.4"></line>
+            <rect x="60" y="70" width="50" height="80" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></rect>
+            <rect x="180" y="40" width="50" height="110" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.2"></rect>
+            <path d="M205,34 Q140,10 100,64" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+            <text x="150" y="20" text-anchor="middle" fill="var(--add)">resolved later, when bigger arrives</text>
+          </svg>
+        </div>
+        <p>The popped bar's answer wasn't knowable until this later, bigger bar showed up.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-previous-greater-element.js</span>
+        <h3>Decreasing stack, resolve immediately</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tall bar still standing on the stack and a shorter current bar being processed now; the current bar immediately reads the tall bar as its previous-greater answer." font-family="var(--font-mono)" font-size="11" text-anchor="middle">
+            <line x1="20" y1="150" x2="290" y2="150" stroke="var(--line)" stroke-width="1.4"></line>
+            <rect x="60" y="40" width="50" height="110" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <rect x="180" y="90" width="50" height="60" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.2"></rect>
+            <path d="M180,110 Q140,90 110,80" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+            <text x="150" y="180" text-anchor="middle" fill="var(--add)">answer known right now — no waiting</text>
+          </svg>
+        </div>
+        <p>Whatever survives on top of the stack after popping IS the current bar's answer, immediately.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-circular-next-greater.js</span>
+        <h3>Variant 1, walked around twice</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A row of bars for the first lap, and a faded ghost row below representing a second lap that wraps back to the start, with an arrow from the ghost row resolving a bar in the first row." font-family="var(--font-mono)" font-size="10.5" text-anchor="middle">
+            <rect x="30" y="35" width="40" height="50" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></rect>
+            <rect x="80" y="55" width="40" height="30" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="130" y="45" width="40" height="40" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="105" y="20" text-anchor="middle" fill="var(--ink-soft)">lap 1 (i &lt; n): push allowed</text>
+            <rect x="30" y="130" width="40" height="30" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2" stroke-dasharray="3 2"></rect>
+            <rect x="80" y="135" width="40" height="25" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 2"></rect>
+            <rect x="130" y="140" width="40" height="20" fill="none" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="3 2"></rect>
+            <text x="105" y="178" text-anchor="middle" fill="var(--ink-soft)">lap 2 (i ≥ n): resolve only, no push</text>
+            <path d="M50,128 Q40,80 50,88" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+          </svg>
+        </div>
+        <p>i % n replays the array a second time so wraparound candidates get a chance to resolve earlier bars.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-largest-rectangle-histogram.js</span>
+        <h3>Increasing stack, both directions at once</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A histogram of bars with an amber rectangle spanning the widest span bounded by the shortest bar in that range on both sides." font-family="var(--font-mono)" font-size="11" text-anchor="middle">
+            <line x1="20" y1="150" x2="300" y2="150" stroke="var(--line)" stroke-width="1.4"></line>
+            <rect x="30" y="100" width="40" height="50" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="70" y="130" width="40" height="20" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="110" y="40" width="40" height="110" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="150" y="25" width="40" height="125" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="190" y="100" width="40" height="50" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="230" y="85" width="40" height="65" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="110" y="103" width="120" height="47" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></rect>
+            <text x="170" y="95" text-anchor="middle" fill="var(--result)">width × shortest bar in range</text>
+          </svg>
+        </div>
+        <p>A bar's max rectangle spans from its nearest-smaller-left to its nearest-smaller-right — both found in one pass.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-trapping-rain-water-stack.js</span>
+        <h3>Decreasing stack, resolve a region</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two tall bars with a short bar between them; the space above the short bar and below the shorter of the two tall bars is filled as trapped water." font-family="var(--font-mono)" font-size="11" text-anchor="middle">
+            <line x1="20" y1="150" x2="300" y2="150" stroke="var(--line)" stroke-width="1.4"></line>
+            <rect x="50" y="50" width="40" height="100" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="90" y="120" width="40" height="30" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></rect>
+            <rect x="130" y="80" width="40" height="70" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <rect x="90" y="80" width="80" height="40" fill="var(--add-soft)" stroke="var(--add)" stroke-width="0"></rect>
+            <text x="130" y="70" text-anchor="middle" fill="var(--add)">width × (min(walls) − floor)</text>
+          </svg>
+        </div>
+        <p>Popping the short floor bar, bounded by the new bar and whatever's exposed behind it, resolves one water layer.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <span class="card-tag">06-remove-k-digits.js</span>
+        <h3>Greedy stack construction</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A sequence of digit boxes where a larger digit gets popped because a smaller digit follows it and removal budget remains, leaving a smaller resulting number." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="30" y="70" width="30" height="30" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+            <rect x="66" y="70" width="30" height="30" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8" stroke-dasharray="3 2"></rect>
+            <rect x="102" y="70" width="30" height="30" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8" stroke-dasharray="3 2"></rect>
+            <rect x="138" y="70" width="30" height="30" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+            <rect x="174" y="70" width="30" height="30" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+            <rect x="210" y="70" width="30" height="30" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8" stroke-dasharray="3 2"></rect>
+            <rect x="246" y="70" width="30" height="30" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.6"></rect>
+            <text x="45" y="90" fill="var(--result)">1</text><text x="81" y="90" fill="var(--remove)">4</text><text x="117" y="90" fill="var(--remove)">3</text><text x="153" y="90" fill="var(--result)">2</text><text x="189" y="90" fill="var(--result)">2</text><text x="225" y="90" fill="var(--remove)">1</text><text x="261" y="90" fill="var(--result)">9</text>
+            <text x="150" y="130" text-anchor="middle" fill="var(--result)">kept digits form the smallest result: 1219</text>
+          </svg>
+        </div>
+        <p>A bigger digit gets popped the moment a smaller one follows it — each pop spends one unit of the removal budget.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/07-monotonic-stack/ — README.md (theory) · problems.md (8 practice problems) · 01–06*.js (runnable code)
+  </footer>
+
+</div>

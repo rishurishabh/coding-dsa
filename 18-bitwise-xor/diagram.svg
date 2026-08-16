@@ -1,0 +1,158 @@
+<svg width="1040" height="1380" viewBox="0 0 1040 1380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bitwise XOR mechanism map: pair cancellation, and six variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1380" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Bitwise XOR — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 18-BITWISE-XOR</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">a ^ a = 0. XOR every element in a sequence together and every duplicate pair</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">vanishes — whatever's left over is the answer.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">cancels with its pair</text>
+  <rect x="240" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="262" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">active / being processed</text>
+  <rect x="470" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="492" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">survivor / result</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">XOR the whole array; duplicates vanish</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,306)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16" text-anchor="middle">
+    <rect x="100" y="80" width="60" height="44" rx="8" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></rect>
+    <text x="130" y="108" fill="#a8710a">4</text>
+    <rect x="180" y="80" width="60" height="44" rx="8" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></rect>
+    <text x="210" y="108" fill="#b3467c">1</text>
+    <rect x="260" y="80" width="60" height="44" rx="8" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></rect>
+    <text x="290" y="108" fill="#b3467c">2</text>
+    <rect x="340" y="80" width="60" height="44" rx="8" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></rect>
+    <text x="370" y="108" fill="#b3467c">1</text>
+    <rect x="420" y="80" width="60" height="44" rx="8" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></rect>
+    <text x="450" y="108" fill="#b3467c">2</text>
+    <path d="M210,72 Q290,20 370,72" fill="none" stroke="#b3467c" stroke-width="1.8"></path>
+    <text x="290" y="30" text-anchor="middle" font-size="12" fill="#b3467c">1 ^ 1 = 0</text>
+    <path d="M290,140 Q370,180 450,140" fill="none" stroke="#b3467c" stroke-width="1.8"></path>
+    <text x="370" y="196" text-anchor="middle" font-size="12" fill="#b3467c">2 ^ 2 = 0</text>
+    <text x="130" y="60" text-anchor="middle" font-size="12" fill="#a8710a">survives — no pair</text>
+  </g>
+
+  <text x="32" y="600" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Order doesn't matter — XOR is commutative and associative, so pairs cancel no</text>
+  <text x="32" y="618" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">matter how far apart they sit in the array.</text>
+
+  <text x="32" y="658" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">SIX VARIANTS</text>
+  <text x="32" y="684" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">One identity, pushed six different ways</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,704)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-single-number-cancellation.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">XOR cancellation</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="120" y="70" width="80" height="40" rx="7" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="160" y="95" fill="#a8710a">acc = 4</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">4 ^ 1 ^ 2 ^ 1 ^ 2 = 4</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">One running XOR, one pass — no</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">hashset needed to track what's</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">been seen.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,704)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-single-number-two-uniques.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Partition by a differing bit</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="30" y="40" width="110" height="50" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="85" y="62" fill="#0f7a72">bit set</text>
+      <text x="85" y="80" fill="#0f7a72">XOR → 3</text>
+      <rect x="180" y="40" width="110" height="50" rx="8" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="235" y="62" fill="#a8710a">bit clear</text>
+      <text x="235" y="80" fill="#a8710a">XOR → 5</text>
+      <text x="160" y="130" text-anchor="middle" fill="#4a5a70">a's pair and b's pair land in the SAME group</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The lowest set bit of (a^b) is</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">where a and b differ — split there,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">then variant 1 works on each half.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,704)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-single-number-triple-appearing.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Bit-count state machine</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <text x="100" y="60" fill="#14202e">2 ^ 2 ^ 2 = 2</text>
+      <text x="100" y="82" fill="#b3467c">(doesn't cancel!)</text>
+      <text x="220" y="60" fill="#a8710a">ones/twos track</text>
+      <text x="220" y="82" fill="#a8710a">count mod 3 per bit</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">a bit survives in `ones` only if seen ≡ 1 (mod 3)</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Plain XOR assumes pairs. Three</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">copies need a real counter, per</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">bit position instead of per value.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,1028)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-missing-number-xor.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">XOR indices against values</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="80" y="50" fill="#4a5a70">idx 0 ^ val 3</text>
+      <text x="80" y="72" fill="#4a5a70">idx 1 ^ val 0</text>
+      <text x="80" y="94" fill="#4a5a70">idx 2 ^ val 1</text>
+      <text x="230" y="50" fill="#b3467c">0,3 pair off</text>
+      <text x="230" y="72" fill="#b3467c">1,1 pair off</text>
+      <text x="230" y="94" fill="#a8710a">idx 3, idx 2: leftover → 2 missing</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same cancellation, but the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">"duplicate" is an index from the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">expected range, not a repeat.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,1028)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-complement-flip-bits.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Mask + XOR to flip</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+      <text x="160" y="60" fill="#14202e">101</text>
+      <text x="160" y="85" fill="#0f7a72">^ 111 (mask)</text>
+      <line x1="100" y1="95" x2="220" y2="95" stroke="#d7dee8" stroke-width="1.4"></line>
+      <text x="160" y="115" fill="#a8710a">010</text>
+      <text x="160" y="145" text-anchor="middle" font-size="11" fill="#4a5a70">mask grows until it covers every significant bit</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">~num flips leading zeros too — a</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">purpose-built mask confines the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">flip to bits that actually matter.</text>
+  </g>
+
+  <!-- CARD 6 -->
+  <g transform="translate(712,1028)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">06-counting-bits-kernighan.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">n &amp; (n-1) clears the lowest bit</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+      <text x="160" y="50" fill="#14202e">1011 (n)</text>
+      <text x="160" y="72" fill="#0f7a72">1010 (n-1)</text>
+      <line x1="110" y1="82" x2="210" y2="82" stroke="#d7dee8" stroke-width="1.4"></line>
+      <text x="160" y="102" fill="#a8710a">1010 (n &amp; n-1)</text>
+      <text x="160" y="140" text-anchor="middle" font-size="11" fill="#4a5a70">repeat until 0 — step count = set bits</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">n-1 flips everything below the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">lowest set bit; ANDing with n</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">erases just that one bit.</text>
+  </g>
+
+  <text x="32" y="1340" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/18-bitwise-xor/ — README.md · problems.md · 01–06*.js</text>
+</svg>

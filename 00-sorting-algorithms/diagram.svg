@@ -1,0 +1,225 @@
+<svg width="1040" height="1400" viewBox="0 0 1040 1400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sorting algorithms mechanism map: comparison sorts versus the non-comparison exception, and seven variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1400" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Sorting Algorithms — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 00-SORTING-ALGORITHMS</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Six algorithms here only ever ask "is A bigger than B?" — that question alone caps</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">them at O(n log n). The seventh sidesteps the question entirely.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">out of order / being moved</text>
+  <rect x="270" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="292" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">compared / active</text>
+  <rect x="470" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="492" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">placed / final</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE SPLIT</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Comparison sorts vs. the one exception</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,286)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <text x="150" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#0f7a72">COMPARISON SORTS</text>
+    <rect x="90" y="50" width="60" height="44" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="120" y="78" fill="#0f7a72">5</text>
+    <rect x="180" y="50" width="60" height="44" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="210" y="78" fill="#0f7a72">2</text>
+    <path d="M154,72 L176,72" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)" marker-start="url(#arrow-add)"></path>
+    <text x="165" y="60" text-anchor="middle" font-size="11" fill="#0f7a72">compare</text>
+    <text x="165" y="130" text-anchor="middle" font-size="12" fill="#b3467c">5 &gt; 2 → swap</text>
+    <text x="165" y="150" text-anchor="middle" font-size="11" fill="#4a5a70">bubble, selection, insertion,</text>
+    <text x="165" y="166" text-anchor="middle" font-size="11" fill="#4a5a70">merge, quick, heap</text>
+
+    <line x1="380" y1="30" x2="380" y2="190" stroke="#d7dee8" stroke-width="1.4"></line>
+
+    <text x="590" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="#a8710a">COUNTING SORT</text>
+    <rect x="500" y="50" width="44" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="522" y="72" fill="#14202e">2</text>
+    <rect x="554" y="50" width="44" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="576" y="72" fill="#14202e">5</text>
+    <rect x="608" y="50" width="44" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="630" y="72" fill="#14202e">2</text>
+    <path d="M522,88 L522,110" fill="none" stroke="#a8710a" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+    <path d="M576,88 L576,110" fill="none" stroke="#a8710a" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+    <path d="M630,88 L630,110" fill="none" stroke="#a8710a" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+    <text x="576" y="130" text-anchor="middle" font-size="12" fill="#a8710a">tally: 2→×2, 5→×1</text>
+    <text x="576" y="160" text-anchor="middle" font-size="11" fill="#4a5a70">no comparisons anywhere</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">log₂(n!) ≈ n log n is the proven floor for anything that only compares — counting sort</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">isn't faster at the same game, it's playing a different one.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">SEVEN VARIANTS</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Six comparison shapes, one non-comparison exception</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-bubble-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Repeated adjacent swaps</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="30" y="70" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="52" y="92" fill="#0f7a72">5</text>
+      <rect x="78" y="70" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="100" y="92" fill="#0f7a72">2</text>
+      <path d="M52,60 Q75,40 98,60" fill="none" stroke="#0f7a72" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+      <text x="75" y="30" text-anchor="middle" fill="#0f7a72">swap: 5 &gt; 2</text>
+      <rect x="126" y="70" width="44" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="148" y="92" fill="#14202e">6</text>
+      <rect x="230" y="70" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="252" y="92" fill="#a8710a">9</text>
+      <text x="252" y="120" text-anchor="middle" fill="#a8710a">placed by a prior pass</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A pass with no swaps means the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">array is already sorted — that's</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the early exit.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-selection-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Repeated find-min-and-place</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="30" y="70" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="52" y="92" fill="#a8710a">1</text>
+      <text x="52" y="60" text-anchor="middle" fill="#a8710a">placed</text>
+      <rect x="90" y="70" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="112" y="92" fill="#0f7a72">5</text>
+      <rect x="138" y="70" width="44" height="34" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></rect>
+      <text x="160" y="92" fill="#b3467c">2</text>
+      <text x="160" y="60" text-anchor="middle" fill="#b3467c">min found here</text>
+      <path d="M112,110 Q135,130 158,110" fill="none" stroke="#b3467c" stroke-width="1.6" marker-end="url(#arrow-remove)"></path>
+      <text x="135" y="145" text-anchor="middle" fill="#b3467c">swap min to front of unsorted region</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Exactly one swap per position,</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">no matter the input — n-1</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">swaps total, always.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-insertion-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Grow a sorted prefix</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="30" y="70" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="52" y="92" fill="#a8710a">2</text>
+      <rect x="78" y="70" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="100" y="92" fill="#a8710a">5</text>
+      <text x="65" y="55" text-anchor="middle" fill="#a8710a">sorted prefix</text>
+      <rect x="126" y="70" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="148" y="92" fill="#0f7a72">3</text>
+      <path d="M148,110 Q100,140 60,120" fill="none" stroke="#0f7a72" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+      <text x="100" y="155" text-anchor="middle" fill="#0f7a72">shift right past bigger values, insert into the gap</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Cost is proportional to how</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">unsorted the input is — O(n) if</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">it's already sorted.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-merge-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Divide, merge on the way back up</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="30" y="40" width="34" height="30" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="47" y="60" fill="#14202e">2</text>
+      <rect x="64" y="40" width="34" height="30" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="81" y="60" fill="#14202e">5</text>
+      <text x="64" y="28" text-anchor="middle" fill="#4a5a70">left (sorted)</text>
+      <rect x="190" y="40" width="34" height="30" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="207" y="60" fill="#14202e">1</text>
+      <rect x="224" y="40" width="34" height="30" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="241" y="60" fill="#14202e">6</text>
+      <text x="224" y="28" text-anchor="middle" fill="#4a5a70">right (sorted)</text>
+      <path d="M47,75 Q120,120 130,140" fill="none" stroke="#a8710a" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+      <path d="M207,75 Q150,120 145,140" fill="none" stroke="#a8710a" stroke-width="1.6" marker-end="url(#arrow-result)"></path>
+      <text x="140" y="165" text-anchor="middle" fill="#a8710a">merged: [1,2,5,6] — smaller front wins each step</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Two sorted halves merge in one</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">linear pass — same idea as</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">merging intervals.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-quick-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Divide via partition, not midpoint</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="30" y="80" width="40" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="50" y="102" fill="#0f7a72">3</text>
+      <rect x="74" y="80" width="40" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="94" y="102" fill="#0f7a72">2</text>
+      <rect x="118" y="80" width="40" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+      <text x="138" y="102" fill="#a8710a">5</text>
+      <rect x="162" y="80" width="40" height="34" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="1.6"></rect>
+      <text x="182" y="102" fill="#b3467c">9</text>
+      <rect x="206" y="80" width="40" height="34" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="1.6"></rect>
+      <text x="226" y="102" fill="#b3467c">6</text>
+      <text x="70" y="70" text-anchor="middle" fill="#0f7a72">≤ pivot</text>
+      <text x="138" y="60" text-anchor="middle" fill="#a8710a">pivot (final index)</text>
+      <text x="204" y="70" text-anchor="middle" fill="#b3467c">&gt; pivot</text>
+      <text x="138" y="140" text-anchor="middle" fill="#4a5a70">recurse on BOTH sides</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The same partition step as</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">quickselect — sorting both sides</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">instead of discarding one.</text>
+  </g>
+
+  <!-- CARD 6 -->
+  <g transform="translate(712,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">06-heap-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Heapify, then repeated extract-max</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <line x1="130" y1="55" x2="90" y2="100" stroke="#d7dee8" stroke-width="1.4"></line>
+      <line x1="130" y1="55" x2="170" y2="100" stroke="#d7dee8" stroke-width="1.4"></line>
+      <circle cx="130" cy="45" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="130" y="50" fill="#0f7a72">9</text>
+      <circle cx="90" cy="110" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <text x="90" y="114" fill="#14202e">5</text>
+      <circle cx="170" cy="110" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <text x="170" y="114" fill="#14202e">6</text>
+      <path d="M148,50 Q250,30 270,110" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <rect x="248" y="110" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="270" y="132" fill="#a8710a">9</text>
+      <text x="270" y="160" text-anchor="middle" fill="#a8710a">placed, heap shrinks by one</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The array IS the heap — no</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">separate structure needed, unlike</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the Heap class used elsewhere.</text>
+  </g>
+
+  <!-- CARD 7 -->
+  <g transform="translate(32,1312)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">07-counting-sort.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Count values, never compare them</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="70" y="50" fill="#14202e">value 1: ×1</text>
+      <text x="70" y="72" fill="#14202e">value 2: ×2</text>
+      <text x="70" y="94" fill="#14202e">value 3: ×1</text>
+      <path d="M150,70 L200,70" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="250" y="70" text-anchor="middle" fill="#a8710a">read out:</text>
+      <text x="250" y="90" text-anchor="middle" fill="#a8710a">[1,2,2,3]</text>
+      <text x="160" y="150" text-anchor="middle" fill="#4a5a70">no element is ever compared to another</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Sidesteps the O(n log n)</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">comparison floor — but only</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">works when the range is small.</text>
+  </g>
+
+  <text x="32" y="1360" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/00-sorting-algorithms/ — README.md · problems.md · 01–07*.js</text>
+</svg>

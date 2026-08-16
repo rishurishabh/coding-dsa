@@ -1,0 +1,189 @@
+<svg width="1040" height="1340" viewBox="0 0 1040 1340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fast and slow pointers mechanism map: the tortoise-and-hare speed loop, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1340" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Fast &amp; Slow Pointers — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 03-FAST-SLOW-POINTERS</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">One pointer moves 1 step, the other 2, on the SAME forward-only structure.</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">That's the whole mechanism — what changes is what you're using it to find.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">slow / trail</text>
+  <rect x="200" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="222" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">fast / lead</text>
+  <rect x="368" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="390" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">result — the node/value found</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE LOOP</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Same list, different speeds</text>
+
+  <rect x="32" y="266" width="976" height="240" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,290)">
+    <g>
+      <circle cx="40" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="130" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="220" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="310" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="400" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="490" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="580" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="670" cy="100" r="18" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <line x1="58" y1="100" x2="662" y2="100" stroke="#d7dee8" stroke-width="1.4"></line>
+    </g>
+    <line x1="40" y1="70" x2="220" y2="70" stroke="#b3467c" stroke-width="2.2" marker-end="url(#arrow-remove)"></line>
+    <text x="130" y="58" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#b3467c">slow: +1 per tick</text>
+    <line x1="40" y1="140" x2="400" y2="140" stroke="#0f7a72" stroke-width="2.2" marker-end="url(#arrow-add)"></line>
+    <text x="220" y="158" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#0f7a72">fast: +2 per tick</text>
+    <text x="580" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">loops → they meet</text>
+    <text x="580" y="175" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">ends → fast finishes first</text>
+  </g>
+
+  <text x="32" y="530" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Both pointers start at the same node. Fast's 2x speed either laps slow inside a cycle</text>
+  <text x="32" y="548" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">(they meet), or hits the end first (its position, or slow's, becomes the answer).</text>
+
+  <text x="32" y="590" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE VARIANTS</text>
+  <text x="32" y="616" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">One trick, applied to different goals and inputs</text>
+
+  <!-- CARD 1: cycle detection — col0,row0 (32,636) -->
+  <g transform="translate(32,636)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-cycle-detection.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Meet-in-the-cycle, reset-to-head</text>
+    <g transform="translate(16,56) scale(0.9)">
+      <circle cx="20" cy="90" r="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <circle cx="60" cy="90" r="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <circle cx="100" cy="90" r="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <line x1="30" y1="90" x2="90" y2="90" stroke="#d7dee8" stroke-width="1.4"></line>
+      <circle cx="195" cy="90" r="55" fill="none" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="140" cy="90" r="7" fill="#a8710a"></circle>
+      <text x="140" y="72" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#a8710a">cycle start</text>
+      <circle cx="234" cy="129" r="6" fill="#14202e"></circle>
+      <text x="252" y="145" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">meet here</text>
+      <path d="M20,90 Q80,130 140,90" fill="none" stroke="#b3467c" stroke-width="1.8" stroke-dasharray="3 3" marker-end="url(#arrow-remove)"></path>
+      <text x="70" y="150" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" fill="#b3467c">ptr from head, +1/step</text>
+      <path d="M234,129 Q160,175 140,95" fill="none" stroke="#0f7a72" stroke-width="1.8" stroke-dasharray="3 3" marker-end="url(#arrow-add)"></path>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">After slow/fast meet, a pointer</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">from head and the meeting point</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">both step by 1 — meet at cycle start.</text>
+  </g>
+
+  <!-- CARD 2: middle of list — col1,row0 (372,636) -->
+  <g transform="translate(372,636)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-middle-of-list.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Fast runs out first</text>
+    <g transform="translate(16,56) scale(0.9)">
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+        <circle cx="30" cy="100" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="80" cy="100" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="130" cy="100" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="180" cy="100" r="15" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></circle>
+        <circle cx="230" cy="100" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="280" cy="100" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <text x="30" y="104" fill="#14202e">1</text>
+        <text x="80" y="104" fill="#14202e">2</text>
+        <text x="130" y="104" fill="#14202e">3</text>
+        <text x="180" y="104" fill="#a8710a">4</text>
+        <text x="230" y="104" fill="#14202e">5</text>
+        <text x="280" y="104" fill="#14202e">6</text>
+      </g>
+      <path d="M30,80 Q105,55 180,80" fill="none" stroke="#b3467c" stroke-width="2" marker-end="url(#arrow-remove)"></path>
+      <text x="105" y="45" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#b3467c">slow: 3 steps</text>
+      <path d="M30,145 Q155,178 280,145" fill="none" stroke="#0f7a72" stroke-width="2" marker-end="url(#arrow-add)"></path>
+      <text x="155" y="180" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#0f7a72">fast: 6 steps — hits the end</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Fast covers twice the distance.</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">When it runs out, slow is provably</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">at the midpoint — no count needed.</text>
+  </g>
+
+  <!-- CARD 3: cycle in implicit sequence — col2,row0 (712,636) -->
+  <g transform="translate(712,636)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-cycle-in-implicit-sequence.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Cycle on a virtual list</text>
+    <g transform="translate(16,56) scale(0.9)">
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+        <rect x="31" y="90" width="34" height="34" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+        <rect x="75" y="90" width="34" height="34" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+        <rect x="119" y="90" width="34" height="34" rx="5" fill="#b3467c14" stroke="#b3467c" stroke-width="2"></rect>
+        <rect x="163" y="90" width="34" height="34" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+        <rect x="207" y="90" width="34" height="34" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+        <text x="48" y="112" fill="#14202e">1</text>
+        <text x="92" y="112" fill="#14202e">3</text>
+        <text x="136" y="112" fill="#b3467c">4</text>
+        <text x="180" y="112" fill="#14202e">2</text>
+        <text x="224" y="112" fill="#0f7a72">2</text>
+      </g>
+      <path d="M136,84 Q180,60 224,84" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+      <path d="M224,116 Q180,140 136,116" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+      <text x="180" y="158" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#a8710a">index 2 ↔ index 4: cycle, duplicate = 2</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">nums[i] IS the next pointer. No</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">real list exists — any deterministic</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">"next" rule works the same way.</text>
+  </g>
+
+  <!-- CARD 4: cycle length + alt start — col0,row1 (32,960) -->
+  <g transform="translate(32,960)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-cycle-length-and-alt-start.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Cycle length, then fixed-gap</text>
+    <g transform="translate(16,56) scale(0.9)">
+      <circle cx="20" cy="95" r="9" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <circle cx="55" cy="95" r="9" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <line x1="29" y1="95" x2="46" y2="95" stroke="#d7dee8" stroke-width="1.4"></line>
+      <circle cx="170" cy="95" r="60" fill="none" stroke="#d7dee8" stroke-width="1.6"></circle>
+      <circle cx="230" cy="95" r="7" fill="#14202e"></circle>
+      <text x="248" y="112" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">meeting node</text>
+      <path d="M230,88 A60,60 0 1 1 224,88" fill="none" stroke="#a8710a" stroke-width="2.2" marker-end="url(#arrow-result)"></path>
+      <text x="170" y="28" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#a8710a">1 full lap = length L</text>
+      <text x="170" y="170" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">then: lead L steps ahead + walk together = cycle start</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Walking from the meeting node</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">back to itself counts one lap —</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">a second proof of variant 1's result.</text>
+  </g>
+
+  <!-- CARD 5: middle + reverse — col1,row1 (372,960) -->
+  <g transform="translate(372,960)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-middle-plus-reverse.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Fast/slow as a building block</text>
+    <g transform="translate(16,56) scale(0.9)">
+      <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+        <circle cx="30" cy="90" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="90" cy="90" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="150" cy="90" r="15" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></circle>
+        <circle cx="210" cy="90" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <circle cx="270" cy="90" r="15" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+        <text x="30" y="94" fill="#14202e">1</text>
+        <text x="90" y="94" fill="#14202e">2</text>
+        <text x="150" y="94" fill="#a8710a">3</text>
+        <text x="210" y="94" fill="#14202e">2</text>
+        <text x="270" y="94" fill="#14202e">1</text>
+      </g>
+      <line x1="45" y1="90" x2="75" y2="90" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></line>
+      <line x1="255" y1="90" x2="225" y2="90" stroke="#4a5a70" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-ink)"></line>
+      <line x1="195" y1="90" x2="165" y2="90" stroke="#4a5a70" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-ink)"></line>
+      <text x="150" y="60" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#a8710a">middle (fast/slow)</text>
+      <path d="M30,106 Q150,155 270,106" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+      <text x="150" y="150" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#0f7a72">compare pairwise while walking</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Find the middle, reverse the back</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">half by relinking, then walk both</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">halves together comparing values.</text>
+  </g>
+
+  <text x="32" y="1300" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/03-fast-slow-pointers/ — README.md · problems.md · 01–05*.js</text>
+</svg>

@@ -1,0 +1,275 @@
+<svg width="1040" height="1600" viewBox="0 0 1040 1600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DSA roadmap progress map: 15 of 28 patterns complete, grouped by section.">
+  <rect x="0" y="0" width="1040" height="1600" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">DSA Roadmap — Progress Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">CODING_DSA / 28 MODULES, GROKKING-STYLE ORDER</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Each module is its own folder: README (theory + diagram), problems.md, and</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">runnable JS for every variant. Filled = done, outlined = not started yet.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">done</text>
+  <rect x="130" y="146" width="14" height="14" rx="3" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+  <text x="152" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">not started</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">PROGRESS</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">16 of 28 modules complete</text>
+
+  <rect x="32" y="266" width="976" height="22" rx="11" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+  <rect x="32" y="266" width="558" height="22" rx="11" fill="#0f7a72"></rect>
+  <text x="604" y="281" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#0f7a72">57%</text>
+
+  <!-- ROW 0: Prerequisite (1) -->
+  <text x="32" y="342" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">PREREQUISITE</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,354)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">00</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Sorting</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Algorithms</text>
+    </g>
+  </g>
+
+  <!-- ROW 1: Foundations (5) -->
+  <text x="32" y="462" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">FOUNDATIONS</text>
+  <line x1="123" y1="506" x2="915" y2="506" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,474)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">01</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Sliding</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Window</text>
+    </g>
+    <g transform="translate(230,474)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">02</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Two</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Pointers</text>
+    </g>
+    <g transform="translate(428,474)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">03</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Fast/Slow</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Pointers</text>
+    </g>
+    <g transform="translate(626,474)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">04</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Merge</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Intervals</text>
+    </g>
+    <g transform="translate(824,474)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">05</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Cyclic</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Sort</text>
+    </g>
+  </g>
+
+  <!-- ROW 2: Linked Lists & Stacks (2) -->
+  <text x="32" y="582" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">LINKED LISTS &amp; STACKS</text>
+  <line x1="123" y1="626" x2="321" y2="626" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,594)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">06</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">LL</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Reversal</text>
+    </g>
+    <g transform="translate(230,594)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">07</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Monotonic</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Stack</text>
+    </g>
+  </g>
+
+  <!-- ROW 3: Trees & Graphs (5) -->
+  <text x="32" y="702" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">TREES &amp; GRAPHS</text>
+  <line x1="123" y1="746" x2="915" y2="746" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,714)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">08</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Tree</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">BFS</text>
+    </g>
+    <g transform="translate(230,714)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">09</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Tree</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">DFS</text>
+    </g>
+    <g transform="translate(428,714)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">10</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Graph</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">BFS/DFS</text>
+    </g>
+    <g transform="translate(626,714)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">11</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Topological</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Sort</text>
+    </g>
+    <g transform="translate(824,714)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">12</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Union</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Find</text>
+    </g>
+  </g>
+
+  <!-- ROW 4: Heaps & Selection (3) -->
+  <text x="32" y="822" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">HEAPS &amp; SELECTION</text>
+  <line x1="123" y1="866" x2="519" y2="866" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,834)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">13</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Two</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Heaps</text>
+    </g>
+    <g transform="translate(230,834)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">14</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Top K</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">Elements</text>
+    </g>
+    <g transform="translate(428,834)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">15</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">K-way</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Merge</text>
+    </g>
+  </g>
+
+  <!-- ROW 5: Search (2) -->
+  <text x="32" y="942" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">SEARCH</text>
+  <line x1="123" y1="986" x2="321" y2="986" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,954)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">16</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">Modified</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Binary Search</text>
+    </g>
+    <g transform="translate(230,954)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">17</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">Subsets/</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Backtracking</text>
+    </g>
+  </g>
+
+  <!-- ROW 6: Bit Manipulation (1) -->
+  <text x="32" y="1062" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">BIT MANIPULATION</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,1074)">
+      <rect width="182" height="64" rx="10" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="14" y="18" font-size="10" fill="#0f7a72">18</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#0f7a72">✓</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#14202e">Bitwise</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#14202e">XOR</text>
+    </g>
+  </g>
+
+  <!-- ROW 7: Dynamic Programming (5) -->
+  <text x="32" y="1182" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">DYNAMIC PROGRAMMING</text>
+  <line x1="123" y1="1226" x2="915" y2="1226" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,1194)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">19</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">0/1</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Knapsack</text>
+    </g>
+    <g transform="translate(230,1194)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">20</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">Unbounded</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Knapsack</text>
+    </g>
+    <g transform="translate(428,1194)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">21</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">LCS</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Family</text>
+    </g>
+    <g transform="translate(626,1194)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">22</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">Palindrome</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Subseq</text>
+    </g>
+    <g transform="translate(824,1194)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">23</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">DP on</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Grids</text>
+    </g>
+  </g>
+
+  <!-- ROW 8: Greedy (1) -->
+  <text x="32" y="1302" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">GREEDY</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,1314)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">24</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="40" text-anchor="middle" font-size="12" fill="#4a5a70">Greedy</text>
+    </g>
+  </g>
+
+  <!-- ROW 9: Advanced Structures (3) -->
+  <text x="32" y="1422" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="0.5" fill="#14202e">ADVANCED STRUCTURES</text>
+  <line x1="123" y1="1466" x2="519" y2="1466" stroke="#d7dee8" stroke-width="1.5"></line>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace">
+    <g transform="translate(32,1434)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">25</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="40" text-anchor="middle" font-size="12" fill="#4a5a70">Trie</text>
+    </g>
+    <g transform="translate(230,1434)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">26</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">Segment/</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Fenwick</text>
+    </g>
+    <g transform="translate(428,1434)">
+      <rect width="182" height="64" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="14" y="18" font-size="10" fill="#4a5a70">27</text>
+      <text x="168" y="18" text-anchor="middle" font-size="12" fill="#4a5a70">○</text>
+      <text x="91" y="34" text-anchor="middle" font-size="12" fill="#4a5a70">Shortest</text>
+      <text x="91" y="50" text-anchor="middle" font-size="12" fill="#4a5a70">Path</text>
+    </g>
+  </g>
+
+  <text x="32" y="1570" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg</text>
+</svg>

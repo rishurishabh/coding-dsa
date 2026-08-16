@@ -1,0 +1,275 @@
+<title>Tree DFS — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 09-tree-dfs/</p>
+  <h1>Tree DFS: which way does state flow?</h1>
+  <p class="lede">
+    Two shapes hide under one name. Top-down hands state to children as
+    arguments; bottom-up builds state from what children return. Getting
+    this backwards is the most common way this pattern goes wrong. Code
+    lives in <code>09-tree-dfs/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>top-down / state passed down</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>bottom-up / state returned up</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result / side-channel answer</div>
+  </div>
+
+  <section>
+    <h2>The core split</h2>
+    <p class="section-title">Top-down vs. bottom-up</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="Two small trees side by side: the left tree's arrows point from parent down to children, representing state passed as arguments; the right tree's arrows point from children up to parent, representing state returned by the recursion." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+        <text x="180" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--add)">TOP-DOWN</text>
+        <line x1="180" y1="55" x2="120" y2="110" stroke="var(--add)" stroke-width="2" marker-end="url(#arrow-add)"></line>
+        <line x1="180" y1="55" x2="240" y2="110" stroke="var(--add)" stroke-width="2" marker-end="url(#arrow-add)"></line>
+        <circle cx="180" cy="40" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="180" y="45" fill="var(--ink)">•</text>
+        <circle cx="120" cy="120" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="120" y="125" fill="var(--ink)">•</text>
+        <circle cx="240" cy="120" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="240" y="125" fill="var(--ink)">•</text>
+        <text x="180" y="175" text-anchor="middle" font-size="11" fill="var(--add)">argument carries state down</text>
+
+        <text x="580" y="26" text-anchor="middle" font-size="13" font-weight="700" fill="var(--remove)">BOTTOM-UP</text>
+        <line x1="520" y1="112" x2="580" y2="57" stroke="var(--remove)" stroke-width="2" marker-end="url(#arrow-remove)"></line>
+        <line x1="640" y1="112" x2="580" y2="57" stroke="var(--remove)" stroke-width="2" marker-end="url(#arrow-remove)"></line>
+        <circle cx="580" cy="40" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="580" y="45" fill="var(--ink)">•</text>
+        <circle cx="520" cy="120" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="520" y="125" fill="var(--ink)">•</text>
+        <circle cx="640" cy="120" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="640" y="125" fill="var(--ink)">•</text>
+        <text x="580" y="175" text-anchor="middle" font-size="11" fill="var(--remove)">return value carries state up</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Top-down: a node decides using only what its parent handed it.
+      Bottom-up: a node can't decide anything until both children have
+      already answered.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Seven variants</h2>
+    <p class="section-title">Three top-down, three bottom-up, one foundation</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-traversal-orders.js</span>
+        <h3>Recursive descent, three orders</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A three-node tree with small numbered badges showing the order nodes are visited in preorder, differing from inorder and postorder." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="120" y1="45" x2="200" y2="90" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="200" y1="100" x2="160" y2="140" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="120" cy="40" r="16" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="120" y="44" fill="var(--ink)">1</text>
+            <circle cx="200" cy="95" r="16" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="200" y="99" fill="var(--ink)">2</text>
+            <circle cx="160" cy="145" r="16" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="160" y="149" fill="var(--ink)">3</text>
+            <text x="160" y="175" text-anchor="middle" fill="var(--result)">pre [1,2,3] · in [1,3,2] · post [3,2,1]</text>
+          </svg>
+        </div>
+        <p>Same three recursive calls, self/left/right reordered — three different sequences fall out.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-path-sum-target.js</span>
+        <h3>Top-down, accumulate down</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A path from root to leaf with the remaining target sum shown decreasing at each node, reaching zero exactly at the leaf." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="35" x2="160" y2="90" stroke="var(--add)" stroke-width="2"></line>
+            <line x1="160" y1="100" x2="160" y2="145" stroke="var(--add)" stroke-width="2"></line>
+            <circle cx="160" cy="30" r="17" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+            <text x="160" y="34" fill="var(--add)">5</text>
+            <circle cx="160" cy="95" r="17" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+            <text x="160" y="99" fill="var(--add)">4</text>
+            <circle cx="160" cy="150" r="17" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></circle>
+            <text x="160" y="154" fill="var(--result)">2</text>
+            <text x="230" y="30" fill="var(--add)">target=11</text>
+            <text x="230" y="95" fill="var(--add)">remaining=6</text>
+            <text x="230" y="150" fill="var(--result)">leaf: 2==2 ✓</text>
+          </svg>
+        </div>
+        <p>The remaining target shrinks by node.val on the way down — the leaf just compares against itself.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-all-paths-with-backtrack.js</span>
+        <h3>Top-down + explicit backtrack</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A shared path list growing as recursion descends and shrinking as it returns, shown as boxes being pushed then popped." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="30" y="60" width="34" height="30" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+            <rect x="68" y="60" width="34" height="30" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.6"></rect>
+            <rect x="106" y="60" width="34" height="30" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="47" y="80" fill="var(--add)">5</text>
+            <text x="85" y="80" fill="var(--add)">4</text>
+            <text x="123" y="80" fill="var(--result)">11</text>
+            <path d="M85,50 Q85,20 47,20" fill="none" stroke="var(--add)" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+            <text x="60" y="14" fill="var(--add)">push on the way down</text>
+            <path d="M85,100 Q85,130 47,130" fill="none" stroke="var(--remove)" stroke-width="1.6" marker-end="url(#arrow-remove)"></path>
+            <text x="60" y="150" fill="var(--remove)">pop on the way back up</text>
+          </svg>
+        </div>
+        <p>One shared array, mutated and un-mutated — cheaper than a fresh array per call, but only if every push has a matching pop.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-validate-bst-range.js</span>
+        <h3>Top-down, shrink a constraint</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tree with a valid value range shown narrowing at each level, and a node marked invalid because its value falls outside the range inherited from a grandparent, not just its parent." font-family="var(--font-mono)" font-size="11" text-anchor="middle">
+            <line x1="160" y1="35" x2="100" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="160" y1="35" x2="220" y2="80" stroke="var(--line)" stroke-width="1.4"></line>
+            <line x1="220" y1="90" x2="190" y2="135" stroke="var(--line)" stroke-width="1.4"></line>
+            <circle cx="160" cy="30" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="160" y="34" fill="var(--ink)">5</text>
+            <text x="160" y="12" fill="var(--ink-soft)">(−∞, ∞)</text>
+            <circle cx="100" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="100" y="84" fill="var(--ink)">1</text>
+            <circle cx="220" cy="80" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="220" y="84" fill="var(--ink)">4</text>
+            <text x="220" y="65" fill="var(--ink-soft)">(5, ∞)</text>
+            <circle cx="190" cy="135" r="15" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2.2"></circle>
+            <text x="190" y="139" fill="var(--remove)">3</text>
+            <text x="150" y="160" fill="var(--remove)">3 &lt; 5: fails ancestor's range</text>
+          </svg>
+        </div>
+        <p>3 looks fine next to its parent 4, but the range inherited from grandparent 5 already ruled it out.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-diameter-of-tree.js</span>
+        <h3>Bottom-up + side channel</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A node with its left and right subtree heights labeled, and the diameter through that node shown as the sum of both heights, tracked separately from the height value returned upward." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="45" x2="100" y2="90" stroke="var(--remove)" stroke-width="1.8"></line>
+            <line x1="160" y1="45" x2="220" y2="90" stroke="var(--remove)" stroke-width="1.8"></line>
+            <circle cx="160" cy="35" r="17" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <text x="160" y="39" fill="var(--ink)">•</text>
+            <circle cx="100" cy="100" r="15" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></circle>
+            <text x="100" y="104" fill="var(--remove)">h=2</text>
+            <circle cx="220" cy="100" r="15" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></circle>
+            <text x="220" y="104" fill="var(--remove)">h=1</text>
+            <text x="160" y="20" fill="var(--add)">returns: 1+max(2,1)=3</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--result)">side channel: diameter = max(2+1, prev best)</text>
+          </svg>
+        </div>
+        <p>Height is what the parent needs back. Diameter-through-this-node is a fact only this node can compute.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <span class="card-tag">06-max-path-sum.js</span>
+        <h3>Bottom-up + side channel + clamping</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A node with one child branch carrying a negative sum clamped to zero and excluded from the through-node total, while the positive branch is kept." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="45" x2="100" y2="90" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="3 2"></line>
+            <line x1="160" y1="45" x2="220" y2="90" stroke="var(--remove)" stroke-width="1.8"></line>
+            <circle cx="160" cy="35" r="17" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <text x="160" y="39" fill="var(--ink)">•</text>
+            <circle cx="100" cy="100" r="15" fill="none" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="3 2"></circle>
+            <text x="100" y="104" fill="var(--ink-soft)">−7 → 0</text>
+            <circle cx="220" cy="100" r="15" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></circle>
+            <text x="220" y="104" fill="var(--remove)">+9</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--result)">through-node = val + 0 + 9 (negative branch skipped)</text>
+          </svg>
+        </div>
+        <p>A branch that only subtracts gets clamped to 0 — opting out of it beats including it, on both the return and the side channel.</p>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card">
+        <span class="card-tag">07-lowest-common-ancestor.js</span>
+        <h3>Bottom-up search</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A tree where p and q are found in different subtrees; the node where both searches return non-null is highlighted as the lowest common ancestor." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="160" y1="45" x2="100" y2="90" stroke="var(--remove)" stroke-width="1.8" marker-end="url(#arrow-remove)"></line>
+            <line x1="160" y1="45" x2="220" y2="90" stroke="var(--remove)" stroke-width="1.8" marker-end="url(#arrow-remove)"></line>
+            <circle cx="160" cy="35" r="17" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></circle>
+            <text x="160" y="39" fill="var(--result)">•</text>
+            <circle cx="100" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="100" y="104" fill="var(--ink)">p</text>
+            <circle cx="220" cy="100" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="220" y="104" fill="var(--ink)">q</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--result)">both sides return non-null → this node is the LCA</text>
+          </svg>
+        </div>
+        <p>Neither subtree alone can report the answer — only the node where both searches converge knows.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/09-tree-dfs/ — README.md (theory) · problems.md (8 practice problems) · 01–07*.js (runnable code)
+  </footer>
+
+</div>

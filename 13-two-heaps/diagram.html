@@ -1,0 +1,182 @@
+<title>Two Heaps — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 13-two-heaps/</p>
+  <h1>Two Heaps: the boundary IS the answer</h1>
+  <p class="lede">
+    A max-heap holds everything below the median, a min-heap holds
+    everything above it. Keep them the same size (±1) and the median is
+    always sitting at one of their tops. Code lives in <code>13-two-heaps/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>small / max-heap (lower half)</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>large / min-heap (upper half)</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result / boundary</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Two roots, one boundary</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="A max-heap on the left holding the lower half of the data with its largest value on top, and a min-heap on the right holding the upper half with its smallest value on top; the median sits between the two roots." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+        <line x1="250" y1="80" x2="180" y2="140" stroke="var(--line)" stroke-width="1.6"></line>
+        <line x1="250" y1="80" x2="320" y2="140" stroke="var(--line)" stroke-width="1.6"></line>
+        <circle cx="250" cy="60" r="22" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2.4"></circle>
+        <text x="250" y="65" fill="var(--remove)">4</text>
+        <circle cx="170" cy="150" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="170" y="155" fill="var(--ink)">2</text>
+        <circle cx="330" cy="150" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="330" y="155" fill="var(--ink)">3</text>
+        <text x="250" y="195" text-anchor="middle" font-size="12" fill="var(--remove)">max-heap: small half</text>
+
+        <line x1="510" y1="80" x2="440" y2="140" stroke="var(--line)" stroke-width="1.6"></line>
+        <line x1="510" y1="80" x2="580" y2="140" stroke="var(--line)" stroke-width="1.6"></line>
+        <circle cx="510" cy="60" r="22" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.4"></circle>
+        <text x="510" y="65" fill="var(--add)">5</text>
+        <circle cx="440" cy="150" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="440" y="155" fill="var(--ink)">7</text>
+        <circle cx="580" cy="150" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="580" y="155" fill="var(--ink)">6</text>
+        <text x="510" y="195" text-anchor="middle" font-size="12" fill="var(--add)">min-heap: large half</text>
+
+        <path d="M272,60 L488,60" fill="none" stroke="var(--result)" stroke-width="2" stroke-dasharray="4 3"></path>
+        <text x="380" y="45" text-anchor="middle" fill="var(--result)">median = (4+5)/2 = 4.5</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Every value in the max-heap is ≤ every value in the min-heap, and
+      their sizes are equal — so the median just reads off both roots.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Three variants</h2>
+    <p class="section-title">A narrow pattern — three genuinely distinct jobs</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-running-median.js</span>
+        <h3>Two balanced heaps</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A new number being pushed into the max-heap first, then its largest value immediately moved over to the min-heap to preserve the ordering guarantee." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <circle cx="110" cy="50" r="18" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="2"></circle>
+            <text x="110" y="55" fill="var(--remove)">4</text>
+            <circle cx="220" cy="50" r="18" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></circle>
+            <text x="220" y="55" fill="var(--add)">5</text>
+            <path d="M126,42 Q165,10 204,42" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="165" y="20" text-anchor="middle" fill="var(--result)">push new num, pop max over</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--ink-soft)">rebalance sizes, then peek both tops</text>
+          </svg>
+        </div>
+        <p>Insert, shuffle one element across to keep the ordering guarantee, then peek — O(log n) per number.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-sliding-window-median.js</span>
+        <h3>Balanced heaps + lazy deletion</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A value marked for removal sitting buried inside a heap, only actually discarded once it happens to surface at the top during a later operation." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <circle cx="160" cy="40" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <text x="160" y="45" fill="var(--ink)">7</text>
+            <circle cx="110" cy="100" r="18" fill="none" stroke="var(--remove)" stroke-width="2" stroke-dasharray="3 2"></circle>
+            <text x="110" y="105" fill="var(--remove)">3✕</text>
+            <circle cx="210" cy="100" r="18" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+            <text x="210" y="105" fill="var(--ink)">5</text>
+            <text x="110" y="135" text-anchor="middle" fill="var(--remove)">marked, not removed yet</text>
+            <text x="160" y="170" text-anchor="middle" fill="var(--ink-soft)">discarded once it reaches the top</text>
+          </svg>
+        </div>
+        <p>The outgoing element can't be plucked from the middle of a heap — it's marked, then swept away lazily.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-ipo-greedy-unlock.js</span>
+        <h3>Gate heap + pick heap</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A min-heap of projects ordered by required capital feeding projects that become affordable into a max-heap ordered by profit, from which the best option is greedily picked." font-family="var(--font-mono)" font-size="11" text-anchor="middle">
+            <rect x="20" y="50" width="110" height="60" rx="8" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></rect>
+            <text x="75" y="72" fill="var(--ink-soft)">gate: min-heap</text>
+            <text x="75" y="90" fill="var(--ink-soft)">by capital needed</text>
+            <path d="M132,80 Q170,80 190,80" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+            <text x="160" y="65" fill="var(--add)">now affordable</text>
+            <rect x="192" y="50" width="110" height="60" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="247" y="72" fill="var(--add)">pick: max-heap</text>
+            <text x="247" y="90" fill="var(--add)">by profit</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--result)">take the best pick; capital grows; repeat</text>
+          </svg>
+        </div>
+        <p>One heap orders what's locked, the other orders what's currently open — capital only grows, never shrinks the options.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/13-two-heaps/ — README.md (theory) · problems.md (4 practice problems) · 01–03*.js (runnable code)
+  </footer>
+
+</div>

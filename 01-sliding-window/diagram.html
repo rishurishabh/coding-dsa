@@ -1,0 +1,552 @@
+<title>Sliding Window — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e;
+    --ink-soft: #4a5a70;
+    --paper: #eef2f7;
+    --surface: #ffffff;
+    --line: #d7dee8;
+    --add: #0f7a72;
+    --add-soft: #0f7a7214;
+    --remove: #b3467c;
+    --remove-soft: #b3467c14;
+    --result: #a8710a;
+    --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3;
+      --ink-soft: #94a3b8;
+      --paper: #0b0f16;
+      --surface: #131a24;
+      --line: #232d3b;
+      --add: #3fc9be;
+      --add-soft: #3fc9be1f;
+      --remove: #e0568f;
+      --remove-soft: #e0568f1f;
+      --result: #e0a84a;
+      --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3;
+    --ink-soft: #94a3b8;
+    --paper: #0b0f16;
+    --surface: #131a24;
+    --line: #232d3b;
+    --add: #3fc9be;
+    --add-soft: #3fc9be1f;
+    --remove: #e0568f;
+    --remove-soft: #e0568f1f;
+    --result: #e0a84a;
+    --result-soft: #e0a84a1f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(28px, 4.2vw, 40px);
+    letter-spacing: -0.01em;
+    line-height: 1.12;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 36px;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 44px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+
+  section { margin-bottom: 56px; }
+  h2 {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+  }
+  .section-title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+
+  figure { margin: 0; }
+  .fig-frame {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    overflow-x: auto;
+  }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    max-width: 68ch;
+  }
+  figcaption code {
+    font-family: var(--font-mono);
+    font-size: 0.93em;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.05em 0.4em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+  .card h3 {
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+  }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p {
+    font-size: 12.8px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+  }
+</style>
+
+<!-- shared arrowhead markers, referenced by every diagram below -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path>
+    </marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path>
+    </marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path>
+    </marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path>
+    </marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 01-sliding-window/</p>
+  <h1>Sliding Window: the mechanism, and its nine shapes</h1>
+  <p class="lede">
+    Every variant below is the <strong>same loop</strong> — a right pointer that
+    expands the window, a left pointer that shrinks it — wearing a different
+    "what does the window remember" costume. The diagrams show the one thing
+    that actually changes per variant; the code lives in <code style="font-family:var(--font-mono); background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:0.05em 0.4em;">01-sliding-window/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>add / expand right</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>remove / shrink left</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>result — the window being reported</div>
+  </div>
+
+  <section>
+    <h2>The core loop</h2>
+    <p class="section-title">Every variant is this cycle</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 260" role="img" aria-label="An array with a right pointer expanding the window to the right and a left pointer shrinking it from behind, with the current window boxed in amber.">
+        <!-- array cells: values [4,7,2,9,1,5,3], x0=9, step=44, w=38, h=40, y=110 -->
+        <g font-family="var(--font-mono)" font-size="15" text-anchor="middle">
+          <!-- cells -->
+          <g>
+            <rect x="9"  y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="53" y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="97" y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="141" y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="185" y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="229" y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <rect x="273" y="110" width="38" height="40" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5"></rect>
+            <text x="28"  y="135" fill="var(--ink)">4</text>
+            <text x="72"  y="135" fill="var(--ink)">7</text>
+            <text x="116" y="135" fill="var(--ink)">2</text>
+            <text x="160" y="135" fill="var(--ink)">9</text>
+            <text x="204" y="135" fill="var(--ink)">1</text>
+            <text x="248" y="135" fill="var(--ink)">5</text>
+            <text x="292" y="135" fill="var(--ink)">3</text>
+          </g>
+        </g>
+
+        <!-- current window (indices 2..5) -->
+        <rect x="93" y="104" width="222" height="52" rx="9" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+        <text x="204" y="97" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--result)">current window</text>
+
+        <!-- R pointer + expand arrow (top) -->
+        <polygon points="248,88 240,74 256,74" fill="var(--add)"></polygon>
+        <text x="248" y="66" text-anchor="middle" font-family="var(--font-mono)" font-size="13" font-weight="700" fill="var(--add)">R</text>
+        <line x1="28" y1="52" x2="230" y2="52" stroke="var(--add)" stroke-width="2" marker-end="url(#arrow-add)"></line>
+        <text x="128" y="42" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--add)">expand: total += nums[right]</text>
+
+        <!-- L pointer + shrink arrow (bottom) -->
+        <polygon points="116,172 108,186 124,186" fill="var(--remove)"></polygon>
+        <text x="116" y="204" text-anchor="middle" font-family="var(--font-mono)" font-size="13" font-weight="700" fill="var(--remove)">L</text>
+        <line x1="28" y1="222" x2="98" y2="222" stroke="var(--remove)" stroke-width="2" marker-end="url(#arrow-remove)"></line>
+        <text x="63" y="240" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--remove)">shrink: total −= nums[left]</text>
+      </svg>
+    </figure>
+    <figcaption>
+      <code>right</code> sweeps the array once, always moving forward. Whenever the
+      window stops being valid (or a better answer is possible), <code>left</code>
+      sweeps forward too — never backward — which is the whole reason this is
+      O(n) instead of O(n²).
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Nine variants</h2>
+    <p class="section-title">What changes is what the window remembers</p>
+
+    <div class="grid">
+
+      <!-- Card 1: fixed-size -->
+      <div class="card">
+        <span class="card-tag">01-fixed-size.js</span>
+        <h3>Fixed-size window</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Array with a dashed previous window and a solid current window shifted one cell to the right, with the exiting cell marked minus and the entering cell marked plus.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="31" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="75" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="119" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="163" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="207" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="251" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <text x="48" y="112" fill="var(--ink)">2</text>
+              <text x="92" y="112" fill="var(--ink)">1</text>
+              <text x="136" y="112" fill="var(--ink)">5</text>
+              <text x="180" y="112" fill="var(--ink)">1</text>
+              <text x="224" y="112" fill="var(--ink)">3</text>
+              <text x="268" y="112" fill="var(--ink)">2</text>
+            </g>
+            <rect x="115" y="84" width="106" height="46" rx="8" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" stroke-dasharray="4 3"></rect>
+            <rect x="159" y="84" width="106" height="46" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+            <circle cx="136" cy="72" r="9" fill="var(--remove)"></circle>
+            <text x="136" y="76" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="white">−</text>
+            <circle cx="268" cy="72" r="9" fill="var(--add)"></circle>
+            <text x="268" y="76" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="white">+</text>
+            <line x1="168" y1="55" x2="212" y2="55" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></line>
+            <text x="190" y="46" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--ink-soft)">slide</text>
+          </svg>
+        </div>
+        <p>k is fixed at 3. Each slide drops one cell (−) and adds one (+); the window never resizes.</p>
+      </div>
+
+      <!-- Card 2: variable-size -->
+      <div class="card">
+        <span class="card-tag">02-variable-size.js</span>
+        <h3>Variable-size window</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Array with R sweeping right while expanding and L sweeping right while shrinking, ending on the smallest valid window boxed in amber.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="31" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="75" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="119" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="163" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="207" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="251" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <text x="48" y="112" fill="var(--ink)">2</text>
+              <text x="92" y="112" fill="var(--ink)">3</text>
+              <text x="136" y="112" fill="var(--ink)">1</text>
+              <text x="180" y="112" fill="var(--ink)">2</text>
+              <text x="224" y="112" fill="var(--ink)">4</text>
+              <text x="268" y="112" fill="var(--ink)">3</text>
+            </g>
+            <rect x="203" y="84" width="86" height="46" rx="8" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></rect>
+            <line x1="48" y1="60" x2="268" y2="60" stroke="var(--add)" stroke-width="2" marker-end="url(#arrow-add)"></line>
+            <text x="158" y="50" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">R expands while summing</text>
+            <line x1="48" y1="152" x2="224" y2="152" stroke="var(--remove)" stroke-width="2" marker-end="url(#arrow-remove)"></line>
+            <text x="136" y="170" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--remove)">L shrinks while sum ≥ target</text>
+          </svg>
+        </div>
+        <p>Grow right until the sum clears the target, then shrink left as long as it still holds — smallest window wins (amber).</p>
+      </div>
+
+      <!-- Card 3: at-most-K trick -->
+      <div class="card">
+        <span class="card-tag">03-at-most-k.js</span>
+        <h3>"At most K" → "exactly K"</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Array with a wide teal bracket for at-most-K, a narrower rose bracket for at-most-K-minus-one nested inside it, and the gap between them highlighted amber as exactly-K.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="53" y="70" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="97" y="70" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="141" y="70" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="185" y="70" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="229" y="70" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <text x="70" y="92" fill="var(--ink)">a</text>
+              <text x="114" y="92" fill="var(--ink)">b</text>
+              <text x="158" y="92" fill="var(--ink)">a</text>
+              <text x="202" y="92" fill="var(--ink)">b</text>
+              <text x="246" y="92" fill="var(--ink)">c</text>
+            </g>
+            <path d="M53,132 Q53,146 67,146 L219,146 Q233,146 233,132" fill="none" stroke="var(--add)" stroke-width="2"></path>
+            <text x="143" y="164" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">atMost(K) — wide</text>
+            <path d="M53,50 Q53,38 67,38 L131,38 Q145,38 145,50" fill="none" stroke="var(--remove)" stroke-width="2"></path>
+            <text x="99" y="28" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--remove)">atMost(K−1)</text>
+            <rect x="145" y="66" width="88" height="42" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2" stroke-dasharray="4 3"></rect>
+            <text x="189" y="180" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--result)">gap = exactly K</text>
+          </svg>
+        </div>
+        <p>atMost(K) counts a wide bracket; atMost(K−1) counts a narrower one nested inside it. The gap between them (amber) is exactly K.</p>
+      </div>
+
+      <!-- Card 4: frequency map -->
+      <div class="card">
+        <span class="card-tag">04-frequency-map.js</span>
+        <h3>Window + frequency counter</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="String cells boxed as the current window, with a need-counter list beside it showing each required character's count reaching zero and getting a checkmark.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="20" y="80" width="30" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="58" y="80" width="30" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="96" y="80" width="30" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="134" y="80" width="30" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <text x="35" y="100" fill="var(--ink)">A</text>
+              <text x="73" y="100" fill="var(--ink)">D</text>
+              <text x="111" y="100" fill="var(--ink)">O</text>
+              <text x="149" y="100" fill="var(--ink)">B</text>
+            </g>
+            <rect x="16" y="76" width="152" height="38" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+            <text x="92" y="66" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">window covers needed chars</text>
+            <g font-family="var(--font-mono)" font-size="12" fill="var(--ink)">
+              <text x="196" y="86">A: 0 ✓</text>
+              <text x="196" y="106">B: 0 ✓</text>
+              <text x="196" y="126">need: {}</text>
+            </g>
+            <text x="196" y="70" font-family="var(--font-mono)" font-size="11" fill="var(--ink-soft)">need-counter</text>
+          </svg>
+        </div>
+        <p>Grow the window until the "need" counter hits zero for every character, then shrink left while it still can.</p>
+      </div>
+
+      <!-- Card 5: monotonic deque -->
+      <div class="card">
+        <span class="card-tag">05-monotonic-deque.js</span>
+        <h3>Monotonic deque</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Array with values feeding a deque row below; smaller trailing values get popped in rose as a bigger newcomer arrives in teal, leaving the front of the deque as the amber current maximum.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="53" y="55" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="97" y="55" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="141" y="55" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="185" y="55" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="229" y="55" width="34" height="34" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+              <text x="70" y="77" fill="var(--ink)">1</text>
+              <text x="114" y="77" fill="var(--ink)">3</text>
+              <text x="158" y="77" fill="var(--ink)">−1</text>
+              <text x="202" y="77" fill="var(--ink)">−3</text>
+              <text x="246" y="77" fill="var(--add)">5</text>
+            </g>
+            <line x1="70" y1="94" x2="246" y2="140" stroke="var(--remove)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-remove)"></line>
+            <line x1="114" y1="94" x2="246" y2="140" stroke="var(--remove)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-remove)"></line>
+            <line x1="158" y1="94" x2="246" y2="140" stroke="var(--remove)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-remove)"></line>
+            <line x1="202" y1="94" x2="246" y2="140" stroke="var(--remove)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-remove)"></line>
+            <text x="150" y="128" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--remove)">popped: 3, −1, −3 ≤ 5</text>
+            <rect x="229" y="150" width="34" height="28" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="246" y="169" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--result)">5</text>
+            <text x="246" y="145" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--ink-soft)">deque front = max</text>
+          </svg>
+        </div>
+        <p>A bigger newcomer pops every smaller value behind it before joining — the front is always the window's current max.</p>
+      </div>
+
+      <!-- Card 6: last-seen jump -->
+      <div class="card">
+        <span class="card-tag">06-two-pointer-last-seen.js</span>
+        <h3>Last-seen-index jump</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="String cells with L leaping directly past a repeated character to just after its earlier occurrence, instead of moving one cell at a time.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="31" y="80" width="34" height="34" rx="5" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+              <rect x="75" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="119" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="163" y="80" width="34" height="34" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+              <text x="48" y="102" fill="var(--remove)">a</text>
+              <text x="92" y="102" fill="var(--ink)">b</text>
+              <text x="136" y="102" fill="var(--ink)">c</text>
+              <text x="180" y="102" fill="var(--add)">a</text>
+            </g>
+            <path d="M48,64 C48,40 92,40 92,64" fill="none" stroke="var(--remove)" stroke-width="2" marker-end="url(#arrow-remove)"></path>
+            <text x="70" y="34" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--remove)">L leaps to lastSeen[a] + 1</text>
+            <text x="180" y="130" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">duplicate found</text>
+          </svg>
+        </div>
+        <p>Instead of stepping left forward one cell at a time, jump it straight to one past the duplicate's last-seen index — O(1).</p>
+      </div>
+
+      <!-- Card 7: at-most-K changes -->
+      <div class="card">
+        <span class="card-tag">07-at-most-k-changes.js</span>
+        <h3>"At most K violations" window</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Binary string window boxed in teal, with two zero cells inside outlined in rose as the allowed violations within the K limit.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="53" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="97" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="141" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--remove)" stroke-width="2" stroke-dasharray="3 2"></rect>
+              <rect x="185" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--remove)" stroke-width="2" stroke-dasharray="3 2"></rect>
+              <rect x="229" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <text x="70" y="102" fill="var(--ink)">1</text>
+              <text x="114" y="102" fill="var(--ink)">1</text>
+              <text x="158" y="102" fill="var(--remove)">0</text>
+              <text x="202" y="102" fill="var(--remove)">0</text>
+              <text x="246" y="102" fill="var(--ink)">1</text>
+            </g>
+            <rect x="49" y="76" width="218" height="42" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+            <text x="158" y="64" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--add)">window valid: 2 zeros ≤ K(2)</text>
+            <text x="158" y="140" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--remove)">a 3rd zero would force a shrink</text>
+          </svg>
+        </div>
+        <p>The window stays valid while it holds at most K "wrong" cells (dashed rose) — grow right, shrink left only past K.</p>
+      </div>
+
+      <!-- Card 8: prefix-sum + deque -->
+      <div class="card">
+        <span class="card-tag">08-prefix-sum-deque.js</span>
+        <h3>Prefix sum + monotonic deque</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Prefix sum markers above an array that includes a negative number, with an amber arrow connecting the earliest prefix to a later one whose difference first reaches the target k.">
+            <g font-family="var(--font-mono)" font-size="12" text-anchor="middle" fill="var(--ink-soft)">
+              <circle cx="97" cy="42" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="141" cy="42" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="185" cy="42" r="15" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+              <circle cx="229" cy="42" r="15" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></circle>
+              <text x="97" y="46" fill="var(--ink)">0</text>
+              <text x="141" y="46" fill="var(--ink)">2</text>
+              <text x="185" y="46" fill="var(--ink)">1</text>
+              <text x="229" y="46" fill="var(--result)">3</text>
+            </g>
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="119" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="163" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="207" y="90" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <text x="136" y="112" fill="var(--ink)">2</text>
+              <text x="180" y="112" fill="var(--ink)">−1</text>
+              <text x="224" y="112" fill="var(--ink)">2</text>
+            </g>
+            <path d="M97,60 Q163,150 229,60" fill="none" stroke="var(--result)" stroke-width="2" marker-end="url(#arrow-result)"></path>
+            <text x="163" y="160" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--result)">P3 − P0 = 3 ≥ k → length 3</text>
+          </svg>
+        </div>
+        <p>P[j] closes out the earliest prefix P[i] with P[j]−P[i] ≥ k. The deque keeps only prefixes small enough to still matter — survives negatives.</p>
+      </div>
+
+      <!-- Card 9: bitmask window -->
+      <div class="card">
+        <span class="card-tag">09-bitmask-window.js</span>
+        <h3>Bitmask window</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Array cells with binary bit patterns feeding an OR mask register; a newcomer sharing a bit with the mask is highlighted in rose, forcing an XOR eviction before it can join in teal.">
+            <g font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+              <rect x="31" y="55" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="75" y="55" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+              <rect x="119" y="55" width="34" height="34" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+              <text x="48" y="77" fill="var(--ink)">1</text>
+              <text x="92" y="77" fill="var(--ink)">3</text>
+              <text x="136" y="77" fill="var(--add)">8</text>
+            </g>
+            <g font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--ink-soft)">
+              <text x="48" y="105">0001</text>
+              <text x="92" y="105">0011</text>
+              <text x="136" y="105">1000</text>
+            </g>
+            <rect x="185" y="55" width="90" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="230" y="77" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--result)">mask 1011</text>
+            <text x="230" y="43" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--ink-soft)">OR of window bits</text>
+            <line x1="136" y1="90" x2="230" y2="118" stroke="var(--add)" stroke-width="1.6" stroke-dasharray="3 3" marker-end="url(#arrow-add)"></line>
+            <text x="200" y="140" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" fill="var(--remove)">shared bit → XOR-evict left first</text>
+          </svg>
+        </div>
+        <p>mask = OR of the window's bits. A newcomer that shares a bit forces XOR-evictions from the left until the conflict clears.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/01-sliding-window/ — README.md (theory) · problems.md (17 practice problems) · 01–09*.js (runnable code)
+  </footer>
+
+</div>
