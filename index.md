@@ -1,6 +1,6 @@
 # DSA Roadmap
 
-![DSA roadmap progress map: 16 of 28 modules complete, grouped by section](roadmap.svg)
+![DSA roadmap progress map: 17 of 28 modules complete, grouped by section](roadmap.svg)
 
 Interactive version: [roadmap.html](roadmap.html) (open in a browser — click any done pattern to jump to its README)
 
@@ -37,7 +37,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [ ] 15. K-way Merge — merge K sorted lists/arrays
 
 ## Search
-- [ ] 16. Modified Binary Search — search in rotated/unknown-bound arrays
+- [x] 16. [Modified Binary Search](16-modified-binary-search/README.md) — search in rotated/unknown-bound arrays
 - [ ] 17. Subsets / Backtracking — permutations, combinations, N-Queens, Sudoku
 
 ## Bit Manipulation
