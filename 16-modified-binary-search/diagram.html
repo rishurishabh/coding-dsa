@@ -1,0 +1,248 @@
+<title>Modified Binary Search — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 16-modified-binary-search/</p>
+  <h1>Binary search: one comparison, half the candidates gone</h1>
+  <p class="lede">
+    Every variant halves the search space on every step. What changes is
+    what gets compared at the midpoint — a target, a structure, a
+    feasibility check, or just a neighbor. Code lives in
+    <code>16-modified-binary-search/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>discarded half</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>kept half</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>midpoint / result</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Compare mid, discard a whole half</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 200" role="img" aria-label="A seven-element array with the midpoint compared against a target; the left half including the midpoint is discarded because it's too small, leaving only the right half as candidates." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+        <rect x="140" y="60" width="60" height="44" rx="7" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+        <text x="170" y="88" fill="var(--remove)">1</text>
+        <rect x="210" y="60" width="60" height="44" rx="7" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+        <text x="240" y="88" fill="var(--remove)">3</text>
+        <rect x="280" y="60" width="60" height="44" rx="7" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.6"></rect>
+        <text x="310" y="88" fill="var(--remove)">5</text>
+        <rect x="350" y="60" width="60" height="44" rx="7" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.4"></rect>
+        <text x="380" y="88" fill="var(--result)">7</text>
+        <rect x="420" y="60" width="60" height="44" rx="7" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+        <text x="450" y="88" fill="var(--add)">9</text>
+        <rect x="490" y="60" width="60" height="44" rx="7" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+        <text x="520" y="88" fill="var(--add)">11</text>
+        <rect x="560" y="60" width="60" height="44" rx="7" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+        <text x="590" y="88" fill="var(--add)">13</text>
+        <text x="380" y="48" text-anchor="middle" font-size="12" fill="var(--result)">mid = 7, target = 9</text>
+        <text x="255" y="128" text-anchor="middle" font-size="12" fill="var(--remove)">7 &lt; 9: discard mid and everything left of it</text>
+        <text x="505" y="128" text-anchor="middle" font-size="12" fill="var(--add)">only these remain candidates</text>
+      </svg>
+    </figure>
+    <figcaption>
+      One comparison ruled out four of seven elements at once — not just
+      the ones that don't match, but every element PROVABLY smaller too.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Seven variants</h2>
+    <p class="section-title">Same halving loop, seven different midpoint questions</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-classic-binary-search.js</span>
+        <h3>Compare to a target</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A sorted array with the midpoint compared directly to a target value to decide which half to keep." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="60" y="80" width="46" height="36" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="83" y="103" fill="var(--ink)">3</text>
+            <rect x="112" y="80" width="46" height="36" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="135" y="103" fill="var(--result)">7</text>
+            <rect x="164" y="80" width="46" height="36" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="187" y="103" fill="var(--ink)">11</text>
+            <text x="135" y="65" text-anchor="middle" fill="var(--result)">mid vs target</text>
+            <text x="135" y="140" text-anchor="middle" fill="var(--ink-soft)">sorted array, foundational case</text>
+          </svg>
+        </div>
+        <p>The foundation every other variant modifies — one comparison, one halved range.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-search-rotated-array.js</span>
+        <h3>Identify the sorted half first</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A rotated array where the left portion up to the midpoint is cleanly sorted and the right portion contains the rotation seam." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="30" y="80" width="120" height="36" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="90" y="103" fill="var(--add)">4,5,6,7</text>
+            <rect x="160" y="80" width="120" height="36" rx="6" fill="none" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="3 2"></rect>
+            <text x="220" y="103" fill="var(--ink-soft)">0,1,2</text>
+            <text x="90" y="65" text-anchor="middle" fill="var(--add)">clean sorted half</text>
+            <text x="220" y="65" text-anchor="middle" fill="var(--ink-soft)">contains the seam</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">check nums[lo] vs nums[mid] to tell which is which</text>
+          </svg>
+        </div>
+        <p>Rotation only breaks the order at one seam — one of the two halves is always fully sorted.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-find-minimum-rotated.js</span>
+        <h3>No target — a structural condition</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A rotated array where the midpoint is compared to the rightmost element instead of a target, to decide which side the rotation point is on." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="90" y="70" fill="var(--result)">mid = 6</text>
+            <text x="230" y="70" fill="var(--ink)">hi = 2</text>
+            <text x="160" y="100" text-anchor="middle" fill="var(--remove)">6 &gt; 2: minimum is past mid</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">compares to nums[hi], not to any target</text>
+          </svg>
+        </div>
+        <p>Comparing mid to hi (not to a value being searched for) locates the rotation seam itself.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-first-last-position.js</span>
+        <h3>Keep narrowing past a match</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A run of equal values with a match found in the middle of the run, and the search continuing leftward to find the run's actual first index." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="80" y="80" width="34" height="34" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="97" y="102" fill="var(--ink)">7</text>
+            <rect x="114" y="80" width="34" height="34" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="131" y="102" fill="var(--add)">8</text>
+            <rect x="148" y="80" width="34" height="34" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></rect>
+            <text x="165" y="102" fill="var(--result)">8</text>
+            <rect x="182" y="80" width="34" height="34" rx="5" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></rect>
+            <text x="199" y="102" fill="var(--add)">8</text>
+            <text x="165" y="65" text-anchor="middle" fill="var(--result)">found at mid — keep going left</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">record it, then hi = mid − 1 anyway</text>
+          </svg>
+        </div>
+        <p>A match isn't a stopping condition — it's recorded, then the search keeps narrowing toward a boundary.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-search-2d-matrix.js</span>
+        <h3>Map 2D index space onto 1D</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A matrix with a flat virtual index converted into a row and column pair, so binary search treats the whole grid as one sorted sequence." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="60" y="50" width="200" height="90" fill="none" stroke="var(--line)" stroke-width="1.4"></rect>
+            <line x1="127" y1="50" x2="127" y2="140" stroke="var(--line)" stroke-width="1"></line>
+            <line x1="193" y1="50" x2="193" y2="140" stroke="var(--line)" stroke-width="1"></line>
+            <line x1="60" y1="80" x2="260" y2="80" stroke="var(--line)" stroke-width="1"></line>
+            <line x1="60" y1="110" x2="260" y2="110" stroke="var(--line)" stroke-width="1"></line>
+            <rect x="127" y="80" width="66" height="30" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></rect>
+            <text x="160" y="100" fill="var(--result)">mid=5</text>
+            <text x="160" y="160" text-anchor="middle" fill="var(--ink-soft)">row = ⌊mid / cols⌋, col = mid % cols</text>
+          </svg>
+        </div>
+        <p>One index-math conversion is the only new step — the halving loop itself is unchanged.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <span class="card-tag">06-binary-search-on-answer.js</span>
+        <h3>Search a space of ANSWERS</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A number line of possible eating speeds, with a feasibility check splitting it into speeds too slow on the left and speeds that work on the right." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="40" y1="90" x2="280" y2="90" stroke="var(--line)" stroke-width="1.6"></line>
+            <line x1="40" y1="80" x2="150" y2="80" stroke="var(--remove)" stroke-width="3"></line>
+            <line x1="150" y1="80" x2="280" y2="80" stroke="var(--add)" stroke-width="3"></line>
+            <circle cx="150" cy="80" r="6" fill="var(--result)"></circle>
+            <text x="95" y="65" text-anchor="middle" fill="var(--remove)">too slow</text>
+            <text x="215" y="65" text-anchor="middle" fill="var(--add)">feasible</text>
+            <text x="150" y="115" text-anchor="middle" fill="var(--result)">smallest feasible speed</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--ink-soft)">the array only appears inside the feasibility check</text>
+          </svg>
+        </div>
+        <p>The search space is a range of candidate answers, not the input array — feasibility only moves one direction.</p>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card">
+        <span class="card-tag">07-find-peak-element.js</span>
+        <h3>Compare only to one neighbor</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="An unsorted array where the midpoint is compared only to its immediate right neighbor, and the search moves toward whichever side is climbing." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <path d="M60,120 L120,90 L180,60 L240,100" fill="none" stroke="var(--line)" stroke-width="2"></path>
+            <circle cx="120" cy="90" r="6" fill="var(--result)"></circle>
+            <text x="120" y="75" text-anchor="middle" fill="var(--result)">mid</text>
+            <path d="M130,85 Q150,75 170,65" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">nums[mid] &lt; nums[mid+1] → climb right</text>
+          </svg>
+        </div>
+        <p>No target, no global sort — a peak is guaranteed to exist in whichever direction the slope climbs.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/16-modified-binary-search/ — README.md (theory) · problems.md (8 practice problems) · 01–07*.js (runnable code)
+  </footer>
+
+</div>

@@ -1,0 +1,191 @@
+<svg width="1040" height="1670" viewBox="0 0 1040 1670" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Modified binary search mechanism map: the halving loop, and seven variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1380" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Modified Binary Search — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 16-MODIFIED-BINARY-SEARCH</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Every variant halves the search space on every step. What changes is what gets</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">compared at the midpoint — a target, a structure, a feasibility check, or a neighbor.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">discarded half</text>
+  <rect x="210" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="232" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">kept half</text>
+  <rect x="360" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="382" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">midpoint / result</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Compare mid, discard a whole half</text>
+
+  <rect x="32" y="266" width="976" height="240" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,306)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="140" y="60" width="60" height="44" rx="7" fill="#b3467c14" stroke="#b3467c" stroke-width="1.6"></rect>
+    <text x="170" y="88" fill="#b3467c">1</text>
+    <rect x="210" y="60" width="60" height="44" rx="7" fill="#b3467c14" stroke="#b3467c" stroke-width="1.6"></rect>
+    <text x="240" y="88" fill="#b3467c">3</text>
+    <rect x="280" y="60" width="60" height="44" rx="7" fill="#b3467c14" stroke="#b3467c" stroke-width="1.6"></rect>
+    <text x="310" y="88" fill="#b3467c">5</text>
+    <rect x="350" y="60" width="60" height="44" rx="7" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></rect>
+    <text x="380" y="88" fill="#a8710a">7</text>
+    <rect x="420" y="60" width="60" height="44" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+    <text x="450" y="88" fill="#0f7a72">9</text>
+    <rect x="490" y="60" width="60" height="44" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+    <text x="520" y="88" fill="#0f7a72">11</text>
+    <rect x="560" y="60" width="60" height="44" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+    <text x="590" y="88" fill="#0f7a72">13</text>
+    <text x="380" y="48" text-anchor="middle" font-size="12" fill="#a8710a">mid = 7, target = 9</text>
+    <text x="255" y="128" text-anchor="middle" font-size="12" fill="#b3467c">7 &lt; 9: discard mid and everything left of it</text>
+    <text x="505" y="128" text-anchor="middle" font-size="12" fill="#0f7a72">only these remain candidates</text>
+  </g>
+
+  <text x="32" y="540" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">One comparison ruled out four of seven elements at once — not just the ones that</text>
+  <text x="32" y="558" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">don't match, but every element PROVABLY smaller too.</text>
+
+  <text x="32" y="598" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">SEVEN VARIANTS</text>
+  <text x="32" y="624" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Same halving loop, seven different midpoint questions</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,644)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-classic-binary-search.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Compare to a target</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="80" width="46" height="36" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="83" y="103" fill="#14202e">3</text>
+      <rect x="112" y="80" width="46" height="36" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="135" y="103" fill="#a8710a">7</text>
+      <rect x="164" y="80" width="46" height="36" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="187" y="103" fill="#14202e">11</text>
+      <text x="135" y="65" text-anchor="middle" fill="#a8710a">mid vs target</text>
+      <text x="135" y="140" text-anchor="middle" fill="#4a5a70">sorted array, foundational case</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The foundation every other</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">variant modifies — one comparison,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">one halved range.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,644)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-search-rotated-array.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Identify the sorted half first</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="30" y="80" width="120" height="36" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="90" y="103" fill="#0f7a72">4,5,6,7</text>
+      <rect x="160" y="80" width="120" height="36" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4" stroke-dasharray="3 2"></rect>
+      <text x="220" y="103" fill="#4a5a70">0,1,2</text>
+      <text x="90" y="65" text-anchor="middle" fill="#0f7a72">clean sorted half</text>
+      <text x="220" y="65" text-anchor="middle" fill="#4a5a70">contains the seam</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">check nums[lo] vs nums[mid]</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Rotation only breaks order at one</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">seam — one half is always fully</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">sorted.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,644)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-find-minimum-rotated.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">No target — a structural condition</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="90" y="70" fill="#a8710a">mid = 6</text>
+      <text x="230" y="70" fill="#14202e">hi = 2</text>
+      <text x="160" y="100" text-anchor="middle" fill="#b3467c">6 &gt; 2: minimum is past mid</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">compares to nums[hi], not a target</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Comparing mid to hi locates the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">rotation seam itself, not a</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">specific value.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,968)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-first-last-position.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Keep narrowing past a match</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="80" y="80" width="34" height="34" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="97" y="102" fill="#14202e">7</text>
+      <rect x="114" y="80" width="34" height="34" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="131" y="102" fill="#0f7a72">8</text>
+      <rect x="148" y="80" width="34" height="34" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+      <text x="165" y="102" fill="#a8710a">8</text>
+      <rect x="182" y="80" width="34" height="34" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="199" y="102" fill="#0f7a72">8</text>
+      <text x="165" y="65" text-anchor="middle" fill="#a8710a">found at mid — keep going left</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">record it, then hi = mid − 1 anyway</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A match isn't a stopping</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">condition — it's recorded, then</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the search keeps narrowing.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,968)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-search-2d-matrix.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Map 2D index space onto 1D</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="50" width="200" height="90" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <line x1="127" y1="50" x2="127" y2="140" stroke="#d7dee8" stroke-width="1"></line>
+      <line x1="193" y1="50" x2="193" y2="140" stroke="#d7dee8" stroke-width="1"></line>
+      <line x1="60" y1="80" x2="260" y2="80" stroke="#d7dee8" stroke-width="1"></line>
+      <line x1="60" y1="110" x2="260" y2="110" stroke="#d7dee8" stroke-width="1"></line>
+      <rect x="127" y="80" width="66" height="30" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="160" y="100" fill="#a8710a">mid=5</text>
+      <text x="160" y="160" text-anchor="middle" fill="#4a5a70">row = ⌊mid / cols⌋, col = mid % cols</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">One index-math conversion is</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the only new step — the halving</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">loop itself is unchanged.</text>
+  </g>
+
+  <!-- CARD 6 -->
+  <g transform="translate(712,968)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">06-binary-search-on-answer.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Search a space of ANSWERS</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <line x1="40" y1="90" x2="280" y2="90" stroke="#d7dee8" stroke-width="1.6"></line>
+      <line x1="40" y1="80" x2="150" y2="80" stroke="#b3467c" stroke-width="3"></line>
+      <line x1="150" y1="80" x2="280" y2="80" stroke="#0f7a72" stroke-width="3"></line>
+      <circle cx="150" cy="80" r="6" fill="#a8710a"></circle>
+      <text x="95" y="65" text-anchor="middle" fill="#b3467c">too slow</text>
+      <text x="215" y="65" text-anchor="middle" fill="#0f7a72">feasible</text>
+      <text x="150" y="115" text-anchor="middle" fill="#a8710a">smallest feasible speed</text>
+      <text x="160" y="150" text-anchor="middle" fill="#4a5a70">array only appears inside the feasibility check</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The search space is candidate</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">answers, not the array — feasibility</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">only moves one direction.</text>
+  </g>
+
+  <!-- CARD 7 -->
+  <g transform="translate(32,1292)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">07-find-peak-element.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Compare only to one neighbor</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <path d="M60,120 L120,90 L180,60 L240,100" fill="none" stroke="#d7dee8" stroke-width="2"></path>
+      <circle cx="120" cy="90" r="6" fill="#a8710a"></circle>
+      <text x="120" y="75" text-anchor="middle" fill="#a8710a">mid</text>
+      <path d="M130,85 Q150,75 170,65" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">nums[mid] &lt; nums[mid+1] → climb right</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">No target, no global sort — a</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">peak exists in whichever direction</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the slope climbs.</text>
+  </g>
+
+  <text x="32" y="1332" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/16-modified-binary-search/ — README.md · problems.md · 01–07*.js</text>
+</svg>
