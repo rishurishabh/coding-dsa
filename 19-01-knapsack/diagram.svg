@@ -1,0 +1,158 @@
+<svg width="1040" height="1380" viewBox="0 0 1040 1380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="0/1 Knapsack mechanism map: the include-or-exclude recurrence, and six variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1380" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">0/1 Knapsack — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 19-01-KNAPSACK</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Every cell in the DP array is the better of two choices: skip this item, or take it</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">(capacity minus its weight, plus its value).</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">exclude — unchanged</text>
+  <rect x="230" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="252" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">include — from a smaller capacity</text>
+  <rect x="490" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="512" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">result cell</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">dp[c] = better of exclude vs include</text>
+
+  <rect x="32" y="266" width="976" height="250" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,306)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="161" y="90" width="54" height="40" rx="7" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <rect x="225" y="90" width="54" height="40" rx="7" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <rect x="289" y="90" width="54" height="40" rx="7" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <rect x="353" y="90" width="54" height="40" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="380" y="115" fill="#0f7a72">dp[3]</text>
+    <rect x="417" y="90" width="54" height="40" rx="7" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <rect x="481" y="90" width="54" height="40" rx="7" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <rect x="545" y="90" width="54" height="40" rx="7" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></rect>
+    <text x="572" y="115" fill="#a8710a">dp[6]</text>
+    <path d="M572,88 Q572,50 545,50 Q520,50 520,88" fill="none" stroke="#b3467c" stroke-width="1.8" marker-end="url(#arrow-remove)"></path>
+    <text x="545" y="35" text-anchor="middle" font-size="12" fill="#b3467c">exclude: keep dp[6]</text>
+    <path d="M380,85 Q460,20 560,85" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+    <text x="470" y="15" text-anchor="middle" font-size="12" fill="#0f7a72">include: dp[3] + value (weight = 3)</text>
+    <text x="572" y="165" text-anchor="middle" font-size="12" fill="#a8710a">dp[6] = max(exclude, include)</text>
+  </g>
+
+  <text x="32" y="570" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">The item's weight (3) determines exactly which earlier cell "include" reads from —</text>
+  <text x="32" y="588" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">capacity 6 minus 3 is capacity 3, the room left over after paying for this item.</text>
+
+  <text x="32" y="628" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">SIX VARIANTS</text>
+  <text x="32" y="654" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">One recurrence, read as a max, a boolean, or a count</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,674)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-knapsack-max-value.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Include-or-exclude, maximize value</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="60" width="80" height="40" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="100" y="85" fill="#0f7a72">w=3, v=4</text>
+      <rect x="180" y="60" width="80" height="40" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="220" y="85" fill="#0f7a72">w=4, v=5</text>
+      <text x="160" y="130" text-anchor="middle" fill="#a8710a">capacity 7: take both → value 9</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Every (item, capacity) pair asks</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">one question: does including this</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">item beat excluding it?</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,674)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-subset-sum-exists.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Same recurrence, boolean</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="40" y="80" width="40" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="60" y="102" fill="#0f7a72">T</text>
+      <rect x="86" y="80" width="40" height="34" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="106" y="102" fill="#4a5a70">F</text>
+      <rect x="132" y="80" width="40" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="152" y="102" fill="#0f7a72">T</text>
+      <rect x="178" y="80" width="40" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+      <text x="198" y="102" fill="#a8710a">T</text>
+      <text x="130" y="65" text-anchor="middle" fill="#4a5a70">sums 0, 2, 3 reachable</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">No value to maximize — just</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">true/false, propagated the same</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">way variant 1 propagates a max.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,674)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-equal-subset-partition.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Reduce to variant 2</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="80" y="60" fill="#14202e">total = 22</text>
+      <path d="M80,70 L80,90" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <text x="80" y="110" fill="#0f7a72">target = 11</text>
+      <path d="M130,100 L200,100" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="255" y="105" fill="#a8710a">variant 2, unchanged</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The problem doesn't look like</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">subset sum — until "equal halves"</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">becomes "half = total/2".</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,998)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-count-subsets-with-sum.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Same recurrence, counting</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">dp[4] += dp[4 − num]</text>
+      <text x="160" y="100" fill="#a8710a">3 existing ways become 3 new ways</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">+= instead of a one-way flag flip</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Existence and counting share the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">same DP shape — only the update</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">operator changes.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,998)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-target-sum-assignment.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Reduce to variant 4 via algebra</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <text x="160" y="60" fill="#14202e">P − N = target</text>
+      <text x="160" y="82" fill="#14202e">P + N = total</text>
+      <path d="M160,92 L160,110" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="130" fill="#a8710a">P = (target + total) / 2</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Two linear equations collapse</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">"how many sign assignments" into</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">"count subsets summing to P".</text>
+  </g>
+
+  <!-- CARD 6 -->
+  <g transform="translate(712,998)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">06-minimum-subset-sum-difference.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Read variant 2's table differently</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="40" y="80" width="34" height="30" rx="5" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <rect x="76" y="80" width="34" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <rect x="112" y="80" width="34" height="30" rx="5" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <rect x="148" y="80" width="34" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+      <text x="165" y="65" text-anchor="middle" fill="#a8710a">half = 11, closest reachable</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">scan down from half for the first `true`</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same reachability table as</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">variant 2 — "is X reachable"</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">becomes "what's closest to X".</text>
+  </g>
+
+  <text x="32" y="1340" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/19-01-knapsack/ — README.md · problems.md · 01–06*.js</text>
+</svg>

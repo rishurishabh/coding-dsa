@@ -1,6 +1,6 @@
 # DSA Roadmap
 
-![DSA roadmap progress map: 17 of 28 modules complete, grouped by section](roadmap.svg)
+![DSA roadmap progress map: 18 of 28 modules complete, grouped by section](roadmap.svg)
 
 Interactive version: [roadmap.html](roadmap.html) (open in a browser — click any done pattern to jump to its README)
 
@@ -44,7 +44,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] 18. [Bitwise XOR](18-bitwise-xor/README.md) — single number, missing number tricks
 
 ## Dynamic Programming
-- [ ] 19. 0/1 Knapsack — subset sum, partition, target sum
+- [x] 19. [0/1 Knapsack](19-01-knapsack/README.md) — subset sum, partition, target sum
 - [ ] 20. Unbounded Knapsack — coin change, rod cutting
 - [ ] 21. LCS family — edit distance, longest common/increasing subsequence
 - [ ] 22. Palindromic Subsequence — interval DP

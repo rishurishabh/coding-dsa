@@ -4,7 +4,7 @@ A pattern-by-pattern DSA practice repo in JavaScript — 28 modules
 (1 prerequisite + 27 interview patterns), each with theory, a visual
 mechanism map, a practice list, and runnable code for every variant.
 
-![DSA roadmap progress map: 17 of 28 modules complete, grouped by section](roadmap.svg)
+![DSA roadmap progress map: 18 of 28 modules complete, grouped by section](roadmap.svg)
 
 **[Full roadmap → index.md](index.md)** · **[Interactive roadmap → roadmap.html](roadmap.html)**
 (open `roadmap.html` in a browser — GitHub only renders it as source, not live;
@@ -29,7 +29,7 @@ Variant counts aren't padded to a round number — some patterns have 3
 genuinely distinct mechanisms, others have 11. The README for each module
 says so explicitly where the count is unusually low or high.
 
-## Progress: 17 / 28
+## Progress: 18 / 28
 
 | # | Module | Status |
 |---|---|---|
@@ -52,7 +52,7 @@ says so explicitly where the count is unusually low or high.
 | 16 | [Modified Binary Search](16-modified-binary-search/README.md) | ✅ |
 | 17 | Subsets / Backtracking | ⬜ |
 | 18 | [Bitwise XOR](18-bitwise-xor/README.md) | ✅ |
-| 19 | 0/1 Knapsack | ⬜ |
+| 19 | [0/1 Knapsack](19-01-knapsack/README.md) | ✅ |
 | 20 | Unbounded Knapsack | ⬜ |
 | 21 | LCS Family | ⬜ |
 | 22 | Palindromic Subsequence | ⬜ |
