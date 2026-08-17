@@ -1,0 +1,169 @@
+<svg width="1040" height="1360" viewBox="0 0 1040 1360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="K-way merge mechanism map: one heap slot per source, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1360" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">K-way Merge — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 15-K-WAY-MERGE</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">The heap never holds more than K elements — one frontier value from each source.</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Pop the smallest, and that source's next value takes its place.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">frontier — in the heap</text>
+  <rect x="240" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="262" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">popped / output</text>
+  <rect x="420" y="146" width="14" height="14" rx="3" fill="#4a5a70"></rect>
+  <text x="442" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">not yet reached</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Pop the min, refill from the same source</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,286)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+    <rect x="40" y="30" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="62" y="52" fill="#0f7a72">1</text>
+    <rect x="92" y="30" width="44" height="34" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="114" y="52" fill="#4a5a70">4</text>
+    <rect x="144" y="30" width="44" height="34" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="166" y="52" fill="#4a5a70">5</text>
+    <text x="20" y="52" fill="#4a5a70" text-anchor="end">A:</text>
+
+    <rect x="40" y="90" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="62" y="112" fill="#0f7a72">1</text>
+    <rect x="92" y="90" width="44" height="34" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="114" y="112" fill="#4a5a70">3</text>
+    <rect x="144" y="90" width="44" height="34" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="166" y="112" fill="#4a5a70">4</text>
+    <text x="20" y="112" fill="#4a5a70" text-anchor="end">B:</text>
+
+    <rect x="40" y="150" width="44" height="34" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="62" y="172" fill="#0f7a72">2</text>
+    <rect x="92" y="150" width="44" height="34" rx="6" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="114" y="172" fill="#4a5a70">6</text>
+    <text x="20" y="172" fill="#4a5a70" text-anchor="end">C:</text>
+
+    <rect x="330" y="80" width="150" height="60" rx="10" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <text x="405" y="105" text-anchor="middle" fill="#14202e">min-heap</text>
+    <text x="405" y="125" text-anchor="middle" fill="#4a5a70">{1, 1, 2}</text>
+    <path d="M62,64 Q200,70 330,105" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+    <path d="M62,124 Q200,110 330,110" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+    <path d="M62,184 Q200,150 330,120" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+
+    <path d="M480,105 L560,105" fill="none" stroke="#a8710a" stroke-width="2" marker-end="url(#arrow-result)"></path>
+    <rect x="562" y="85" width="60" height="40" rx="7" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+    <text x="592" y="110" fill="#a8710a">1 (A)</text>
+    <text x="592" y="145" text-anchor="middle" font-size="11" fill="#a8710a">popped — output</text>
+
+    <path d="M62,64 Q10,75 62,88" fill="none" stroke="#b3467c" stroke-width="1.6" stroke-dasharray="3 2" marker-end="url(#arrow-remove)"></path>
+    <text x="20" y="80" text-anchor="middle" font-size="10.5" fill="#b3467c">A's slot</text>
+    <text x="20" y="92" text-anchor="middle" font-size="10.5" fill="#b3467c">refills with 4</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Two lists tie at 1 — either can be popped first. The popped list's next element (4)</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">takes its old slot in the heap.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE VARIANTS</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">One heap discipline, five kinds of "source"</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-merge-k-lists.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">One heap slot per source</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="60" cy="60" r="16" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></circle>
+      <text x="60" y="65" fill="#0f7a72">1</text>
+      <circle cx="60" cy="110" r="16" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></circle>
+      <text x="60" y="115" fill="#0f7a72">1</text>
+      <circle cx="60" cy="160" r="16" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></circle>
+      <text x="60" y="165" fill="#0f7a72">2</text>
+      <path d="M76,60 Q160,60 220,90" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+      <path d="M76,110 Q160,100 220,90" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+      <path d="M76,160 Q160,130 220,90" fill="none" stroke="#0f7a72" stroke-width="1.6"></path>
+      <circle cx="240" cy="90" r="18" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></circle>
+      <text x="240" y="95" fill="#a8710a">1</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Each list's head competes; the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">winner extends the output and</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">its list's next node re-enters.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-merge-k-sorted-arrays.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Same mechanism, by indices</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="90" y="70" width="140" height="50" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="160" y="92" fill="#0f7a72">[value, arr=1, idx=0]</text>
+      <text x="160" y="110" fill="#4a5a70">next: arr[1][1]</text>
+      <text x="160" y="150" text-anchor="middle" fill="#4a5a70">no .next — position tracked explicitly</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same one-slot-per-source rule —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">"where this came from" is an</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">index pair instead of a pointer.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-kth-smallest-in-matrix.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Variant 2's merge, stopped early</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="80" y="50" fill="#14202e">row 0: 1, 5, 9</text>
+      <text x="80" y="72" fill="#14202e">row 1: 10, 11, 13</text>
+      <text x="80" y="94" fill="#14202e">row 2: 12, 13, 15</text>
+      <text x="230" y="70" fill="#a8710a">pop #8 = 13</text>
+      <text x="230" y="90" fill="#a8710a">stop here</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">no need to drain the remaining heap</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The kth pop IS the answer —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">merging the rest of the matrix</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">would be wasted work.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-smallest-range-k-lists.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Variant 2's merge, as a window</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <line x1="60" y1="90" x2="260" y2="90" stroke="#d7dee8" stroke-width="1.6"></line>
+      <circle cx="90" cy="90" r="6" fill="#0f7a72"></circle>
+      <text x="90" y="75" fill="#0f7a72">heap min</text>
+      <circle cx="220" cy="90" r="6" fill="#a8710a"></circle>
+      <text x="220" y="75" fill="#a8710a">running max</text>
+      <line x1="90" y1="110" x2="220" y2="110" stroke="#a8710a" stroke-width="2.4"></line>
+      <text x="155" y="130" text-anchor="middle" fill="#a8710a">candidate range width</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Every pop redefines the range's</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">edges — the merge stops the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">instant any list runs dry.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-k-pairs-smallest-sums.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">A virtual merge over generated sources</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="120" y="50" fill="#14202e">nums1[0]=1, fixed</text>
+      <text x="120" y="75" fill="#0f7a72">+ nums2[0]=2 → 3</text>
+      <text x="120" y="97" fill="#4a5a70">+ nums2[1]=4 → 5 (not yet)</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">this row exists only as a formula</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Fixing i and sweeping j IS a</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">sorted sequence — merged without</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">ever being materialized.</text>
+  </g>
+
+  <text x="32" y="1320" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/15-k-way-merge/ — README.md · problems.md · 01–05*.js</text>
+</svg>
