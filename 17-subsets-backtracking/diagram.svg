@@ -1,0 +1,191 @@
+<svg width="1040" height="1720" viewBox="0 0 1040 1720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Subsets and backtracking mechanism map: choose-explore-un-choose, and seven variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1720" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Subsets / Backtracking — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 17-SUBSETS-BACKTRACKING</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Every branch of the decision tree pushes a choice, recurses into everything that</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">follows from it, then pops the choice back off before trying the next one.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">choose / explore</text>
+  <rect x="220" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="242" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">un-choose / backtrack</text>
+  <rect x="440" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="462" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">recorded result</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Push, recurse, pop — then try the next branch</text>
+
+  <rect x="32" y="266" width="976" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(140,296)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <line x1="380" y1="55" x2="280" y2="110" stroke="#0f7a72" stroke-width="2"></line>
+    <line x1="280" y1="125" x2="280" y2="180" stroke="#0f7a72" stroke-width="2"></line>
+    <circle cx="380" cy="40" r="20" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="380" y="45" fill="#14202e">[]</text>
+    <circle cx="280" cy="115" r="20" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+    <text x="280" y="120" fill="#0f7a72">[1]</text>
+    <circle cx="280" cy="190" r="22" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></circle>
+    <text x="280" y="195" fill="#a8710a">[1,2]</text>
+    <text x="280" y="225" text-anchor="middle" font-size="11" fill="#a8710a">recorded</text>
+
+    <path d="M264,175 Q230,145 264,120" fill="none" stroke="#b3467c" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-remove)"></path>
+    <text x="205" y="150" text-anchor="middle" font-size="11" fill="#b3467c">pop 2</text>
+    <path d="M264,105 Q230,75 364,50" fill="none" stroke="#b3467c" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrow-remove)"></path>
+    <text x="230" y="60" text-anchor="middle" font-size="11" fill="#b3467c">pop 1</text>
+
+    <line x1="380" y1="55" x2="480" y2="110" stroke="#0f7a72" stroke-width="2" marker-end="url(#arrow-add)"></line>
+    <circle cx="480" cy="120" r="20" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+    <text x="480" y="125" fill="#0f7a72">[2]</text>
+    <text x="480" y="160" text-anchor="middle" font-size="11" fill="#4a5a70">next branch from a clean root</text>
+  </g>
+
+  <text x="32" y="610" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">After [1,2] is recorded, both choices unwind in reverse order — the path is back</text>
+  <text x="32" y="628" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">to [] before [2] is ever tried, as if [1] had never been chosen at all.</text>
+
+  <text x="32" y="668" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">SEVEN VARIANTS</text>
+  <text x="32" y="694" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">One skeleton, seven definitions of "a choice"</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,714)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-subsets-include-exclude.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Choose forward from `start`</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="30" y="80" width="34" height="30" rx="5" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="47" y="100" fill="#4a5a70">1</text>
+      <rect x="70" y="80" width="34" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="87" y="100" fill="#0f7a72">2</text>
+      <rect x="110" y="80" width="34" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="127" y="100" fill="#0f7a72">3</text>
+      <text x="87" y="65" text-anchor="middle" fill="#0f7a72">start = 1: only 2, 3 considered</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">never looks backward — no duplicate subsets</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Every partial path IS a valid</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">subset — recorded on entry,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">extended only forward.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,714)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-subsets-with-duplicates.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Variant 1 + duplicate skip</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="120" cy="60" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="120" y="65" fill="#0f7a72">2</text>
+      <circle cx="200" cy="60" r="18" fill="#b3467c14" stroke="#b3467c" stroke-width="2" stroke-dasharray="3 2"></circle>
+      <text x="200" y="65" fill="#b3467c">2✕</text>
+      <text x="160" y="110" text-anchor="middle" fill="#b3467c">sorted first: same value, same level → skip</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Sorting groups duplicates</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">adjacent — a simple equality</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">check prunes the redundant branch.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,714)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-permutations.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Loop restarts from 0, `used`</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="80" width="34" height="30" rx="5" fill="#b3467c14" stroke="#b3467c" stroke-width="1.8"></rect>
+      <text x="77" y="100" fill="#b3467c">1✕</text>
+      <rect x="100" y="80" width="34" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="117" y="100" fill="#0f7a72">2</text>
+      <rect x="140" y="80" width="34" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+      <text x="157" y="100" fill="#0f7a72">3</text>
+      <text x="77" y="65" text-anchor="middle" fill="#b3467c">already in path</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">excluded by `used`, not index order</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Order matters, so every index is</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">a candidate at every position —</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">except whatever's already chosen.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,1038)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-combination-sum.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Recurse with `i`, not `i+1`</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <circle cx="160" cy="80" r="20" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></circle>
+      <text x="160" y="85" fill="#0f7a72">2</text>
+      <path d="M175,65 Q210,50 190,90 Q180,105 172,95" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <text x="230" y="60" fill="#0f7a72">recurse(i, remaining−2)</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">same index stays available next call</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">One index-vs-index+1 change is</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the whole difference from "used</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">once" to "unlimited reuse".</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,1038)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-palindrome-partitioning.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">The choice is WHERE to cut</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16" text-anchor="middle">
+      <text x="100" y="80" fill="#a8710a">a</text>
+      <text x="130" y="80" fill="#a8710a">a</text>
+      <text x="160" y="80" fill="#14202e">b</text>
+      <path d="M115,50 L115,105" stroke="#0f7a72" stroke-width="2"></path>
+      <path d="M145,50 L145,105" stroke="#d7dee8" stroke-width="1.4" stroke-dasharray="3 2"></path>
+      <text x="115" y="40" text-anchor="middle" font-size="11" fill="#0f7a72">cut: "aa" is a palindrome ✓</text>
+      <text x="160" y="140" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" fill="#4a5a70">the loop advances an END index</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The search space is cut</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">positions, not elements — a piece</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">is only explored if legal first.</text>
+  </g>
+
+  <!-- CARD 6 -->
+  <g transform="translate(712,1038)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">06-n-queens.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Constraint satisfaction</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="90" y="40" width="140" height="140" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <rect x="90" y="40" width="35" height="35" fill="#a8710a14"></rect>
+      <text x="107" y="63" fill="#a8710a">Q</text>
+      <rect x="125" y="40" width="35" height="35" fill="#b3467c14"></rect>
+      <rect x="90" y="75" width="35" height="35" fill="#b3467c14"></rect>
+      <rect x="125" y="75" width="35" height="35" fill="#b3467c14"></rect>
+      <text x="160" y="150" text-anchor="middle" fill="#b3467c">column + both diagonals: all attacked</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Three Sets (column, both</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">diagonals) turn "is this attacked"</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">into an O(1) check.</text>
+  </g>
+
+  <!-- CARD 7 -->
+  <g transform="translate(32,1362)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">07-word-search.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Backtracking on a grid</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+      <rect x="60" y="60" width="40" height="40" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="80" y="85" fill="#a8710a">A</text>
+      <rect x="100" y="60" width="40" height="40" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="120" y="85" fill="#a8710a">B</text>
+      <rect x="140" y="60" width="40" height="40" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+      <text x="160" y="85" fill="#0f7a72">#</text>
+      <text x="160" y="120" text-anchor="middle" fill="#0f7a72">cell borrowed as its own visited-marker</text>
+      <text x="160" y="150" text-anchor="middle" fill="#4a5a70">restored to 'C' on the way back out</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">No separate visited grid — the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">board's own cell holds the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">marker, then gets its letter back.</text>
+  </g>
+
+  <text x="32" y="1700" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/17-subsets-backtracking/ — README.md · problems.md · 01–07*.js</text>
+</svg>
