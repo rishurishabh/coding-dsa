@@ -1,0 +1,230 @@
+<title>K-way Merge — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 15-k-way-merge/</p>
+  <h1>K-way merge: one candidate per source, always</h1>
+  <p class="lede">
+    The heap never holds more than K elements — one frontier value from
+    each source. Pop the smallest, and that source's next value takes its
+    place. Code lives in <code>15-k-way-merge/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>frontier — currently in the heap</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>popped / output</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--ink-soft)"></span>not yet reached</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Pop the min, refill from the same source</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 760 220" role="img" aria-label="Three sorted sources, each with its first unconsumed element in the heap; the smallest of the three is popped as output, and that source's next element replaces it in the heap." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+        <g>
+          <rect x="40" y="30" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+          <text x="62" y="52" fill="var(--add)">1</text>
+          <rect x="92" y="30" width="44" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="114" y="52" fill="var(--ink-soft)">4</text>
+          <rect x="144" y="30" width="44" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="166" y="52" fill="var(--ink-soft)">5</text>
+          <text x="20" y="52" fill="var(--ink-soft)" text-anchor="end">A:</text>
+
+          <rect x="40" y="90" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+          <text x="62" y="112" fill="var(--add)">1</text>
+          <rect x="92" y="90" width="44" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="114" y="112" fill="var(--ink-soft)">3</text>
+          <rect x="144" y="90" width="44" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="166" y="112" fill="var(--ink-soft)">4</text>
+          <text x="20" y="112" fill="var(--ink-soft)" text-anchor="end">B:</text>
+
+          <rect x="40" y="150" width="44" height="34" rx="6" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+          <text x="62" y="172" fill="var(--add)">2</text>
+          <rect x="92" y="150" width="44" height="34" rx="6" fill="none" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="114" y="172" fill="var(--ink-soft)">6</text>
+          <text x="20" y="172" fill="var(--ink-soft)" text-anchor="end">C:</text>
+        </g>
+
+        <rect x="330" y="80" width="150" height="60" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></rect>
+        <text x="405" y="105" text-anchor="middle" fill="var(--ink)">min-heap</text>
+        <text x="405" y="125" text-anchor="middle" fill="var(--ink-soft)">{1, 1, 2}</text>
+        <path d="M62,64 Q200,70 330,105" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+        <path d="M62,124 Q200,110 330,110" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+        <path d="M62,184 Q200,150 330,120" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+
+        <path d="M480,105 L560,105" fill="none" stroke="var(--result)" stroke-width="2" marker-end="url(#arrow-result)"></path>
+        <rect x="562" y="85" width="60" height="40" rx="7" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></rect>
+        <text x="592" y="110" fill="var(--result)">1 (A)</text>
+        <text x="592" y="145" text-anchor="middle" font-size="11" fill="var(--result)">popped — output</text>
+
+        <path d="M62,64 Q10,75 62,88" fill="none" stroke="var(--remove)" stroke-width="1.6" stroke-dasharray="3 2" marker-end="url(#arrow-remove)"></path>
+        <text x="20" y="80" text-anchor="middle" font-size="10.5" fill="var(--remove)">A's slot</text>
+        <text x="20" y="92" text-anchor="middle" font-size="10.5" fill="var(--remove)">refills with 4</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Two lists tie at 1 — either can be popped first (the tie-break
+      doesn't matter for correctness). The popped list's next element (4)
+      takes its old slot in the heap.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Five variants</h2>
+    <p class="section-title">One heap discipline, five kinds of "source"</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-merge-k-lists.js</span>
+        <h3>One heap slot per source, linked lists</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Three linked lists each contributing their head node to a heap, with the smallest head becoming the next node of the merged output." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <circle cx="60" cy="60" r="16" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+            <text x="60" y="65" fill="var(--add)">1</text>
+            <circle cx="60" cy="110" r="16" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+            <text x="60" y="115" fill="var(--add)">1</text>
+            <circle cx="60" cy="160" r="16" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+            <text x="60" y="165" fill="var(--add)">2</text>
+            <path d="M76,60 Q160,60 220,90" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+            <path d="M76,110 Q160,100 220,90" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+            <path d="M76,160 Q160,130 220,90" fill="none" stroke="var(--add)" stroke-width="1.6"></path>
+            <circle cx="240" cy="90" r="18" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></circle>
+            <text x="240" y="95" fill="var(--result)">1</text>
+          </svg>
+        </div>
+        <p>Each list's current head competes; the winner extends the merged output and its own list's next node re-enters.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-merge-k-sorted-arrays.js</span>
+        <h3>Same mechanism, tracked by indices</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A heap entry storing a value alongside its array index and element index, since arrays have no next pointer to follow." font-family="var(--font-mono)" font-size="13" text-anchor="middle">
+            <rect x="90" y="70" width="140" height="50" rx="8" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+            <text x="160" y="92" fill="var(--add)">[value, arr=1, idx=0]</text>
+            <text x="160" y="110" fill="var(--ink-soft)">next: arr[1][1]</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--ink-soft)">no .next — position tracked explicitly</text>
+          </svg>
+        </div>
+        <p>Same one-slot-per-source rule — "where this came from" is an index pair instead of a pointer.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-kth-smallest-in-matrix.js</span>
+        <h3>Variant 2's merge, stopped early</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A matrix with each row seeded into the heap, popped repeatedly until the kth pop, at which point the merge stops without draining the rest." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="80" y="50" fill="var(--ink)">row 0: 1, 5, 9</text>
+            <text x="80" y="72" fill="var(--ink)">row 1: 10, 11, 13</text>
+            <text x="80" y="94" fill="var(--ink)">row 2: 12, 13, 15</text>
+            <text x="230" y="70" fill="var(--result)">pop #8 = 13</text>
+            <text x="230" y="90" fill="var(--result)">stop here</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">no need to drain the remaining heap</text>
+          </svg>
+        </div>
+        <p>The kth pop IS the answer — merging the rest of the matrix would be wasted work.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-smallest-range-k-lists.js</span>
+        <h3>Variant 2's merge, read as a window</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A heap minimum and a separately tracked running maximum together defining a range guaranteed to touch every list, checked after each pop." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <line x1="60" y1="90" x2="260" y2="90" stroke="var(--line)" stroke-width="1.6"></line>
+            <circle cx="90" cy="90" r="6" fill="var(--add)"></circle>
+            <text x="90" y="75" fill="var(--add)">heap min</text>
+            <circle cx="220" cy="90" r="6" fill="var(--result)"></circle>
+            <text x="220" y="75" fill="var(--result)">running max</text>
+            <line x1="90" y1="110" x2="220" y2="110" stroke="var(--result)" stroke-width="2.4"></line>
+            <text x="155" y="130" text-anchor="middle" fill="var(--result)">candidate range width</text>
+          </svg>
+        </div>
+        <p>Every pop redefines the range's edges — the merge stops the instant any list runs dry.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-k-pairs-smallest-sums.js</span>
+        <h3>A virtual merge over generated sources</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A fixed value from the first array paired against increasing values from the second array, forming a sorted sequence that is generated on demand instead of stored." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="120" y="50" fill="var(--ink)">nums1[0]=1, fixed</text>
+            <text x="120" y="75" fill="var(--add)">+ nums2[0]=2 → 3</text>
+            <text x="120" y="97" fill="var(--ink-soft)">+ nums2[1]=4 → 5 (not yet)</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">this row exists only as a formula, not an array</text>
+          </svg>
+        </div>
+        <p>Fixing i and sweeping j through nums2 IS a sorted sequence — the heap merges it without it ever being materialized.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/15-k-way-merge/ — README.md (theory) · problems.md (5 practice problems) · 01–05*.js (runnable code)
+  </footer>
+
+</div>
