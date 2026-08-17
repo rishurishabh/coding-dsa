@@ -65,6 +65,14 @@ says so explicitly where the count is unusually low or high.
 See [index.md](index.md) for the same list grouped by section, with the why
 behind the ordering.
 
+## Data Structures track
+
+A separate track alongside the patterns above: building the core data
+structures **from scratch** — what operations they support, why those
+operations cost what they cost. See **[data-structures/index.md](data-structures/index.md)**
+for the full list (1 of 8 built so far, starting with
+[Stack](data-structures/01-stack/README.md)).
+
 ## Running the code
 
 No dependencies — just Node:

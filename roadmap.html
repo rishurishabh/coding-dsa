@@ -57,19 +57,37 @@
   .chip.pending { background: var(--surface); border: 1.4px solid var(--line); color: var(--ink-soft); cursor: default; }
   .chip.pending .label { color: var(--ink-soft); }
 
+  .tabbar { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 1.5px solid var(--line); }
+  .tab-btn {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+    padding: 10px 18px; background: none; border: none; border-bottom: 2px solid transparent;
+    color: var(--ink-soft); cursor: pointer; margin-bottom: -1.5px;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--ink); border-bottom-color: var(--add); }
+  .tab-btn:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .panel[hidden] { display: none; }
+
   footer { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 40px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
 </style>
 
 <div class="wrap">
-  <p class="eyebrow">coding_dsa / 28 modules, Grokking-style order</p>
+  <p class="eyebrow">coding_dsa / two tracks, Grokking-style order</p>
   <h1>DSA Roadmap: where to start, and what's next</h1>
   <p class="lede">
     Work top to bottom, section by section — each pattern builds on ones
-    before it more than it builds on the ones after. Click a done pattern to
+    before it more than it builds on the ones after. Click a done module to
     open its README (theory + diagrams); every folder also has a
     <code>problems.md</code> practice list and runnable <code>.js</code> for
     every variant.
   </p>
+
+  <div class="tabbar" role="tablist">
+    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
+  </div>
+
+  <div class="panel" id="panel-patterns" role="tabpanel" aria-labelledby="tab-patterns">
 
   <div class="legend">
     <div class="legend-item"><span class="swatch done"></span>done — click to open</div>
@@ -167,7 +185,59 @@
     </div>
   </section>
 
+  </div><!-- /panel-patterns -->
+
+  <div class="panel" id="panel-ds" role="tabpanel" aria-labelledby="tab-ds" hidden>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch done"></span>done — click to open</div>
+    <div class="legend-item"><span class="swatch pending"></span>not started yet</div>
+  </div>
+
+  <p class="progress-label">1 of 8 structures built</p>
+  <div class="progress-track"><div class="progress-fill" style="width: 12.5%"></div></div>
+
+  <section class="group">
+    <p class="group-label">DATA STRUCTURES — FROM SCRATCH</p>
+    <div class="chip-row">
+      <a class="chip done" href="data-structures/01-stack/README.md"><span class="num">01</span><span class="status">✓</span><span class="label">Stack</span></a>
+      <div class="chip pending"><span class="num">02</span><span class="status">○</span><span class="label">Queue</span></div>
+      <div class="chip pending"><span class="num">03</span><span class="status">○</span><span class="label">Linked List</span></div>
+      <div class="chip pending"><span class="num">04</span><span class="status">○</span><span class="label">Hash Map</span></div>
+      <div class="chip pending"><span class="num">05</span><span class="status">○</span><span class="label">Binary Search Tree</span></div>
+      <div class="chip pending"><span class="num">06</span><span class="status">○</span><span class="label">Heap / Priority Queue</span></div>
+      <div class="chip pending"><span class="num">07</span><span class="status">○</span><span class="label">Trie</span></div>
+      <div class="chip pending"><span class="num">08</span><span class="status">○</span><span class="label">Graph</span></div>
+    </div>
+  </section>
+
+  <p style="font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; max-width: 68ch;">
+    A separate track from the patterns tab: building each structure from
+    scratch, not applying a technique on top of one. See
+    <a href="data-structures/index.md" style="text-decoration: underline;">data-structures/index.md</a>
+    for how the two tracks relate.
+  </p>
+
+  </div><!-- /panel-ds -->
+
   <footer>
     coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg
   </footer>
 </div>
+
+<script>
+  function showTab(name) {
+    const patternsPanel = document.getElementById('panel-patterns');
+    const dsPanel = document.getElementById('panel-ds');
+    const patternsTab = document.getElementById('tab-patterns');
+    const dsTab = document.getElementById('tab-ds');
+    const showPatterns = name === 'patterns';
+
+    patternsPanel.hidden = !showPatterns;
+    dsPanel.hidden = showPatterns;
+    patternsTab.classList.toggle('active', showPatterns);
+    dsTab.classList.toggle('active', !showPatterns);
+    patternsTab.setAttribute('aria-selected', String(showPatterns));
+    dsTab.setAttribute('aria-selected', String(!showPatterns));
+  }
+</script>

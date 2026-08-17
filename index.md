@@ -63,3 +63,10 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - Each pattern gets its own numbered folder: `README.md` (how/when/why) +
   one file per variant + `problems.md` (practice list).
 - Run any file directly: `node 01-sliding-window/01-fixed-size.js`.
+
+## Data Structures track
+The 27 patterns above assume familiarity with the underlying data
+structures. **[data-structures/index.md](data-structures/index.md)** is a
+separate track that builds those structures from scratch — same
+README/problems.md/diagram convention, starting with
+[Stack](data-structures/01-stack/README.md).
