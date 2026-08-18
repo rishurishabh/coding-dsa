@@ -36,6 +36,18 @@
   #doc code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; color: var(--ink); }
   #doc pre { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 0 0 16px; }
   #doc pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+
+  /* Standalone .js file viewer (reader.html?path=...js) — a minimal
+     hand-rolled highlighter, no external library, matching the rest of
+     the repo's no-dependency convention. */
+  .code-view { counter-reset: line; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 0; overflow-x: auto; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.65; margin: 0 0 20px; }
+  .code-view .code-line { counter-increment: line; white-space: pre; padding: 0 20px 0 4.4em; position: relative; color: var(--ink); }
+  .code-view .code-line::before { content: counter(line); position: absolute; left: 0; width: 3.6em; text-align: right; color: var(--ink-soft); opacity: 0.45; user-select: none; }
+  .code-view .code-line:hover { background: var(--paper); }
+  .tok-comment { color: var(--ink-soft); font-style: italic; }
+  .tok-string { color: var(--result); }
+  .tok-keyword { color: var(--add); font-weight: 600; }
+  .tok-number { color: var(--remove); }
   #doc a { text-decoration: underline; text-decoration-style: dotted; }
   #doc a:hover { color: var(--ink); }
   /* diagram.svg files use fixed light-theme colors (so they render consistently
@@ -118,6 +130,33 @@
     return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   }
 
+  const JS_KEYWORDS = /\b(?:function|const|let|var|if|else|for|while|do|return|class|new|this|typeof|instanceof|throw|try|catch|finally|break|continue|switch|case|default|extends|super|import|export|from|require|module|exports|async|await|yield|static|get|set|of|in|null|undefined|true|false|void|delete)\b/;
+
+  function highlightJS(code) {
+    const escaped = escapeHtml(code);
+    const pattern = new RegExp(
+      '(//.*$)' +                              // 1: line comment
+      '|(/\\*[\\s\\S]*?\\*/)' +                 // 2: block comment
+      '|("(?:[^"\\\\]|\\\\.)*"|\'(?:[^\'\\\\]|\\\\.)*\'|`(?:[^`\\\\]|\\\\.)*`)' + // 3: string
+      '|(' + JS_KEYWORDS.source + ')' +         // 4: keyword
+      '|(\\b\\d+\\.?\\d*\\b)',                  // 5: number
+      'gm'
+    );
+    return escaped.replace(pattern, (m, comment, block, str, keyword, num) => {
+      if (comment || block) return '<span class="tok-comment">' + m + '</span>';
+      if (str) return '<span class="tok-string">' + m + '</span>';
+      if (keyword) return '<span class="tok-keyword">' + m + '</span>';
+      if (num) return '<span class="tok-number">' + m + '</span>';
+      return m;
+    });
+  }
+
+  function renderCodeView(code) {
+    const highlighted = highlightJS(code);
+    const lines = highlighted.split('\n').map((line) => '<div class="code-line">' + (line.length ? line : ' ') + '</div>');
+    return '<div class="code-view">' + lines.join('') + '</div>';
+  }
+
   function inline(text, baseDir) {
     let out = escapeHtml(text);
     out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, src) => {
@@ -126,7 +165,7 @@
     });
     out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, href) => {
       let resolved = resolvePath(baseDir, href);
-      if (/\.md($|#)/i.test(resolved)) resolved = 'reader.html?path=' + resolved;
+      if (/\.(md|js)($|#)/i.test(resolved)) resolved = 'reader.html?path=' + resolved;
       return '<a href="' + resolved + '">' + label + '</a>';
     });
     out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -332,15 +371,22 @@
 
     statusEl.innerHTML = '<span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--add)]"></span>Loading…</span>';
 
+    const isCode = /\.js$/i.test(path);
+
     try {
       const res = await fetch(path);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const text = await res.text();
       statusEl.textContent = '';
-      docEl.innerHTML = renderMarkdown(text, baseDir);
+      if (isCode) {
+        const filename = path.split('/').pop();
+        docEl.innerHTML = '<h1>' + filename + '</h1>' + renderCodeView(text);
+      } else {
+        docEl.innerHTML = renderMarkdown(text, baseDir);
+        buildTOC(docEl);
+        buildStickyNotes(docEl, path);
+      }
       cardEl.classList.remove('hidden');
-      buildTOC(docEl);
-      buildStickyNotes(docEl, path);
     } catch (err) {
       statusEl.innerHTML =
         '<div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 max-w-[70ch] shadow-sm">' +
