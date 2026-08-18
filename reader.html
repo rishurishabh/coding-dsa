@@ -35,7 +35,14 @@
   #doc pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
   #doc a { text-decoration: underline; text-decoration-style: dotted; }
   #doc a:hover { color: var(--ink); }
-  #doc img { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); margin: 4px 0 20px; }
+  /* diagram.svg files use fixed light-theme colors (so they render consistently
+     on GitHub, which strips <style>/media-query blocks from embedded SVGs) —
+     framed and dimmed slightly here so they don't glare against a dark page. */
+  #doc img { display: block; max-width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); background: #eef2f7; margin: 8px 0 24px; box-shadow: 0 14px 32px -18px rgba(0,0,0,0.35); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) #doc img { filter: brightness(0.88) contrast(1.03); }
+  }
+  :root[data-theme="dark"] #doc img { filter: brightness(0.88) contrast(1.03); }
   #doc table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 14px; }
   #doc th, #doc td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
   #doc th { background: var(--surface); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-soft); }
