@@ -4,13 +4,12 @@
   Open the live version instead: see the Pages link in README.md / index.md,
   or download this file and open it locally in a browser.
 -->
+<script src="https://cdn.tailwindcss.com"></script>
 <title>DSA Roadmap — Progress Map</title>
 <style>
   :root {
     --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
     --add: #0f7a72; --add-soft: #0f7a7214;
-    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
-    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -22,172 +21,129 @@
     --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
     --add: #3fc9be; --add-soft: #3fc9be1f;
   }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  .font-mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace; }
+  .font-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 56px 24px 80px; }
-  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
-  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
-  .lede { font-size: 16px; line-height: 1.65; color: var(--ink-soft); max-width: 68ch; margin: 0 0 28px; }
-  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
-  .legend { display: flex; flex-wrap: wrap; gap: 22px; margin-bottom: 32px; }
-  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
-  .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
-  .swatch.done { background: var(--add); }
-  .swatch.pending { background: var(--surface); border: 1.4px solid var(--line); }
-
-  .progress-label { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; }
-  .progress-track { background: var(--surface); border: 1.5px solid var(--line); border-radius: 11px; height: 22px; overflow: hidden; margin-bottom: 44px; }
-  .progress-fill { background: var(--add); height: 100%; width: 79%; border-radius: 11px 0 0 11px; }
-
-  section.group { margin-bottom: 34px; }
-  .group-label { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; color: var(--ink); margin: 0 0 12px; }
-  .chip-row { display: flex; flex-wrap: wrap; gap: 14px; }
-
-  .chip {
-    display: flex; flex-direction: column; justify-content: center; gap: 2px;
-    width: 168px; min-height: 60px; padding: 10px 14px;
-    border-radius: 10px; position: relative;
-    font-family: var(--font-mono); font-size: 12.5px; line-height: 1.3;
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-  }
-  .chip .num { position: absolute; top: 8px; left: 12px; font-size: 10px; }
-  .chip .status { position: absolute; top: 7px; right: 12px; font-size: 12px; }
-  .chip .label { margin-top: 14px; }
-
-  .chip.done { background: var(--add-soft); border: 2px solid var(--add); color: var(--add); cursor: pointer; }
-  .chip.done .label { color: var(--ink); }
-  .chip.done:hover { transform: translateY(-2px); box-shadow: 0 6px 16px -8px var(--add); }
-
-  .chip.pending { background: var(--surface); border: 1.4px solid var(--line); color: var(--ink-soft); cursor: default; }
-  .chip.pending .label { color: var(--ink-soft); }
-
-  .tabbar { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 1.5px solid var(--line); }
-  .tab-btn {
-    font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-    padding: 10px 18px; background: none; border: none; border-bottom: 2px solid transparent;
-    color: var(--ink-soft); cursor: pointer; margin-bottom: -1.5px;
-  }
-  .tab-btn:hover { color: var(--ink); }
-  .tab-btn.active { color: var(--ink); border-bottom-color: var(--add); }
-  .tab-btn:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
-  .panel[hidden] { display: none; }
-
-  footer { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 40px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+  /* Kept as plain CSS (not Tailwind utilities) so tab/panel switching can never
+     be beaten by a later-loaded utility class of equal specificity. */
+  .tab-btn.active { color: var(--ink) !important; border-bottom-color: var(--add) !important; }
+  .panel[hidden] { display: none !important; }
 </style>
 
-<div class="wrap">
-  <p class="eyebrow">coding_dsa / two tracks, Grokking-style order</p>
-  <h1>DSA Roadmap: where to start, and what's next</h1>
-  <p class="lede">
+<div class="font-body max-w-[1000px] mx-auto px-6 py-14 pb-20">
+  <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--ink-soft)] mb-3.5">coding_dsa / two tracks, Grokking-style order</p>
+  <h1 class="font-mono font-bold text-[clamp(26px,4vw,38px)] tracking-[-0.01em] leading-[1.12] mb-[18px] [text-wrap:balance]">DSA Roadmap: where to start, and what's next</h1>
+  <p class="text-base leading-[1.65] text-[var(--ink-soft)] max-w-[68ch] mb-7">
     Work top to bottom, section by section — each pattern builds on ones
     before it more than it builds on the ones after. Click a done module to
     open its README (theory + diagrams); every folder also has a
-    <code>problems.md</code> practice list and runnable <code>.js</code> for
-    every variant.
+    <code class="font-mono text-[0.9em] bg-[var(--surface)] border border-[var(--line)] rounded px-[0.4em] py-[0.05em]">problems.md</code> practice list and runnable
+    <code class="font-mono text-[0.9em] bg-[var(--surface)] border border-[var(--line)] rounded px-[0.4em] py-[0.05em]">.js</code> for every variant.
   </p>
 
-  <div class="tabbar" role="tablist">
-    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
+  <div class="flex gap-1 mb-8 border-b-[1.5px] border-[var(--line)]" role="tablist">
+    <button class="tab-btn active font-mono text-[13px] font-bold px-[18px] py-[10px] bg-transparent border-0 border-b-2 border-transparent text-[var(--ink-soft)] cursor-pointer -mb-[1.5px] hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
+    <button class="tab-btn font-mono text-[13px] font-bold px-[18px] py-[10px] bg-transparent border-0 border-b-2 border-transparent text-[var(--ink-soft)] cursor-pointer -mb-[1.5px] hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
   </div>
 
   <div class="panel" id="panel-patterns" role="tabpanel" aria-labelledby="tab-patterns">
 
-  <div class="legend">
-    <div class="legend-item"><span class="swatch done"></span>done — click to open</div>
-    <div class="legend-item"><span class="swatch pending"></span>not started yet</div>
+  <div class="flex flex-wrap gap-[22px] mb-8">
+    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--add)]"></span>done — click to open</div>
+    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--surface)] border-[1.4px] border-[var(--line)]"></span>not started yet</div>
   </div>
 
-  <p class="progress-label">22 of 28 modules complete</p>
-  <div class="progress-track"><div class="progress-fill"></div></div>
+  <p class="font-mono text-[13px] text-[var(--ink-soft)] mb-2">22 of 28 modules complete</p>
+  <div class="bg-[var(--surface)] border-[1.5px] border-[var(--line)] rounded-[11px] h-[22px] overflow-hidden mb-11">
+    <div class="bg-[var(--add)] h-full rounded-l-[11px]" style="width: 79%"></div>
+  </div>
 
-  <section class="group">
-    <p class="group-label">PREREQUISITE</p>
-    <div class="chip-row">
-      <a class="chip done" href="00-sorting-algorithms/README.md"><span class="num">00</span><span class="status">✓</span><span class="label">Sorting Algorithms</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">PREREQUISITE</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="00-sorting-algorithms/README.md"><span class="absolute top-2 left-3 text-[10px]">00</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Sorting Algorithms</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">FOUNDATIONS</p>
-    <div class="chip-row">
-      <a class="chip done" href="01-sliding-window/README.md"><span class="num">01</span><span class="status">✓</span><span class="label">Sliding Window</span></a>
-      <a class="chip done" href="02-two-pointers/README.md"><span class="num">02</span><span class="status">✓</span><span class="label">Two Pointers</span></a>
-      <a class="chip done" href="03-fast-slow-pointers/README.md"><span class="num">03</span><span class="status">✓</span><span class="label">Fast &amp; Slow Pointers</span></a>
-      <a class="chip done" href="04-merge-intervals/README.md"><span class="num">04</span><span class="status">✓</span><span class="label">Merge Intervals</span></a>
-      <a class="chip done" href="05-cyclic-sort/README.md"><span class="num">05</span><span class="status">✓</span><span class="label">Cyclic Sort</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">FOUNDATIONS</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="01-sliding-window/README.md"><span class="absolute top-2 left-3 text-[10px]">01</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Sliding Window</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="02-two-pointers/README.md"><span class="absolute top-2 left-3 text-[10px]">02</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Two Pointers</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="03-fast-slow-pointers/README.md"><span class="absolute top-2 left-3 text-[10px]">03</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Fast &amp; Slow Pointers</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="04-merge-intervals/README.md"><span class="absolute top-2 left-3 text-[10px]">04</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Merge Intervals</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="05-cyclic-sort/README.md"><span class="absolute top-2 left-3 text-[10px]">05</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Cyclic Sort</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">LINKED LISTS &amp; STACKS</p>
-    <div class="chip-row">
-      <a class="chip done" href="06-in-place-linked-list-reversal/README.md"><span class="num">06</span><span class="status">✓</span><span class="label">In-place LL Reversal</span></a>
-      <a class="chip done" href="07-monotonic-stack/README.md"><span class="num">07</span><span class="status">✓</span><span class="label">Monotonic Stack</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">LINKED LISTS &amp; STACKS</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="06-in-place-linked-list-reversal/README.md"><span class="absolute top-2 left-3 text-[10px]">06</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">In-place LL Reversal</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="07-monotonic-stack/README.md"><span class="absolute top-2 left-3 text-[10px]">07</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Monotonic Stack</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">TREES &amp; GRAPHS</p>
-    <div class="chip-row">
-      <a class="chip done" href="08-tree-bfs/README.md"><span class="num">08</span><span class="status">✓</span><span class="label">Tree BFS</span></a>
-      <a class="chip done" href="09-tree-dfs/README.md"><span class="num">09</span><span class="status">✓</span><span class="label">Tree DFS</span></a>
-      <a class="chip done" href="10-graph-bfs-dfs/README.md"><span class="num">10</span><span class="status">✓</span><span class="label">Graph BFS/DFS</span></a>
-      <a class="chip done" href="11-topological-sort/README.md"><span class="num">11</span><span class="status">✓</span><span class="label">Topological Sort</span></a>
-      <a class="chip done" href="12-union-find/README.md"><span class="num">12</span><span class="status">✓</span><span class="label">Union Find</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">TREES &amp; GRAPHS</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="08-tree-bfs/README.md"><span class="absolute top-2 left-3 text-[10px]">08</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Tree BFS</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="09-tree-dfs/README.md"><span class="absolute top-2 left-3 text-[10px]">09</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Tree DFS</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="10-graph-bfs-dfs/README.md"><span class="absolute top-2 left-3 text-[10px]">10</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Graph BFS/DFS</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="11-topological-sort/README.md"><span class="absolute top-2 left-3 text-[10px]">11</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Topological Sort</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="12-union-find/README.md"><span class="absolute top-2 left-3 text-[10px]">12</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Union Find</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">HEAPS &amp; SELECTION</p>
-    <div class="chip-row">
-      <a class="chip done" href="13-two-heaps/README.md"><span class="num">13</span><span class="status">✓</span><span class="label">Two Heaps</span></a>
-      <a class="chip done" href="14-top-k-elements/README.md"><span class="num">14</span><span class="status">✓</span><span class="label">Top K Elements</span></a>
-      <a class="chip done" href="15-k-way-merge/README.md"><span class="num">15</span><span class="status">✓</span><span class="label">K-way Merge</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">HEAPS &amp; SELECTION</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="13-two-heaps/README.md"><span class="absolute top-2 left-3 text-[10px]">13</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Two Heaps</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="14-top-k-elements/README.md"><span class="absolute top-2 left-3 text-[10px]">14</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Top K Elements</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="15-k-way-merge/README.md"><span class="absolute top-2 left-3 text-[10px]">15</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">K-way Merge</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">SEARCH</p>
-    <div class="chip-row">
-      <a class="chip done" href="16-modified-binary-search/README.md"><span class="num">16</span><span class="status">✓</span><span class="label">Modified Binary Search</span></a>
-      <a class="chip done" href="17-subsets-backtracking/README.md"><span class="num">17</span><span class="status">✓</span><span class="label">Subsets / Backtracking</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">SEARCH</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="16-modified-binary-search/README.md"><span class="absolute top-2 left-3 text-[10px]">16</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Modified Binary Search</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="17-subsets-backtracking/README.md"><span class="absolute top-2 left-3 text-[10px]">17</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Subsets / Backtracking</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">BIT MANIPULATION</p>
-    <div class="chip-row">
-      <a class="chip done" href="18-bitwise-xor/README.md"><span class="num">18</span><span class="status">✓</span><span class="label">Bitwise XOR</span></a>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">BIT MANIPULATION</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="18-bitwise-xor/README.md"><span class="absolute top-2 left-3 text-[10px]">18</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Bitwise XOR</span></a>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">DYNAMIC PROGRAMMING</p>
-    <div class="chip-row">
-      <a class="chip done" href="19-01-knapsack/README.md"><span class="num">19</span><span class="status">✓</span><span class="label">0/1 Knapsack</span></a>
-      <a class="chip done" href="20-unbounded-knapsack/README.md"><span class="num">20</span><span class="status">✓</span><span class="label">Unbounded Knapsack</span></a>
-      <a class="chip done" href="21-lcs-family/README.md"><span class="num">21</span><span class="status">✓</span><span class="label">LCS Family</span></a>
-      <div class="chip pending"><span class="num">22</span><span class="status">○</span><span class="label">Palindromic Subseq</span></div>
-      <div class="chip pending"><span class="num">23</span><span class="status">○</span><span class="label">DP on Grids</span></div>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">DYNAMIC PROGRAMMING</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="19-01-knapsack/README.md"><span class="absolute top-2 left-3 text-[10px]">19</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">0/1 Knapsack</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="20-unbounded-knapsack/README.md"><span class="absolute top-2 left-3 text-[10px]">20</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Unbounded Knapsack</span></a>
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="21-lcs-family/README.md"><span class="absolute top-2 left-3 text-[10px]">21</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">LCS Family</span></a>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">22</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Palindromic Subseq</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">23</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">DP on Grids</span></div>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">GREEDY</p>
-    <div class="chip-row">
-      <div class="chip pending"><span class="num">24</span><span class="status">○</span><span class="label">Greedy</span></div>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">GREEDY</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">24</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Greedy</span></div>
     </div>
   </section>
 
-  <section class="group">
-    <p class="group-label">ADVANCED STRUCTURES</p>
-    <div class="chip-row">
-      <div class="chip pending"><span class="num">25</span><span class="status">○</span><span class="label">Trie</span></div>
-      <div class="chip pending"><span class="num">26</span><span class="status">○</span><span class="label">Segment / Fenwick Tree</span></div>
-      <div class="chip pending"><span class="num">27</span><span class="status">○</span><span class="label">Graph Shortest Path</span></div>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">ADVANCED STRUCTURES</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">25</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Trie</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">26</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Segment / Fenwick Tree</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">27</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Graph Shortest Path</span></div>
     </div>
   </section>
 
@@ -195,38 +151,40 @@
 
   <div class="panel" id="panel-ds" role="tabpanel" aria-labelledby="tab-ds" hidden>
 
-  <div class="legend">
-    <div class="legend-item"><span class="swatch done"></span>done — click to open</div>
-    <div class="legend-item"><span class="swatch pending"></span>not started yet</div>
+  <div class="flex flex-wrap gap-[22px] mb-8">
+    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--add)]"></span>done — click to open</div>
+    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--surface)] border-[1.4px] border-[var(--line)]"></span>not started yet</div>
   </div>
 
-  <p class="progress-label">1 of 8 structures built</p>
-  <div class="progress-track"><div class="progress-fill" style="width: 12.5%"></div></div>
+  <p class="font-mono text-[13px] text-[var(--ink-soft)] mb-2">1 of 8 structures built</p>
+  <div class="bg-[var(--surface)] border-[1.5px] border-[var(--line)] rounded-[11px] h-[22px] overflow-hidden mb-11">
+    <div class="bg-[var(--add)] h-full rounded-l-[11px]" style="width: 12.5%"></div>
+  </div>
 
-  <section class="group">
-    <p class="group-label">DATA STRUCTURES — FROM SCRATCH</p>
-    <div class="chip-row">
-      <a class="chip done" href="data-structures/01-stack/README.md"><span class="num">01</span><span class="status">✓</span><span class="label">Stack</span></a>
-      <div class="chip pending"><span class="num">02</span><span class="status">○</span><span class="label">Queue</span></div>
-      <div class="chip pending"><span class="num">03</span><span class="status">○</span><span class="label">Linked List</span></div>
-      <div class="chip pending"><span class="num">04</span><span class="status">○</span><span class="label">Hash Map</span></div>
-      <div class="chip pending"><span class="num">05</span><span class="status">○</span><span class="label">Binary Search Tree</span></div>
-      <div class="chip pending"><span class="num">06</span><span class="status">○</span><span class="label">Heap / Priority Queue</span></div>
-      <div class="chip pending"><span class="num">07</span><span class="status">○</span><span class="label">Trie</span></div>
-      <div class="chip pending"><span class="num">08</span><span class="status">○</span><span class="label">Graph</span></div>
+  <section class="mb-[34px]">
+    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">DATA STRUCTURES — FROM SCRATCH</p>
+    <div class="flex flex-wrap gap-[14px]">
+      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="data-structures/01-stack/README.md"><span class="absolute top-2 left-3 text-[10px]">01</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Stack</span></a>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">02</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Queue</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">03</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Linked List</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">04</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Hash Map</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">05</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Binary Search Tree</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">06</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Heap / Priority Queue</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">07</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Trie</span></div>
+      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">08</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Graph</span></div>
     </div>
   </section>
 
-  <p style="font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; max-width: 68ch;">
+  <p class="font-mono text-[12.5px] text-[var(--ink-soft)] leading-[1.6] max-w-[68ch]">
     A separate track from the patterns tab: building each structure from
     scratch, not applying a technique on top of one. See
-    <a href="data-structures/index.md" style="text-decoration: underline;">data-structures/index.md</a>
+    <a href="data-structures/index.md" class="underline">data-structures/index.md</a>
     for how the two tracks relate.
   </p>
 
   </div><!-- /panel-ds -->
 
-  <footer>
+  <footer class="border-t border-[var(--line)] pt-[22px] mt-10 text-[13px] text-[var(--ink-soft)] font-mono">
     coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg
   </footer>
 </div>
