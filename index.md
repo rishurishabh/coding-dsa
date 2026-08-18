@@ -70,7 +70,9 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 The 27 patterns above assume familiarity with the underlying data
 structures. **[data-structures/index.md](data-structures/index.md)** is a
 separate track that builds those structures from scratch — same
-README/problems.md/diagram convention. 5 of 8 built so far: Stack, Queue,
+README/problems.md/diagram convention. 7 of 8 built so far: Stack, Queue,
 [Linked List](data-structures/03-linked-list/README.md),
-[Hash Map](data-structures/04-hash-map/README.md), and
-[Binary Search Tree](data-structures/05-binary-search-tree/README.md).
+[Hash Map](data-structures/04-hash-map/README.md),
+[Binary Search Tree](data-structures/05-binary-search-tree/README.md),
+[Heap / Priority Queue](data-structures/06-heap-priority-queue/README.md),
+and [Graph](data-structures/08-graph/README.md). Only Trie is left.

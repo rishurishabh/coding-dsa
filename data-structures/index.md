@@ -15,12 +15,12 @@ Legend: `[ ]` not started · `[x]` done
 - [x] 03. [Linked List](03-linked-list/README.md) — from-scratch singly/doubly linked list operations
 - [x] 04. [Hash Map](04-hash-map/README.md) — from-scratch hashing and collision resolution
 - [x] 05. [Binary Search Tree](05-binary-search-tree/README.md) — from-scratch insert/delete/search
-- [ ] 06. Heap / Priority Queue — from-scratch binary heap (the structure
+- [x] 06. [Heap / Priority Queue](06-heap-priority-queue/README.md) — from-scratch binary heap (the structure
       reused throughout [13-two-heaps](../13-two-heaps/README.md),
       [14-top-k-elements](../14-top-k-elements/README.md), and
       [15-k-way-merge](../15-k-way-merge/README.md))
 - [ ] 07. Trie — from-scratch prefix tree (also pattern 25 in the main roadmap)
-- [ ] 08. Graph — from-scratch adjacency list/matrix representations
+- [x] 08. [Graph](08-graph/README.md) — from-scratch adjacency list/matrix representations
 
 ## Conventions
 Same as the pattern modules: each numbered folder gets a `README.md`
