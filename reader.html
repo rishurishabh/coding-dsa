@@ -4,17 +4,20 @@
 <style>
   :root {
     --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
-    --add: #0f7a72; --add-soft: #0f7a7214;
+    --add: #0f7a72; --add-soft: #0f7a7214; --result: #a8710a; --result-soft: #a8710a14;
+    --remove: #b3467c; --remove-soft: #b3467c14;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
-      --add: #3fc9be; --add-soft: #3fc9be1f;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --result: #e0a84a; --result-soft: #e0a84a1f;
+      --remove: #e0568f; --remove-soft: #e0568f1f;
     }
   }
   :root[data-theme="dark"] {
     --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
-    --add: #3fc9be; --add-soft: #3fc9be1f;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --result: #e0a84a; --result-soft: #e0a84a1f;
+    --remove: #e0568f; --remove-soft: #e0568f1f;
   }
   .font-mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace; }
   .font-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
@@ -57,6 +60,19 @@
   #toc a { display: block; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; line-height: 1.5; padding: 5px 0 5px 12px; border-left: 2px solid var(--line); color: var(--ink-soft); text-decoration: none; transition: color 0.15s, border-color 0.15s; }
   #toc a:hover { color: var(--ink); }
   #toc a.active { color: var(--add); border-left-color: var(--add); font-weight: 600; }
+
+  /* Quick-glance sticky notes: an auto-pulled one-line summary of each page's
+     first three sections (What / When to use it / Why it works), styled like
+     pinned index cards so the core idea is visible before reading the rest. */
+  .sticky-notes { display: flex; flex-wrap: wrap; gap: 18px 16px; margin: 4px 0 34px; }
+  .sticky-note { position: relative; flex: 1 1 210px; padding: 16px 16px 14px; border-radius: 3px 14px 14px 14px; box-shadow: 0 12px 24px -16px rgba(0,0,0,0.45); transform: rotate(var(--rot, -1deg)); transition: transform 0.18s ease; }
+  .sticky-note:hover { transform: rotate(0deg) translateY(-2px); }
+  .sticky-note::before { content: ''; position: absolute; top: -7px; left: 16px; width: 12px; height: 12px; border-radius: 50%; background: currentColor; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+  .sticky-note .note-title { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 7px; }
+  .sticky-note .note-body { font-size: 13px; line-height: 1.5; margin: 0; color: var(--ink); }
+  .note-add { background: var(--add-soft); border: 1px solid var(--add); color: var(--add); }
+  .note-remove { background: var(--remove-soft); border: 1px solid var(--remove); color: var(--remove); }
+  .note-result { background: var(--result-soft); border: 1px solid var(--result); color: var(--result); }
 </style>
 
 <div id="progress-bar"></div>
@@ -228,6 +244,49 @@
     headers.forEach((h) => observer.observe(h));
   }
 
+  function buildStickyNotes(docEl) {
+    const headers = Array.from(docEl.querySelectorAll('h2')).slice(0, 3);
+    if (headers.length < 2) return; // too short a page for this to add value
+
+    const colors = ['add', 'remove', 'result'];
+    const rotations = [-2, 1.5, -1.5];
+    const notes = headers.map((h, idx) => {
+      // Prefer the first LIST item over a short intro paragraph (e.g. "Reach
+      // for a stack when:") — walk every sibling until the next h2, favoring
+      // whichever list item appears first, falling back to the first <p>.
+      let node = h.nextElementSibling;
+      let listSummary = null;
+      let paraSummary = null;
+      while (node && node.tagName !== 'H2') {
+        if (!listSummary && (node.tagName === 'UL' || node.tagName === 'OL')) {
+          const li = node.querySelector('li');
+          if (li) listSummary = li.textContent.trim();
+        }
+        if (!paraSummary && node.tagName === 'P') {
+          paraSummary = node.textContent.trim();
+        }
+        node = node.nextElementSibling;
+      }
+      const summary = listSummary || paraSummary;
+      return summary ? { title: h.textContent, summary, color: colors[idx], rot: rotations[idx] } : null;
+    }).filter(Boolean);
+
+    if (notes.length === 0) return;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'sticky-notes';
+    wrap.innerHTML = notes.map((n) =>
+      '<div class="sticky-note note-' + n.color + '" style="--rot:' + n.rot + 'deg">' +
+        '<p class="note-title">' + n.title + '</p>' +
+        '<p class="note-body">' + n.summary + '</p>' +
+      '</div>'
+    ).join('');
+
+    const h1 = docEl.querySelector('h1');
+    if (h1) h1.after(wrap);
+    else docEl.prepend(wrap);
+  }
+
   async function main() {
     const params = new URLSearchParams(location.search);
     const path = params.get('path');
@@ -255,6 +314,7 @@
       docEl.innerHTML = renderMarkdown(text, baseDir);
       cardEl.classList.remove('hidden');
       buildTOC(docEl);
+      buildStickyNotes(docEl);
     } catch (err) {
       statusEl.innerHTML =
         '<div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 max-w-[70ch] shadow-sm">' +
