@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <script src="https://cdn.tailwindcss.com"></script>
 <title>coding_dsa — Reader</title>
 <style>
@@ -42,11 +43,17 @@
   #doc td code, #doc th code { white-space: nowrap; }
 </style>
 
-<div class="font-body max-w-[900px] mx-auto px-6 py-12 pb-24">
-  <a href="roadmap.html" class="inline-flex items-center gap-1.5 mb-6 font-mono text-[12px] text-[var(--ink-soft)] hover:text-[var(--add)]">← back to roadmap</a>
+<div class="font-body max-w-[860px] mx-auto px-6 py-12 pb-24">
+  <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+    <a href="roadmap.html" class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[12px] font-medium text-[var(--ink-soft)] transition-colors hover:border-[var(--add)] hover:text-[var(--add)]">← back to roadmap</a>
+    <span id="breadcrumb" class="font-mono text-[11px] text-[var(--ink-soft)]"></span>
+  </div>
 
   <div id="status" class="font-mono text-[13px] text-[var(--ink-soft)]"></div>
-  <article id="doc"></article>
+
+  <div id="card" class="hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 shadow-sm sm:p-10">
+    <article id="doc"></article>
+  </div>
 </div>
 
 <script>
@@ -169,6 +176,8 @@
     const path = params.get('path');
     const statusEl = document.getElementById('status');
     const docEl = document.getElementById('doc');
+    const cardEl = document.getElementById('card');
+    const breadcrumbEl = document.getElementById('breadcrumb');
 
     if (!path) {
       statusEl.textContent = 'No ?path= given.';
@@ -176,7 +185,10 @@
     }
 
     document.title = path + ' — coding_dsa';
+    breadcrumbEl.textContent = 'coding_dsa / ' + path;
     const baseDir = path.includes('/') ? path.slice(0, path.lastIndexOf('/') + 1) : '';
+
+    statusEl.innerHTML = '<span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--add)]"></span>Loading…</span>';
 
     try {
       const res = await fetch(path);
@@ -184,14 +196,15 @@
       const text = await res.text();
       statusEl.textContent = '';
       docEl.innerHTML = renderMarkdown(text, baseDir);
+      cardEl.classList.remove('hidden');
     } catch (err) {
       statusEl.innerHTML =
-        '<div class="rounded-xl border border-[var(--line)] bg-[var(--surface)] p-4 max-w-[70ch]">' +
-        '<p class="mb-2">Could not load <code class="font-mono bg-[var(--paper)] border border-[var(--line)] rounded px-1">' + path + '</code> directly (' + err.message + ').</p>' +
-        '<p class="mb-2">Browsers block this kind of local file fetch — open this page from the live site instead:<br>' +
-        '<a class="underline" href="https://rishurishabh.github.io/coding-dsa/reader.html?path=' + encodeURIComponent(path) + '">rishurishabh.github.io/coding-dsa/reader.html?path=' + path + '</a></p>' +
+        '<div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 max-w-[70ch] shadow-sm">' +
+        '<p class="mb-3 text-[var(--ink)]">Could not load <code class="font-mono bg-[var(--paper)] border border-[var(--line)] rounded px-1.5 py-0.5">' + path + '</code> directly (' + err.message + ').</p>' +
+        '<p class="mb-3">Browsers block this kind of local file fetch — open this page from the live site instead:<br>' +
+        '<a class="underline decoration-dotted hover:text-[var(--ink)]" href="https://rishurishabh.github.io/coding-dsa/reader.html?path=' + encodeURIComponent(path) + '">rishurishabh.github.io/coding-dsa/reader.html?path=' + path + '</a></p>' +
         '<p>Or view it rendered on GitHub directly:<br>' +
-        '<a class="underline" href="https://github.com/rishurishabh/coding-dsa/blob/main/' + path + '">github.com/rishurishabh/coding-dsa/blob/main/' + path + '</a></p>' +
+        '<a class="underline decoration-dotted hover:text-[var(--ink)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/' + path + '">github.com/rishurishabh/coding-dsa/blob/main/' + path + '</a></p>' +
         '</div>';
     }
   }
