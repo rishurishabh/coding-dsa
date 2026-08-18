@@ -1,0 +1,142 @@
+<svg width="1040" height="1360" viewBox="0 0 1040 1360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linked List mechanism map: a chain of nodes, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1360" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Linked List — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / DATA-STRUCTURES / 03-LINKED-LIST</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Each node only points to what comes next — inserting at the head is one pointer swap,</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">reaching any other position means walking node by node.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">new node</text>
+  <rect x="200" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="222" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">pointer rewired</text>
+  <rect x="380" y="146" width="14" height="14" rx="3" fill="#4a5a70"></rect>
+  <text x="402" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">existing chain</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Insert at head: one pointer swap, O(1)</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(220,320)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" text-anchor="middle">
+    <circle cx="70" cy="70" r="26" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></circle>
+    <text x="70" y="76" fill="#a8710a">0</text>
+    <text x="70" y="30" text-anchor="middle" font-size="12" fill="#a8710a">new head</text>
+    <path d="M96,70 L154,70" fill="none" stroke="#0f7a72" stroke-width="2" marker-end="url(#arrow-add)"></path>
+    <text x="125" y="55" text-anchor="middle" font-size="11" fill="#0f7a72">next</text>
+
+    <circle cx="180" cy="70" r="22" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="180" y="76" fill="#14202e">1</text>
+    <path d="M202,70 L248,70" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+    <circle cx="270" cy="70" r="22" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="270" y="76" fill="#14202e">2</text>
+    <path d="M292,70 L338,70" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+    <circle cx="360" cy="70" r="22" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="360" y="76" fill="#14202e">3</text>
+
+    <text x="215" y="140" text-anchor="middle" font-size="12" fill="#4a5a70">old head (1) untouched — only the new node's pointer and</text>
+    <text x="215" y="158" text-anchor="middle" font-size="12" fill="#4a5a70">the list's head reference change</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Reaching node 3 instead means walking from the head through 0, 1, 2 first — O(n),</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">since there's no index arithmetic the way an array has.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE FILES</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Two ways to build it, three problems that need it</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-singly-linked-list.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Core CRUD, one direction</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="80" cy="90" r="18" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></circle>
+      <text x="80" y="95" fill="#a8710a">1</text>
+      <path d="M98,90 L140,90" fill="none" stroke="#4a5a70" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+      <circle cx="160" cy="90" r="16" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <text x="160" y="95" fill="#14202e">2</text>
+      <text x="140" y="130" text-anchor="middle" fill="#4a5a70">next-only — removal needs the node before it</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Cheapest per-node overhead —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">one pointer, but no way back</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">without walking from the head.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-doubly-linked-list.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Core CRUD, both directions</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="120" cy="90" r="16" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></circle>
+      <text x="120" y="95" fill="#14202e">1</text>
+      <path d="M138,84 L182,84" fill="none" stroke="#0f7a72" stroke-width="1.4" marker-end="url(#arrow-add)"></path>
+      <path d="M182,96 L138,96" fill="none" stroke="#b3467c" stroke-width="1.4" marker-end="url(#arrow-remove)"></path>
+      <circle cx="200" cy="90" r="18" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></circle>
+      <text x="200" y="95" fill="#a8710a">2</text>
+      <text x="160" y="130" text-anchor="middle" fill="#4a5a70">prev + next — self-removal in O(1)</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A node can splice ITSELF out</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">given just a reference — no</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">search for the previous node.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-merge-two-sorted-lists.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Merge by re-linking</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="90" y="75" fill="#14202e">a: 1 → 4</text>
+      <text x="90" y="105" fill="#14202e">b: 1 → 3</text>
+      <path d="M160,90 L220,90" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="270" y="95" fill="#a8710a">1,1,3,4</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A dummy head absorbs the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">"is this the first node?" case —</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">no new nodes ever allocated.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-lru-cache.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Doubly linked list + hash map</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="90" y="75" fill="#a8710a">map[key] → node</text>
+      <path d="M90,85 L90,100" fill="none" stroke="#0f7a72" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+      <text x="90" y="120" fill="#14202e">list: MRU ⟷ ⟷ LRU</text>
+      <text x="160" y="150" text-anchor="middle" fill="#4a5a70">evict tail — O(1), no scan for "least used"</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The map gives O(1) lookup by</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">key; the doubly linked list gives</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">O(1) reorder and eviction.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-add-two-numbers.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Digit-by-digit with carry</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="150" y="70" fill="#14202e">2→4→3   (342)</text>
+      <text x="150" y="92" fill="#14202e">5→6→4   (465)</text>
+      <path d="M150,102 L150,118" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="150" y="138" fill="#a8710a">7→0→8   (807)</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Least-significant digit first —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">both lists walked in lockstep,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">carry can add one final digit.</text>
+  </g>
+
+  <text x="32" y="1320" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/data-structures/03-linked-list/ — README.md · problems.md · 01–05*.js</text>
+</svg>

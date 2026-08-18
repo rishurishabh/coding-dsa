@@ -1,0 +1,201 @@
+<title>Linked List — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to data-structures/03-linked-list/</p>
+  <h1>Linked list: a chain of pointers, not a block</h1>
+  <p class="lede">
+    Each node only points to what comes next — inserting at the head is
+    one pointer swap, reaching any other position means walking node by
+    node. Code lives in <code>data-structures/03-linked-list/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>new node</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>pointer rewired</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--ink-soft)"></span>existing chain</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Insert at head: one pointer swap, O(1)</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 620 220" role="img" aria-label="A new node pointing at the old head of the list, becoming the new head, while the rest of the chain stays completely untouched." font-family="var(--font-mono)" font-size="15" text-anchor="middle">
+        <circle cx="70" cy="70" r="26" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.4"></circle>
+        <text x="70" y="76" fill="var(--result)">0</text>
+        <text x="70" y="30" text-anchor="middle" font-size="12" fill="var(--result)">new head</text>
+        <path d="M96,70 L154,70" fill="none" stroke="var(--add)" stroke-width="2" marker-end="url(#arrow-add)"></path>
+        <text x="125" y="55" text-anchor="middle" font-size="11" fill="var(--add)">next</text>
+
+        <circle cx="180" cy="70" r="22" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="180" y="76" fill="var(--ink)">1</text>
+        <path d="M202,70 L248,70" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+        <circle cx="270" cy="70" r="22" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="270" y="76" fill="var(--ink)">2</text>
+        <path d="M292,70 L338,70" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+        <circle cx="360" cy="70" r="22" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"></circle>
+        <text x="360" y="76" fill="var(--ink)">3</text>
+
+        <text x="215" y="140" text-anchor="middle" font-size="12" fill="var(--ink-soft)">old head (1) untouched — only the new node's pointer and</text>
+        <text x="215" y="158" text-anchor="middle" font-size="12" fill="var(--ink-soft)">the list's head reference change</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Reaching node 3 instead means walking from the head through 0, 1,
+      2 first — O(n), since there's no index arithmetic the way an
+      array has.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Five files</h2>
+    <p class="section-title">Two ways to build it, three problems that need it</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-singly-linked-list.js</span>
+        <h3>Core CRUD, one direction</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two nodes connected by a single next pointer, with no way to walk backward from the second node to the first." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <circle cx="80" cy="90" r="18" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></circle>
+            <text x="80" y="95" fill="var(--result)">1</text>
+            <path d="M98,90 L140,90" fill="none" stroke="var(--ink-soft)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+            <circle cx="160" cy="90" r="16" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="160" y="95" fill="var(--ink)">2</text>
+            <text x="140" y="130" text-anchor="middle" fill="var(--ink-soft)">next-only — removal needs the node before it</text>
+          </svg>
+        </div>
+        <p>Cheapest per-node overhead — one pointer, but no way back without walking from the head.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-doubly-linked-list.js</span>
+        <h3>Core CRUD, both directions</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two nodes connected by both a next and a previous pointer, allowing either node to be removed on its own without searching for its neighbor." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <circle cx="120" cy="90" r="16" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></circle>
+            <text x="120" y="95" fill="var(--ink)">1</text>
+            <path d="M138,84 L182,84" fill="none" stroke="var(--add)" stroke-width="1.4" marker-end="url(#arrow-add)"></path>
+            <path d="M182,96 L138,96" fill="none" stroke="var(--remove)" stroke-width="1.4" marker-end="url(#arrow-remove)"></path>
+            <circle cx="200" cy="90" r="18" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2"></circle>
+            <text x="200" y="95" fill="var(--result)">2</text>
+            <text x="160" y="130" text-anchor="middle" fill="var(--ink-soft)">prev + next — self-removal in O(1)</text>
+          </svg>
+        </div>
+        <p>A node can splice ITSELF out given just a reference — no search for the previous node.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-merge-two-sorted-lists.js</span>
+        <h3>Merge by re-linking</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two sorted lists, a starting 1 to 4 and b starting 1 to 3, being merged into a single sorted chain 1, 1, 3, 4 by re-linking existing nodes." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="90" y="75" fill="var(--ink)">a: 1 → 4</text>
+            <text x="90" y="105" fill="var(--ink)">b: 1 → 3</text>
+            <path d="M160,90 L220,90" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="270" y="95" fill="var(--result)">1,1,3,4</text>
+          </svg>
+        </div>
+        <p>A dummy head absorbs the "is this the first node?" case — no new nodes ever allocated.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-lru-cache.js</span>
+        <h3>Doubly linked list + hash map</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A hash map pointing directly at a node inside a doubly linked list ordered from most to least recently used, allowing O(1) eviction of the tail." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="90" y="75" fill="var(--result)">map[key] → node</text>
+            <path d="M90,85 L90,100" fill="none" stroke="var(--add)" stroke-width="1.6" marker-end="url(#arrow-add)"></path>
+            <text x="90" y="120" fill="var(--ink)">list: MRU ⟷ ⟷ LRU</text>
+            <text x="160" y="150" text-anchor="middle" fill="var(--ink-soft)">evict tail — O(1), no scan for "least used"</text>
+          </svg>
+        </div>
+        <p>The map gives O(1) lookup by key; the doubly linked list gives O(1) reorder and eviction.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-add-two-numbers.js</span>
+        <h3>Digit-by-digit with carry</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Two linked lists representing the digits of 342 and 465, least significant digit first, added in lockstep to produce 807." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="150" y="70" fill="var(--ink)">2→4→3   (342)</text>
+            <text x="150" y="92" fill="var(--ink)">5→6→4   (465)</text>
+            <path d="M150,102 L150,118" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="150" y="138" fill="var(--result)">7→0→8   (807)</text>
+          </svg>
+        </div>
+        <p>Least-significant digit first — both lists walked in lockstep, a carry can add one final digit.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/data-structures/03-linked-list/ — README.md (theory) · problems.md (6 practice problems) · 01–05*.js (runnable code)
+  </footer>
+
+</div>

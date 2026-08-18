@@ -1,0 +1,199 @@
+<title>Hash Map — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to data-structures/04-hash-map/</p>
+  <h1>Hash map: a key, hashed into an index</h1>
+  <p class="lede">
+    A hash function turns any key into an array index — collisions (two
+    keys, one slot) are the entire reason variants 1 and 2 differ.
+    Code lives in <code>data-structures/04-hash-map/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>target slot</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>key hashed here</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove)"></span>collision</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">hash(key) → slot index</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 620 220" role="img" aria-label="The key apple hashed into slot 2 of an array, then a second key grape also hashing to slot 2, creating a collision." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+        <rect x="0" y="60" width="110" height="40" rx="7" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2"></rect>
+        <text x="55" y="85" fill="var(--add)">"apple"</text>
+        <path d="M110,80 L200,80" fill="none" stroke="var(--ink-soft)" stroke-width="1.8" marker-end="url(#arrow-ink)"></path>
+        <text x="155" y="65" text-anchor="middle" font-size="12" fill="var(--ink-soft)">hash()</text>
+
+        <rect x="220" y="20" width="50" height="34" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+        <rect x="220" y="60" width="50" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.2"></rect>
+        <text x="245" y="82" fill="var(--result)">2</text>
+        <rect x="220" y="100" width="50" height="34" rx="6" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+        <text x="245" y="45" text-anchor="middle" font-size="12" fill="var(--result)">slot 2 ← "apple"</text>
+
+        <path d="M245,94 L245,130" fill="none" stroke="var(--remove)" stroke-width="1.8" marker-end="url(#arrow-remove)"></path>
+        <rect x="290" y="130" width="90" height="34" rx="6" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></rect>
+        <text x="335" y="152" fill="var(--remove)">"grape"</text>
+        <text x="335" y="118" text-anchor="middle" font-size="12" fill="var(--remove)">also hashes to slot 2 — collision</text>
+      </svg>
+    </figure>
+    <figcaption>
+      "apple" and "grape" landing on the same slot is what variants 1
+      and 2 handle differently — a bucket list, or a probe to the next
+      open slot.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Five files</h2>
+    <p class="section-title">Two ways to resolve collisions, three problems that need O(1) lookup</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-hash-map-chaining.js</span>
+        <h3>Buckets of key/value pairs</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Slot 2 holding a small list of two colliding key-value pairs, apple and grape, chained together." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="60" y="70" width="50" height="30" rx="5" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.8"></rect>
+            <text x="85" y="90" fill="var(--result)">slot 2</text>
+            <path d="M112,85 L155,85" fill="none" stroke="var(--ink-soft)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+            <rect x="160" y="70" width="60" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="190" y="90" fill="var(--ink)">apple</text>
+            <path d="M222,85 L255,85" fill="none" stroke="var(--ink-soft)" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+            <rect x="258" y="70" width="55" height="30" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+            <text x="285" y="90" fill="var(--ink)">grape</text>
+            <text x="185" y="130" text-anchor="middle" fill="var(--ink-soft)">collision just extends the list</text>
+          </svg>
+        </div>
+        <p>Simple, degrades gracefully — a collision only costs a short scan within one bucket.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-hash-map-open-addressing.js</span>
+        <h3>Linear probing, flat array</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Apple occupying its hashed slot while grape, hashing to the same slot, probes forward into the next available slot instead." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <rect x="60" y="80" width="44" height="34" rx="6" fill="var(--result-soft)" stroke="var(--result)" stroke-width="1.8"></rect>
+            <text x="82" y="102" fill="var(--result)">apple</text>
+            <rect x="104" y="80" width="44" height="34" rx="6" fill="var(--remove-soft)" stroke="var(--remove)" stroke-width="1.8"></rect>
+            <text x="126" y="102" fill="var(--remove)">grape</text>
+            <text x="105" y="65" text-anchor="middle" fill="var(--ink-soft)">grape probes to the NEXT slot</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">deletion needs a tombstone, not empty</text>
+          </svg>
+        </div>
+        <p>Better cache locality — one contiguous array, no per-slot list allocation.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-two-sum.js</span>
+        <h3>O(1) "seen the complement" lookup</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A hash map recording each number's index as the array is scanned once, checking whether the complement needed to reach the target has already been seen." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="75" fill="var(--ink)">nums = [2,7,11,15], target = 9</text>
+            <text x="160" y="105" fill="var(--result)">seen[2]=0 → need 7 → seen.has(7)? yes</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">answer: [0, 1]</text>
+          </svg>
+        </div>
+        <p>One pass builds AND queries the same map — O(n), not the brute-force O(n²) pair check.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-group-anagrams.js</span>
+        <h3>Keying by a canonical value</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="The words eat and tea both sorting to the same signature aet, so they land in the same map bucket." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="90" y="75" fill="var(--ink)">"eat" → "aet"</text>
+            <text x="90" y="97" fill="var(--ink)">"tea" → "aet"</text>
+            <path d="M170,86 L220,86" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="270" y="90" fill="var(--result)">same bucket</text>
+          </svg>
+        </div>
+        <p>Sorting each word makes every anagram of it produce the exact same map key.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-longest-consecutive-sequence.js</span>
+        <h3>Set membership as existence check</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="The number 1 recognized as a sequence start because 0 is not in the set, then walked forward through 2, 3, and 4 to find a run of length 4." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="75" fill="var(--ink)">{100, 4, 200, 1, 3, 2}</text>
+            <text x="160" y="105" fill="var(--result)">1 has no (1-1)=0 → sequence start</text>
+            <text x="160" y="140" text-anchor="middle" fill="var(--ink-soft)">walk 1→2→3→4, length 4</text>
+          </svg>
+        </div>
+        <p>Only true sequence starts walk forward — every number still visited only once total.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/data-structures/04-hash-map/ — README.md (theory) · problems.md (6 practice problems) · 01–05*.js (runnable code)
+  </footer>
+
+</div>

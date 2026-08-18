@@ -1,0 +1,140 @@
+<svg width="1040" height="1360" viewBox="0 0 1040 1360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hash Map mechanism map: keys mapped to slots via a hash function, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1360" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Hash Map — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / DATA-STRUCTURES / 04-HASH-MAP</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">A hash function turns any key into an array index — collisions (two keys, one</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">slot) are the entire reason variants 1 and 2 differ.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">target slot</text>
+  <rect x="200" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="222" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">key hashed here</text>
+  <rect x="400" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="422" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">collision</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">hash(key) → slot index</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(220,306)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="0" y="60" width="110" height="40" rx="7" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="55" y="85" fill="#0f7a72">"apple"</text>
+    <path d="M110,80 L200,80" fill="none" stroke="#4a5a70" stroke-width="1.8" marker-end="url(#arrow-ink)"></path>
+    <text x="155" y="65" text-anchor="middle" font-size="12" fill="#4a5a70">hash()</text>
+
+    <rect x="220" y="20" width="50" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <rect x="220" y="60" width="50" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+    <text x="245" y="82" fill="#a8710a">2</text>
+    <rect x="220" y="100" width="50" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="245" y="45" text-anchor="middle" font-size="12" fill="#a8710a">slot 2 ← "apple"</text>
+
+    <path d="M245,94 L245,130" fill="none" stroke="#b3467c" stroke-width="1.8" marker-end="url(#arrow-remove)"></path>
+    <rect x="290" y="130" width="90" height="34" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="1.8"></rect>
+    <text x="335" y="152" fill="#b3467c">"grape"</text>
+    <text x="335" y="118" text-anchor="middle" font-size="12" fill="#b3467c">also hashes to slot 2 — collision</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">"apple" and "grape" landing on the same slot is what variants 1 and 2 handle</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">differently — a bucket list, or a probe to the next open slot.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE FILES</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Two ways to resolve collisions, three problems that need O(1) lookup</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-hash-map-chaining.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Buckets of key/value pairs</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="70" width="50" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="85" y="90" fill="#a8710a">slot 2</text>
+      <path d="M112,85 L155,85" fill="none" stroke="#4a5a70" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+      <rect x="160" y="70" width="60" height="30" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="190" y="90" fill="#14202e">apple</text>
+      <path d="M222,85 L255,85" fill="none" stroke="#4a5a70" stroke-width="1.4" marker-end="url(#arrow-ink)"></path>
+      <rect x="258" y="70" width="55" height="30" rx="5" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="285" y="90" fill="#14202e">grape</text>
+      <text x="185" y="130" text-anchor="middle" fill="#4a5a70">collision just extends the list</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Simple, degrades gracefully —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">a collision only costs a short</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">scan within one bucket.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-hash-map-open-addressing.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Linear probing, flat array</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="80" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="82" y="102" fill="#a8710a">apple</text>
+      <rect x="104" y="80" width="44" height="34" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="1.8"></rect>
+      <text x="126" y="102" fill="#b3467c">grape</text>
+      <text x="105" y="65" text-anchor="middle" fill="#4a5a70">grape probes to the NEXT slot</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">deletion needs a tombstone, not empty</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Better cache locality — one</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">contiguous array, no per-slot</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">list allocation.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-two-sum.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">O(1) "seen the complement" lookup</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">nums = [2,7,11,15], target = 9</text>
+      <text x="160" y="105" fill="#a8710a">seen[2]=0 → need 7 → seen.has(7)? yes</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">answer: [0, 1]</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">One pass builds AND queries the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">same map — O(n), not the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">brute-force O(n²) pair check.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-group-anagrams.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Keying by a canonical value</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="90" y="75" fill="#14202e">"eat" → "aet"</text>
+      <text x="90" y="97" fill="#14202e">"tea" → "aet"</text>
+      <path d="M170,86 L220,86" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="270" y="90" fill="#a8710a">same bucket</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Sorting each word makes every</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">anagram of it produce the exact</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">same map key.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-longest-consecutive-sequence.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Set membership as existence check</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">{100, 4, 200, 1, 3, 2}</text>
+      <text x="160" y="105" fill="#a8710a">1 has no (1-1)=0 → sequence start</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">walk 1→2→3→4, length 4</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Only true sequence starts walk</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">forward — every number still</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">visited only once total.</text>
+  </g>
+
+  <text x="32" y="1320" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/data-structures/04-hash-map/ — README.md · problems.md · 01–05*.js</text>
+</svg>
