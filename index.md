@@ -1,6 +1,6 @@
 # DSA Roadmap
 
-![DSA roadmap progress map: 20 of 28 modules complete, grouped by section](roadmap.svg)
+![DSA roadmap progress map: 22 of 28 modules complete, grouped by section](roadmap.svg)
 
 Interactive version (live): [rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)
 (click any done pattern to jump to its README — the [roadmap.html](roadmap.html)
@@ -47,8 +47,8 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Dynamic Programming
 - [x] 19. [0/1 Knapsack](19-01-knapsack/README.md) — subset sum, partition, target sum
-- [ ] 20. Unbounded Knapsack — coin change, rod cutting
-- [ ] 21. LCS family — edit distance, longest common/increasing subsequence
+- [x] 20. [Unbounded Knapsack](20-unbounded-knapsack/README.md) — coin change, rod cutting
+- [x] 21. [LCS family](21-lcs-family/README.md) — edit distance, longest common/increasing subsequence
 - [ ] 22. Palindromic Subsequence — interval DP
 - [ ] 23. DP on Grids — unique paths, min path sum
 
