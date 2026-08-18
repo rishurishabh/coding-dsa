@@ -69,7 +69,10 @@
   @media (min-width: 1360px) { .sticky-notes.has-content { display: flex; } }
   .sticky-note { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); border-left-width: 3px; background: var(--surface); }
   .sticky-note .note-title { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 5px; }
-  .sticky-note .note-body { font-size: 11px; line-height: 1.5; margin: 0; color: var(--ink-soft); }
+  .sticky-note .note-body { font-size: 11px; line-height: 1.7; margin: 0; color: var(--ink-soft); }
+  .sticky-note .note-body code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 3px; padding: 0.1em 0.35em; color: var(--ink); }
+  .sticky-note .note-body a { color: var(--ink-soft); text-decoration: underline; text-decoration-style: dotted; }
+  .sticky-note .note-body a:hover { color: var(--ink); }
   .note-add { border-left-color: var(--add); }
   .note-add .note-title { color: var(--add); }
   .note-remove { border-left-color: var(--remove); }
@@ -247,31 +250,52 @@
     headers.forEach((h) => observer.observe(h));
   }
 
-  function buildStickyNotes(docEl) {
-    const headers = Array.from(docEl.querySelectorAll('h2')).slice(0, 3);
-    if (headers.length < 2) return; // too short a page for this to add value
+  function buildStickyNotes(docEl, currentPath) {
+    // Complexity cheatsheet: every distinct Big-O notation mentioned on the
+    // page (plain text, not just inside code spans — most of these READMEs
+    // write "O(1)" as prose, not `O(1)`), in the order it first appears.
+    const complexities = [];
+    const bigOMatches = docEl.textContent.match(/O\([^)]{1,12}\)/g);
+    if (bigOMatches) bigOMatches.forEach((c) => { if (!complexities.includes(c)) complexities.push(c); });
 
-    const colors = ['add', 'remove', 'result'];
-    const notes = headers.map((h, idx) => {
-      // Prefer the first LIST item over a short intro paragraph (e.g. "Reach
-      // for a stack when:") — walk every sibling until the next h2, favoring
-      // whichever list item appears first, falling back to the first <p>.
-      let node = h.nextElementSibling;
-      let listSummary = null;
-      let paraSummary = null;
-      while (node && node.tagName !== 'H2') {
-        if (!listSummary && (node.tagName === 'UL' || node.tagName === 'OL')) {
-          const li = node.querySelector('li');
-          if (li) listSummary = li.textContent.trim();
-        }
-        if (!paraSummary && node.tagName === 'P') {
-          paraSummary = node.textContent.trim();
-        }
-        node = node.nextElementSibling;
+    // File index: every variant .js file linked from the page's table, so
+    // you can jump straight to a specific implementation.
+    const files = [];
+    docEl.querySelectorAll('a[href$=".js"]').forEach((a) => {
+      const href = a.getAttribute('href');
+      if (!files.some((f) => f.href === href)) files.push({ label: a.textContent.trim(), href });
+    });
+
+    // Related modules: other README.md pages this one links to (cross-
+    // references like "see also X" or "not the same as Y").
+    const related = [];
+    docEl.querySelectorAll('a[href*="reader.html?path="]').forEach((a) => {
+      const href = a.getAttribute('href');
+      const target = decodeURIComponent(href.split('reader.html?path=')[1] || '');
+      if (target.endsWith('README.md') && target !== currentPath && !related.some((r) => r.href === href)) {
+        related.push({ label: a.textContent.trim(), href });
       }
-      const summary = listSummary || paraSummary;
-      return summary ? { title: h.textContent, summary, color: colors[idx] } : null;
-    }).filter(Boolean);
+    });
+
+    const notes = [];
+    if (complexities.length > 0) {
+      notes.push({
+        title: 'Complexity', color: 'add',
+        bodyHtml: complexities.slice(0, 8).map((c) => '<code>' + c + '</code>').join(' · '),
+      });
+    }
+    if (files.length > 1) {
+      notes.push({
+        title: 'Files (' + files.length + ')', color: 'remove',
+        bodyHtml: files.slice(0, 9).map((f) => '<a href="' + f.href + '">' + f.label + '</a>').join('<br>'),
+      });
+    }
+    if (related.length > 0) {
+      notes.push({
+        title: 'Related', color: 'result',
+        bodyHtml: related.slice(0, 5).map((r) => '<a href="' + r.href + '">' + r.label + '</a>').join('<br>'),
+      });
+    }
 
     if (notes.length === 0) return;
 
@@ -280,7 +304,7 @@
     wrap.innerHTML = notes.map((n) =>
       '<div class="sticky-note note-' + n.color + '">' +
         '<p class="note-title">' + n.title + '</p>' +
-        '<p class="note-body">' + n.summary + '</p>' +
+        '<p class="note-body">' + n.bodyHtml + '</p>' +
       '</div>'
     ).join('');
 
@@ -316,7 +340,7 @@
       docEl.innerHTML = renderMarkdown(text, baseDir);
       cardEl.classList.remove('hidden');
       buildTOC(docEl);
-      buildStickyNotes(docEl);
+      buildStickyNotes(docEl, path);
     } catch (err) {
       statusEl.innerHTML =
         '<div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 max-w-[70ch] shadow-sm">' +
