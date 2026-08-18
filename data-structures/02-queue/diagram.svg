@@ -1,0 +1,147 @@
+<svg width="1040" height="1360" viewBox="0 0 1040 1360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Queue mechanism map: FIFO at two ends, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1360" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Queue — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / DATA-STRUCTURES / 02-QUEUE</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Enqueue adds at the back, dequeue removes from the front — two DIFFERENT ends,</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">the mirror image of Stack's single end.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">front of queue</text>
+  <rect x="220" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="242" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">enqueue (back)</text>
+  <rect x="380" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="402" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">dequeue (front)</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">In at the back, out at the front</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(240,306)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" text-anchor="middle">
+    <rect x="0" y="60" width="100" height="60" rx="8" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></rect>
+    <text x="50" y="95" fill="#a8710a">1</text>
+    <text x="50" y="45" text-anchor="middle" font-size="12" fill="#a8710a">front</text>
+    <rect x="120" y="60" width="100" height="60" rx="8" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <text x="170" y="95" fill="#14202e">2</text>
+    <rect x="240" y="60" width="100" height="60" rx="8" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></rect>
+    <text x="290" y="95" fill="#14202e">3</text>
+    <text x="290" y="45" text-anchor="middle" font-size="12" fill="#0f7a72">back</text>
+
+    <path d="M-30,90 L-2,90" fill="none" stroke="#b3467c" stroke-width="2" marker-end="url(#arrow-remove)"></path>
+    <text x="-15" y="140" text-anchor="middle" font-size="12" fill="#b3467c">dequeue: O(1)</text>
+
+    <path d="M370,90 L342,90" fill="none" stroke="#0f7a72" stroke-width="2" marker-start="url(#arrow-add)"></path>
+    <text x="380" y="140" text-anchor="middle" font-size="12" fill="#0f7a72">enqueue: O(1)</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Whatever arrived first (1) leaves first — new arrivals join the back and wait</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">their turn, in order.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE FILES</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Two ways to build it, three problems that need it</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-array-queue.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Array-backed, circular buffer</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="80" width="44" height="34" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+      <text x="82" y="102" fill="#a8710a">1</text>
+      <rect x="104" y="80" width="44" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="126" y="102" fill="#14202e">2</text>
+      <rect x="148" y="80" width="44" height="34" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="170" y="102" fill="#14202e">3</text>
+      <text x="115" y="65" text-anchor="middle" fill="#a8710a">head/tail wrap via % length</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">no shifting — O(1), occasional resize</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">head/tail indices wrap instead</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">of the array physically</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">shifting on dequeue.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-linked-list-queue.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Linked list, head + tail pointers</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <circle cx="140" cy="90" r="18" fill="#a8710a14" stroke="#a8710a" stroke-width="2.2"></circle>
+      <text x="140" y="95" fill="#a8710a">1</text>
+      <text x="140" y="60" text-anchor="middle" fill="#a8710a">head</text>
+      <line x1="158" y1="90" x2="200" y2="90" stroke="#d7dee8" stroke-width="1.6" marker-end="url(#arrow-ink)"></line>
+      <circle cx="220" cy="90" r="16" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></circle>
+      <text x="220" y="95" fill="#0f7a72">3</text>
+      <text x="220" y="60" text-anchor="middle" fill="#0f7a72">tail</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">both pointers needed — tail avoids an O(n) walk</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Without a tail pointer, append</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">would need to walk the whole</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">list first — O(n), not O(1).</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-queue-using-two-stacks.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">FIFO from two LIFO stacks</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="80" y="80" fill="#14202e">in: [1,2,3]</text>
+      <path d="M140,80 L200,80" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+      <text x="260" y="80" fill="#a8710a">out: [3,2,1]</text>
+      <text x="160" y="130" text-anchor="middle" fill="#4a5a70">reversed twice = original order</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">out refills from in only when</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">empty — each element moves</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">at most twice, ever.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-sliding-window-maximum.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Monotonic deque</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="80" width="40" height="30" rx="5" fill="none" stroke="#d7dee8" stroke-width="1.4"></rect>
+      <text x="80" y="100" fill="#4a5a70">1</text>
+      <rect x="104" y="80" width="40" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="124" y="100" fill="#0f7a72">5</text>
+      <rect x="148" y="80" width="40" height="30" rx="5" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+      <text x="168" y="100" fill="#0f7a72">3</text>
+      <text x="125" y="65" text-anchor="middle" fill="#4a5a70">1 evicted — smaller values popped</text>
+      <text x="160" y="140" text-anchor="middle" fill="#a8710a">front (5) is always this window's max</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Kept in decreasing order —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">each index pushed once, popped</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">at most once — O(n) total.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-design-circular-queue.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Fixed-capacity circular queue</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <rect x="60" y="80" width="40" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <rect x="104" y="80" width="40" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <rect x="148" y="80" width="40" height="30" rx="5" fill="#a8710a14" stroke="#a8710a" stroke-width="1.8"></rect>
+      <text x="160" y="65" text-anchor="middle" fill="#a8710a">capacity 3 — isFull() true</text>
+      <text x="160" y="140" text-anchor="middle" fill="#4a5a70">count tracked explicitly, not inferred</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">head === tail is ambiguous on</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">its own (empty or full?) — an</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">explicit count resolves it.</text>
+  </g>
+
+  <text x="32" y="1320" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/data-structures/02-queue/ — README.md · problems.md · 01–05*.js</text>
+</svg>

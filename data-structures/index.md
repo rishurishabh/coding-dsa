@@ -11,10 +11,10 @@ gets built and explained.
 Legend: `[ ]` not started · `[x]` done
 
 - [x] 01. [Stack](01-stack/README.md) — LIFO at one end, array-backed vs linked-list-backed
-- [ ] 02. Queue — FIFO, the mirror image of a stack
-- [ ] 03. Linked List — from-scratch singly/doubly linked list operations
-- [ ] 04. Hash Map — from-scratch hashing and collision resolution
-- [ ] 05. Binary Search Tree — from-scratch insert/delete/search
+- [x] 02. [Queue](02-queue/README.md) — FIFO, the mirror image of a stack
+- [x] 03. [Linked List](03-linked-list/README.md) — from-scratch singly/doubly linked list operations
+- [x] 04. [Hash Map](04-hash-map/README.md) — from-scratch hashing and collision resolution
+- [x] 05. [Binary Search Tree](05-binary-search-tree/README.md) — from-scratch insert/delete/search
 - [ ] 06. Heap / Priority Queue — from-scratch binary heap (the structure
       reused throughout [13-two-heaps](../13-two-heaps/README.md),
       [14-top-k-elements](../14-top-k-elements/README.md), and
