@@ -1,5 +1,9 @@
 # Coding DSA
 
+[![Deploy Pages](https://github.com/rishurishabh/coding-dsa/actions/workflows/pages.yml/badge.svg)](https://github.com/rishurishabh/coding-dsa/actions/workflows/pages.yml)
+
+**🔗 Live roadmap: [rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)**
+
 A pattern-by-pattern DSA practice repo in JavaScript — 28 modules
 (1 prerequisite + 27 interview patterns), each with theory, a visual
 mechanism map, a practice list, and runnable code for every variant.
