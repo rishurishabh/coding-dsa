@@ -61,20 +61,21 @@
   #toc a:hover { color: var(--ink); }
   #toc a.active { color: var(--add); border-left-color: var(--add); font-weight: 600; }
 
-  /* Quick-glance sticky notes: an auto-pulled one-line summary of each page's
-     first three sections (What / When to use it / Why it works), styled like
-     pinned index cards and pinned to a left sidebar — mirrors #toc on the
-     right, so the core idea stays visible the whole time you're reading. */
-  .sticky-notes { position: fixed; top: 110px; left: max(24px, calc(50% - 620px)); width: 220px; display: none; flex-direction: column; gap: 22px; max-height: calc(100vh - 150px); overflow-y: auto; padding: 2px 6px 2px 2px; }
+  /* Quick-glance notes: an auto-pulled one-line summary of each page's first
+     three sections (What / When to use it / Why it works), pinned to a left
+     sidebar — mirrors #toc on the right. Flat callout style, not literal
+     "paper" notes — color-coded left border is the only accent. */
+  .sticky-notes { position: fixed; top: 110px; left: max(24px, calc(50% - 620px)); width: 224px; display: none; flex-direction: column; gap: 14px; max-height: calc(100vh - 150px); overflow-y: auto; padding: 2px; }
   @media (min-width: 1360px) { .sticky-notes.has-content { display: flex; } }
-  .sticky-note { position: relative; padding: 16px 16px 14px; border-radius: 3px 14px 14px 14px; box-shadow: 0 12px 24px -16px rgba(0,0,0,0.45); transform: rotate(var(--rot, -1deg)); transition: transform 0.18s ease; }
-  .sticky-note:hover { transform: rotate(0deg) translateX(2px); }
-  .sticky-note::before { content: ''; position: absolute; top: -7px; left: 16px; width: 12px; height: 12px; border-radius: 50%; background: currentColor; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-  .sticky-note .note-title { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 7px; }
-  .sticky-note .note-body { font-size: 12.5px; line-height: 1.5; margin: 0; color: var(--ink); }
-  .note-add { background: var(--add-soft); border: 1px solid var(--add); color: var(--add); }
-  .note-remove { background: var(--remove-soft); border: 1px solid var(--remove); color: var(--remove); }
-  .note-result { background: var(--result-soft); border: 1px solid var(--result); color: var(--result); }
+  .sticky-note { padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); border-left-width: 3px; background: var(--surface); }
+  .sticky-note .note-title { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 6px; }
+  .sticky-note .note-body { font-size: 12.5px; line-height: 1.55; margin: 0; color: var(--ink-soft); }
+  .note-add { border-left-color: var(--add); }
+  .note-add .note-title { color: var(--add); }
+  .note-remove { border-left-color: var(--remove); }
+  .note-remove .note-title { color: var(--remove); }
+  .note-result { border-left-color: var(--result); }
+  .note-result .note-title { color: var(--result); }
 </style>
 
 <div id="progress-bar"></div>
@@ -251,7 +252,6 @@
     if (headers.length < 2) return; // too short a page for this to add value
 
     const colors = ['add', 'remove', 'result'];
-    const rotations = [-2, 1.5, -1.5];
     const notes = headers.map((h, idx) => {
       // Prefer the first LIST item over a short intro paragraph (e.g. "Reach
       // for a stack when:") — walk every sibling until the next h2, favoring
@@ -270,7 +270,7 @@
         node = node.nextElementSibling;
       }
       const summary = listSummary || paraSummary;
-      return summary ? { title: h.textContent, summary, color: colors[idx], rot: rotations[idx] } : null;
+      return summary ? { title: h.textContent, summary, color: colors[idx] } : null;
     }).filter(Boolean);
 
     if (notes.length === 0) return;
@@ -278,7 +278,7 @@
     const wrap = document.createElement('div');
     wrap.className = 'sticky-notes has-content';
     wrap.innerHTML = notes.map((n) =>
-      '<div class="sticky-note note-' + n.color + '" style="--rot:' + n.rot + 'deg">' +
+      '<div class="sticky-note note-' + n.color + '">' +
         '<p class="note-title">' + n.title + '</p>' +
         '<p class="note-body">' + n.summary + '</p>' +
       '</div>'
