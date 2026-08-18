@@ -27,14 +27,15 @@
   a { color: inherit; text-decoration: none; }
   /* Kept as plain CSS (not Tailwind utilities) so tab/panel switching can never
      be beaten by a later-loaded utility class of equal specificity. */
-  .tab-btn.active { color: var(--ink) !important; border-bottom-color: var(--add) !important; }
+  .tab-btn.active { background: var(--add) !important; color: var(--paper) !important; }
   .panel[hidden] { display: none !important; }
 </style>
 
-<div class="font-body max-w-[1000px] mx-auto px-6 py-14 pb-20">
-  <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--ink-soft)] mb-3.5">coding_dsa / two tracks, Grokking-style order</p>
-  <h1 class="font-mono font-bold text-[clamp(26px,4vw,38px)] tracking-[-0.01em] leading-[1.12] mb-[18px] [text-wrap:balance]">DSA Roadmap: where to start, and what's next</h1>
-  <p class="text-base leading-[1.65] text-[var(--ink-soft)] max-w-[68ch] mb-7">
+<div class="font-body max-w-[1100px] mx-auto px-6 py-14 pb-24">
+
+  <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 mb-5 font-mono text-[11px] font-medium tracking-wide text-[var(--ink-soft)]">coding_dsa · two tracks, Grokking-style order</span>
+  <h1 class="font-mono font-bold text-[clamp(28px,4.2vw,42px)] tracking-[-0.01em] leading-[1.1] mb-4 [text-wrap:balance]">DSA Roadmap: where to start, and what's next</h1>
+  <p class="text-base leading-[1.65] text-[var(--ink-soft)] max-w-[68ch] mb-8">
     Work top to bottom, section by section — each pattern builds on ones
     before it more than it builds on the ones after. Click a done module to
     open its README (theory + diagrams); every folder also has a
@@ -42,108 +43,242 @@
     <code class="font-mono text-[0.9em] bg-[var(--surface)] border border-[var(--line)] rounded px-[0.4em] py-[0.05em]">.js</code> for every variant.
   </p>
 
-  <div class="flex gap-1 mb-8 border-b-[1.5px] border-[var(--line)]" role="tablist">
-    <button class="tab-btn active font-mono text-[13px] font-bold px-[18px] py-[10px] bg-transparent border-0 border-b-2 border-transparent text-[var(--ink-soft)] cursor-pointer -mb-[1.5px] hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
-    <button class="tab-btn font-mono text-[13px] font-bold px-[18px] py-[10px] bg-transparent border-0 border-b-2 border-transparent text-[var(--ink-soft)] cursor-pointer -mb-[1.5px] hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
+  <div class="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+    <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+      <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Patterns</p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">22<span class="text-base font-normal text-[var(--ink-soft)]"> / 28</span></p>
+    </div>
+    <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+      <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Data Structures</p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">5<span class="text-base font-normal text-[var(--ink-soft)]"> / 8</span></p>
+    </div>
+    <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+      <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Overall</p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--add)]">27<span class="text-base font-normal text-[var(--ink-soft)]"> / 36</span></p>
+    </div>
+  </div>
+
+  <div class="mb-10 inline-flex gap-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-1" role="tablist">
+    <button class="tab-btn active rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
+    <button class="tab-btn rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
   </div>
 
   <div class="panel" id="panel-patterns" role="tabpanel" aria-labelledby="tab-patterns">
 
-  <div class="flex flex-wrap gap-[22px] mb-8">
-    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--add)]"></span>done — click to open</div>
-    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--surface)] border-[1.4px] border-[var(--line)]"></span>not started yet</div>
+  <div class="mb-8 flex flex-wrap items-center gap-2">
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] text-[var(--ink-soft)]"><span class="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--add)] text-[8px] font-bold text-[var(--paper)]">✓</span>done — click to open</span>
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] text-[var(--ink-soft)]"><span class="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--line)] text-[7px] text-[var(--ink-soft)]">○</span>not started yet</span>
   </div>
 
-  <p class="font-mono text-[13px] text-[var(--ink-soft)] mb-2">22 of 28 modules complete</p>
-  <div class="bg-[var(--surface)] border-[1.5px] border-[var(--line)] rounded-[11px] h-[22px] overflow-hidden mb-11">
-    <div class="bg-[var(--add)] h-full rounded-l-[11px]" style="width: 79%"></div>
+  <div class="mb-10">
+    <div class="mb-2 flex items-center justify-between">
+      <p class="font-mono text-[13px] text-[var(--ink-soft)]">22 of 28 modules complete</p>
+      <p class="font-mono text-[13px] font-bold text-[var(--add)]">79%</p>
+    </div>
+    <div class="h-2.5 overflow-hidden rounded-full bg-[var(--line)]">
+      <div class="h-full rounded-full bg-[var(--add)]" style="width: 79%"></div>
+    </div>
   </div>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">PREREQUISITE</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/00-sorting-algorithms/README.md"><span class="absolute top-2 left-3 text-[10px]">00</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Sorting Algorithms</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">PREREQUISITE</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">1 / 1</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/00-sorting-algorithms/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">00</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Sorting Algorithms</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">FOUNDATIONS</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/01-sliding-window/README.md"><span class="absolute top-2 left-3 text-[10px]">01</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Sliding Window</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/02-two-pointers/README.md"><span class="absolute top-2 left-3 text-[10px]">02</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Two Pointers</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/03-fast-slow-pointers/README.md"><span class="absolute top-2 left-3 text-[10px]">03</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Fast &amp; Slow Pointers</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/04-merge-intervals/README.md"><span class="absolute top-2 left-3 text-[10px]">04</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Merge Intervals</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/05-cyclic-sort/README.md"><span class="absolute top-2 left-3 text-[10px]">05</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Cyclic Sort</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">FOUNDATIONS</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">5 / 5</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/01-sliding-window/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">01</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Sliding Window</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/02-two-pointers/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">02</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Two Pointers</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/03-fast-slow-pointers/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">03</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Fast &amp; Slow Pointers</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/04-merge-intervals/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">04</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Merge Intervals</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/05-cyclic-sort/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">05</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Cyclic Sort</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">LINKED LISTS &amp; STACKS</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/06-in-place-linked-list-reversal/README.md"><span class="absolute top-2 left-3 text-[10px]">06</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">In-place LL Reversal</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/07-monotonic-stack/README.md"><span class="absolute top-2 left-3 text-[10px]">07</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Monotonic Stack</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">LINKED LISTS &amp; STACKS</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">2 / 2</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/06-in-place-linked-list-reversal/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">06</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">In-place LL Reversal</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/07-monotonic-stack/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">07</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Monotonic Stack</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">TREES &amp; GRAPHS</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/08-tree-bfs/README.md"><span class="absolute top-2 left-3 text-[10px]">08</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Tree BFS</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/09-tree-dfs/README.md"><span class="absolute top-2 left-3 text-[10px]">09</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Tree DFS</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/10-graph-bfs-dfs/README.md"><span class="absolute top-2 left-3 text-[10px]">10</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Graph BFS/DFS</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/11-topological-sort/README.md"><span class="absolute top-2 left-3 text-[10px]">11</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Topological Sort</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/12-union-find/README.md"><span class="absolute top-2 left-3 text-[10px]">12</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Union Find</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">TREES &amp; GRAPHS</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">5 / 5</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/08-tree-bfs/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">08</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Tree BFS</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/09-tree-dfs/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">09</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Tree DFS</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/10-graph-bfs-dfs/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">10</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Graph BFS/DFS</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/11-topological-sort/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">11</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Topological Sort</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/12-union-find/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">12</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Union Find</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">HEAPS &amp; SELECTION</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/13-two-heaps/README.md"><span class="absolute top-2 left-3 text-[10px]">13</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Two Heaps</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/14-top-k-elements/README.md"><span class="absolute top-2 left-3 text-[10px]">14</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Top K Elements</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/15-k-way-merge/README.md"><span class="absolute top-2 left-3 text-[10px]">15</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">K-way Merge</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">HEAPS &amp; SELECTION</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">3 / 3</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/13-two-heaps/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">13</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Two Heaps</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/14-top-k-elements/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">14</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Top K Elements</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/15-k-way-merge/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">15</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">K-way Merge</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">SEARCH</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/16-modified-binary-search/README.md"><span class="absolute top-2 left-3 text-[10px]">16</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Modified Binary Search</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/17-subsets-backtracking/README.md"><span class="absolute top-2 left-3 text-[10px]">17</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Subsets / Backtracking</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">SEARCH</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">2 / 2</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/16-modified-binary-search/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">16</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Modified Binary Search</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/17-subsets-backtracking/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">17</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Subsets / Backtracking</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">BIT MANIPULATION</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/18-bitwise-xor/README.md"><span class="absolute top-2 left-3 text-[10px]">18</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Bitwise XOR</span></a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">BIT MANIPULATION</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">1 / 1</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/18-bitwise-xor/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">18</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Bitwise XOR</span>
+      </a>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">DYNAMIC PROGRAMMING</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/19-01-knapsack/README.md"><span class="absolute top-2 left-3 text-[10px]">19</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">0/1 Knapsack</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/20-unbounded-knapsack/README.md"><span class="absolute top-2 left-3 text-[10px]">20</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">Unbounded Knapsack</span></a>
-      <a class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/21-lcs-family/README.md"><span class="absolute top-2 left-3 text-[10px]">21</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)]">LCS Family</span></a>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">22</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Palindromic Subseq</span></div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">23</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">DP on Grids</span></div>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">DYNAMIC PROGRAMMING</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">3 / 5</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/19-01-knapsack/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">19</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">0/1 Knapsack</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/20-unbounded-knapsack/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">20</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Unbounded Knapsack</span>
+      </a>
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]" href="https://github.com/rishurishabh/coding-dsa/blob/main/21-lcs-family/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">21</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">LCS Family</span>
+      </a>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">22</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Palindromic Subseq</span>
+      </div>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">23</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">DP on Grids</span>
+      </div>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">GREEDY</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">24</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Greedy</span></div>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">GREEDY</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">0 / 1</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">24</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Greedy</span>
+      </div>
     </div>
   </section>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">ADVANCED STRUCTURES</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">25</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Trie</span></div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">26</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Segment / Fenwick Tree</span></div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">27</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Graph Shortest Path</span></div>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">ADVANCED STRUCTURES</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">0 / 3</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">25</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Trie</span>
+      </div>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">26</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Segment / Fenwick Tree</span>
+      </div>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">27</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Graph Shortest Path</span>
+      </div>
     </div>
   </section>
 
@@ -151,56 +286,89 @@
 
   <div class="panel" id="panel-ds" role="tabpanel" aria-labelledby="tab-ds" hidden>
 
-  <div class="flex flex-wrap gap-[22px] mb-8">
-    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--add)]"></span>done — click to open</div>
-    <div class="flex items-center gap-2 font-mono text-xs text-[var(--ink-soft)]"><span class="w-3 h-3 rounded-[3px] shrink-0 bg-[var(--surface)] border-[1.4px] border-[var(--line)]"></span>not started yet</div>
+  <div class="mb-8 flex flex-wrap items-center gap-2">
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] text-[var(--ink-soft)]"><span class="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--add)] text-[8px] font-bold text-[var(--paper)]">✓</span>done — click to open</span>
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] text-[var(--ink-soft)]"><span class="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--line)] text-[7px] text-[var(--ink-soft)]">○</span>not started yet</span>
   </div>
 
-  <p class="font-mono text-[13px] text-[var(--ink-soft)] mb-2">5 of 8 structures built</p>
-  <div class="bg-[var(--surface)] border-[1.5px] border-[var(--line)] rounded-[11px] h-[22px] overflow-hidden mb-11">
-    <div class="bg-[var(--add)] h-full rounded-l-[11px]" style="width: 62.5%"></div>
+  <div class="mb-10">
+    <div class="mb-2 flex items-center justify-between">
+      <p class="font-mono text-[13px] text-[var(--ink-soft)]">5 of 8 structures built</p>
+      <p class="font-mono text-[13px] font-bold text-[var(--add)]">63%</p>
+    </div>
+    <div class="h-2.5 overflow-hidden rounded-full bg-[var(--line)]">
+      <div class="h-full rounded-full bg-[var(--add)]" style="width: 62.5%"></div>
+    </div>
   </div>
 
-  <section class="mb-[34px]">
-    <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)] mb-3">DATA STRUCTURES — FROM SCRATCH</p>
-    <div class="flex flex-wrap gap-[14px]">
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]">
-        <a class="absolute top-0 left-0 right-0 bottom-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/01-stack/README.md" aria-label="Stack README"><span class="absolute top-2 left-3 text-[10px]">01</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)] block">Stack</span></a>
-        <a class="absolute bottom-1.5 right-3 text-[9px] underline decoration-dotted text-[var(--add)] hover:text-[var(--ink)]" href="data-structures/01-stack/diagram.html">diagram ↗</a>
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">DATA STRUCTURES — FROM SCRATCH</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">5 / 8</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/01-stack/README.md" aria-label="Stack README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">01</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Stack</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="data-structures/01-stack/diagram.html">diagram ↗</a>
       </div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]">
-        <a class="absolute top-0 left-0 right-0 bottom-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/02-queue/README.md" aria-label="Queue README"><span class="absolute top-2 left-3 text-[10px]">02</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)] block">Queue</span></a>
-        <a class="absolute bottom-1.5 right-3 text-[9px] underline decoration-dotted text-[var(--add)] hover:text-[var(--ink)]" href="data-structures/02-queue/diagram.html">diagram ↗</a>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/02-queue/README.md" aria-label="Queue README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">02</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Queue</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="data-structures/02-queue/diagram.html">diagram ↗</a>
       </div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]">
-        <a class="absolute top-0 left-0 right-0 bottom-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/03-linked-list/README.md" aria-label="Linked List README"><span class="absolute top-2 left-3 text-[10px]">03</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)] block">Linked List</span></a>
-        <a class="absolute bottom-1.5 right-3 text-[9px] underline decoration-dotted text-[var(--add)] hover:text-[var(--ink)]" href="data-structures/03-linked-list/diagram.html">diagram ↗</a>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/03-linked-list/README.md" aria-label="Linked List README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">03</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Linked List</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="data-structures/03-linked-list/diagram.html">diagram ↗</a>
       </div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]">
-        <a class="absolute top-0 left-0 right-0 bottom-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/04-hash-map/README.md" aria-label="Hash Map README"><span class="absolute top-2 left-3 text-[10px]">04</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)] block">Hash Map</span></a>
-        <a class="absolute bottom-1.5 right-3 text-[9px] underline decoration-dotted text-[var(--add)] hover:text-[var(--ink)]" href="data-structures/04-hash-map/diagram.html">diagram ↗</a>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/04-hash-map/README.md" aria-label="Hash Map README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">04</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Hash Map</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="data-structures/04-hash-map/diagram.html">diagram ↗</a>
       </div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] transition-[transform,box-shadow] duration-[120ms] ease-out bg-[var(--add-soft)] border-2 border-[var(--add)] text-[var(--add)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_-8px_var(--add)]">
-        <a class="absolute top-0 left-0 right-0 bottom-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/05-binary-search-tree/README.md" aria-label="Binary Search Tree README"><span class="absolute top-2 left-3 text-[10px]">05</span><span class="absolute top-[7px] right-3 text-xs">✓</span><span class="mt-3.5 text-[var(--ink)] block">Binary Search Tree</span></a>
-        <a class="absolute bottom-1.5 right-3 text-[9px] underline decoration-dotted text-[var(--add)] hover:text-[var(--ink)]" href="data-structures/05-binary-search-tree/diagram.html">diagram ↗</a>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-[var(--line)] bg-[var(--surface)] p-4 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:border-[var(--add)] hover:shadow-[0_10px_24px_-12px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/05-binary-search-tree/README.md" aria-label="Binary Search Tree README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">05</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Binary Search Tree</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="data-structures/05-binary-search-tree/diagram.html">diagram ↗</a>
       </div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">06</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Heap / Priority Queue</span></div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">07</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Trie</span></div>
-      <div class="flex flex-col justify-center gap-0.5 w-[168px] min-h-[60px] px-[14px] py-[10px] rounded-[10px] relative font-mono text-[12.5px] leading-[1.3] bg-[var(--surface)] border-[1.4px] border-[var(--line)] text-[var(--ink-soft)] cursor-default"><span class="absolute top-2 left-3 text-[10px]">08</span><span class="absolute top-[7px] right-3 text-xs">○</span><span class="mt-3.5">Graph</span></div>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">06</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Heap / Priority Queue</span>
+      </div>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">07</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Trie</span>
+      </div>
+      <div class="relative flex min-h-[100px] flex-col justify-between rounded-2xl border-[1.5px] border-dashed border-[var(--line)] bg-[var(--surface)] p-4 opacity-60">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">08</span><span class="flex h-5 w-5 items-center justify-center rounded-full border border-[var(--line)] text-[10px] text-[var(--ink-soft)]">○</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink-soft)]">Graph</span>
+      </div>
     </div>
   </section>
 
-  <p class="font-mono text-[12.5px] text-[var(--ink-soft)] leading-[1.6] max-w-[68ch]">
+  <p class="max-w-[68ch] font-mono text-[12.5px] leading-[1.6] text-[var(--ink-soft)]">
     A separate track from the patterns tab: building each structure from
     scratch, not applying a technique on top of one. See
-    <a href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/index.md" class="underline">data-structures/index.md</a>
+    <a href="https://github.com/rishurishabh/coding-dsa/blob/main/data-structures/index.md" class="underline decoration-dotted hover:text-[var(--add)]">data-structures/index.md</a>
     for how the two tracks relate.
   </p>
 
   </div><!-- /panel-ds -->
 
-  <footer class="border-t border-[var(--line)] pt-[22px] mt-10 text-[13px] text-[var(--ink-soft)] font-mono">
-    coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg
+  <footer class="mt-16 flex flex-col gap-2 border-t border-[var(--line)] pt-6 font-mono text-[13px] text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between">
+    <p>coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg</p>
+    <a class="underline decoration-dotted hover:text-[var(--add)]" href="https://github.com/rishurishabh/coding-dsa">github.com/rishurishabh/coding-dsa</a>
   </footer>
 </div>
 
