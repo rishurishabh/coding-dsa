@@ -1,0 +1,199 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<title>coding_dsa — Reader</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f;
+  }
+  .font-mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace; }
+  .font-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+  body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+
+  #doc h1 { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; font-size: 30px; line-height: 1.2; margin: 0 0 18px; color: var(--ink); }
+  #doc h2 { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; font-size: 20px; line-height: 1.3; margin: 36px 0 12px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink); }
+  #doc h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  #doc h3 { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; font-size: 15px; margin: 22px 0 8px; color: var(--ink); }
+  #doc p { font-size: 15.5px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 14px; max-width: 74ch; }
+  #doc ul { list-style: disc; margin: 0 0 16px; padding-left: 22px; }
+  #doc ol { list-style: decimal; margin: 0 0 16px; padding-left: 22px; }
+  #doc li { display: list-item; font-size: 15.5px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 6px; max-width: 72ch; }
+  #doc strong { color: var(--ink); font-weight: 700; }
+  #doc code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; color: var(--ink); }
+  #doc pre { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 0 0 16px; }
+  #doc pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.6; }
+  #doc a { text-decoration: underline; text-decoration-style: dotted; }
+  #doc a:hover { color: var(--ink); }
+  #doc img { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); margin: 4px 0 20px; }
+  #doc table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 14px; }
+  #doc th, #doc td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  #doc th { background: var(--surface); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-soft); }
+  #doc td { color: var(--ink-soft); }
+  #doc td code, #doc th code { white-space: nowrap; }
+</style>
+
+<div class="font-body max-w-[900px] mx-auto px-6 py-12 pb-24">
+  <a href="roadmap.html" class="inline-flex items-center gap-1.5 mb-6 font-mono text-[12px] text-[var(--ink-soft)] hover:text-[var(--add)]">← back to roadmap</a>
+
+  <div id="status" class="font-mono text-[13px] text-[var(--ink-soft)]"></div>
+  <article id="doc"></article>
+</div>
+
+<script>
+  function resolvePath(baseDir, relative) {
+    if (/^https?:\/\//i.test(relative) || relative.startsWith('#')) return relative;
+    const combined = (baseDir + relative).split('/');
+    const stack = [];
+    for (const part of combined) {
+      if (part === '' || part === '.') continue;
+      if (part === '..') stack.pop();
+      else stack.push(part);
+    }
+    return stack.join('/');
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function inline(text, baseDir) {
+    let out = escapeHtml(text);
+    out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, src) => {
+      const resolved = resolvePath(baseDir, src);
+      return '<img alt="' + alt + '" src="' + resolved + '">';
+    });
+    out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, href) => {
+      let resolved = resolvePath(baseDir, href);
+      if (/\.md($|#)/i.test(resolved)) resolved = 'reader.html?path=' + resolved;
+      return '<a href="' + resolved + '">' + label + '</a>';
+    });
+    out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+    return out;
+  }
+
+  function renderMarkdown(md, baseDir) {
+    const lines = md.replace(/\r\n/g, '\n').split('\n');
+    let html = '';
+    let i = 0;
+
+    function isTableSep(line) {
+      return /^\s*\|?[\s:|-]+\|?\s*$/.test(line) && line.includes('-');
+    }
+
+    while (i < lines.length) {
+      const line = lines[i];
+
+      if (line.trim() === '') { i++; continue; }
+
+      // fenced code block
+      if (line.trim().startsWith('```')) {
+        const buf = [];
+        i++;
+        while (i < lines.length && !lines[i].trim().startsWith('```')) { buf.push(lines[i]); i++; }
+        i++; // skip closing fence
+        html += '<pre><code>' + escapeHtml(buf.join('\n')) + '</code></pre>';
+        continue;
+      }
+
+      // headers
+      const headerMatch = line.match(/^(#{1,6})\s+(.*)$/);
+      if (headerMatch) {
+        const level = headerMatch[1].length;
+        html += '<h' + level + '>' + inline(headerMatch[2], baseDir) + '</h' + level + '>';
+        i++;
+        continue;
+      }
+
+      // table
+      if (line.includes('|') && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+        const headerCells = line.split('|').map(c => c.trim()).filter((c, idx, arr) => !(idx === 0 && c === '') && !(idx === arr.length - 1 && c === ''));
+        i += 2;
+        const rows = [];
+        while (i < lines.length && lines[i].includes('|') && lines[i].trim() !== '') {
+          const cells = lines[i].split('|').map(c => c.trim()).filter((c, idx, arr) => !(idx === 0 && c === '') && !(idx === arr.length - 1 && c === ''));
+          rows.push(cells);
+          i++;
+        }
+        html += '<table><thead><tr>' + headerCells.map(c => '<th>' + inline(c, baseDir) + '</th>').join('') + '</tr></thead><tbody>' +
+          rows.map(r => '<tr>' + r.map(c => '<td>' + inline(c, baseDir) + '</td>').join('') + '</tr>').join('') +
+          '</tbody></table>';
+        continue;
+      }
+
+      // lists (unordered - / ordered N.)
+      if (/^\s*([-*]|\d+\.)\s+/.test(line)) {
+        const ordered = /^\s*\d+\./.test(line);
+        const tag = ordered ? 'ol' : 'ul';
+        const items = [];
+        while (i < lines.length) {
+          const m = lines[i].match(/^\s*(?:[-*]|\d+\.)\s+(.*)$/);
+          if (m) {
+            items.push(m[1]);
+            i++;
+          } else if (lines[i].trim() !== '' && /^\s+\S/.test(lines[i]) && items.length > 0) {
+            items[items.length - 1] += ' ' + lines[i].trim();
+            i++;
+          } else {
+            break;
+          }
+        }
+        html += '<' + tag + '>' + items.map(it => '<li>' + inline(it, baseDir) + '</li>').join('') + '</' + tag + '>';
+        continue;
+      }
+
+      // paragraph
+      const buf = [line];
+      i++;
+      while (i < lines.length && lines[i].trim() !== '' && !/^(#{1,6})\s/.test(lines[i]) && !lines[i].trim().startsWith('```') && !/^\s*([-*]|\d+\.)\s+/.test(lines[i])) {
+        buf.push(lines[i]);
+        i++;
+      }
+      html += '<p>' + inline(buf.join(' '), baseDir) + '</p>';
+    }
+    return html;
+  }
+
+  async function main() {
+    const params = new URLSearchParams(location.search);
+    const path = params.get('path');
+    const statusEl = document.getElementById('status');
+    const docEl = document.getElementById('doc');
+
+    if (!path) {
+      statusEl.textContent = 'No ?path= given.';
+      return;
+    }
+
+    document.title = path + ' — coding_dsa';
+    const baseDir = path.includes('/') ? path.slice(0, path.lastIndexOf('/') + 1) : '';
+
+    try {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const text = await res.text();
+      statusEl.textContent = '';
+      docEl.innerHTML = renderMarkdown(text, baseDir);
+    } catch (err) {
+      statusEl.innerHTML =
+        '<div class="rounded-xl border border-[var(--line)] bg-[var(--surface)] p-4 max-w-[70ch]">' +
+        '<p class="mb-2">Could not load <code class="font-mono bg-[var(--paper)] border border-[var(--line)] rounded px-1">' + path + '</code> directly (' + err.message + ').</p>' +
+        '<p class="mb-2">Browsers block this kind of local file fetch — open this page from the live site instead:<br>' +
+        '<a class="underline" href="https://rishurishabh.github.io/coding-dsa/reader.html?path=' + encodeURIComponent(path) + '">rishurishabh.github.io/coding-dsa/reader.html?path=' + path + '</a></p>' +
+        '<p>Or view it rendered on GitHub directly:<br>' +
+        '<a class="underline" href="https://github.com/rishurishabh/coding-dsa/blob/main/' + path + '">github.com/rishurishabh/coding-dsa/blob/main/' + path + '</a></p>' +
+        '</div>';
+    }
+  }
+  main();
+</script>
