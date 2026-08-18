@@ -2,7 +2,9 @@
 
 ![DSA roadmap progress map: 20 of 28 modules complete, grouped by section](roadmap.svg)
 
-Interactive version: [roadmap.html](roadmap.html) (open in a browser — click any done pattern to jump to its README)
+Interactive version (live): [rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)
+(click any done pattern to jump to its README — the [roadmap.html](roadmap.html)
+link here just shows as source code on GitHub, since it doesn't run the script)
 
 Pattern-based roadmap (not "topic-based"). Each pattern solves a *family* of
 problems with one reusable technique. Work top to bottom — later patterns

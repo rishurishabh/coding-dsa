@@ -6,9 +6,11 @@ mechanism map, a practice list, and runnable code for every variant.
 
 ![DSA roadmap progress map: 20 of 28 modules complete, grouped by section](roadmap.svg)
 
-**[Full roadmap → index.md](index.md)** · **[Interactive roadmap → roadmap.html](roadmap.html)**
-(open `roadmap.html` in a browser — GitHub only renders it as source, not live;
-click any done module there to jump straight to its README)
+**[Full roadmap → index.md](index.md)** · **[Interactive roadmap (live) →
+rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)**
+(click any done module there to jump straight to its README — the
+[roadmap.html](roadmap.html) source link above just shows as code on GitHub,
+since GitHub doesn't execute the tab-switching script there)
 
 ## How each module is structured
 
