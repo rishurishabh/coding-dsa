@@ -1,0 +1,130 @@
+<svg width="1040" height="1360" viewBox="0 0 1040 1360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heap mechanism map: a complete binary tree stored flat in an array, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1360" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Heap — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / DATA-STRUCTURES / 06-HEAP-PRIORITY-QUEUE</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">A complete binary tree, stored flat in an array — child i lives at 2i+1/2i+2,</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">no pointers needed.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">root — always best</text>
+  <rect x="240" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="262" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">sift up</text>
+  <rect x="360" y="146" width="14" height="14" rx="3" fill="#b3467c"></rect>
+  <text x="382" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">sift down</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Push: append, then sift up while better than parent</text>
+
+  <rect x="32" y="266" width="976" height="260" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g transform="translate(300,296)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" text-anchor="middle">
+    <circle cx="180" cy="20" r="24" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></circle>
+    <text x="180" y="26" fill="#a8710a">1</text>
+    <line x1="164" y1="40" x2="110" y2="90" stroke="#d7dee8" stroke-width="1.6"></line>
+    <circle cx="100" cy="100" r="20" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="100" y="106" fill="#14202e">3</text>
+    <line x1="196" y1="40" x2="250" y2="90" stroke="#d7dee8" stroke-width="1.6"></line>
+    <circle cx="260" cy="100" r="20" fill="#ffffff" stroke="#d7dee8" stroke-width="1.6"></circle>
+    <text x="260" y="106" fill="#14202e">5</text>
+
+    <path d="M100,124 Q60,150 20,140" fill="none" stroke="#0f7a72" stroke-width="2" marker-end="url(#arrow-add)"></path>
+    <circle cx="0" cy="150" r="18" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></circle>
+    <text x="0" y="155" fill="#0f7a72">2</text>
+    <text x="30" y="185" text-anchor="middle" font-size="11" fill="#0f7a72">pushed here — smaller than parent 3</text>
+
+    <text x="30" y="205" text-anchor="middle" font-size="11" fill="#0f7a72">so it sifts up, swapping with 3</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Push always appends at the array's next open slot — a valid complete-tree position —</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">then swaps upward at most tree-height times. Pop mirrors this: swap root with the last element, sift down.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE FILES</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Two foundational files, three problems that need "always know the best"</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-array-heap-core.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">push / pop via sift up/down</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">compare(a,b) &lt; 0 → a wins</text>
+      <path d="M160,85 L160,103" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="123" fill="#a8710a">min-heap or max-heap, same code</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The compare function alone</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">decides min-heap vs max-heap —</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">no separate implementations.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-heapify-build-heap.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">O(n) build-heap</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">sift down from floor(n/2)-1 → 0</text>
+      <path d="M160,85 L160,103" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="123" fill="#a8710a">O(n), not n × O(log n)</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Most nodes are near the</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">leaves, where there's almost</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">no tree left to sift through.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-kth-largest-in-stream.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Size-capped min-heap</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">heap holds only the top k</text>
+      <path d="M160,85 L160,103" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="123" fill="#a8710a">root = kth largest so far</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Every new value that can't</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">beat the current worst of the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">top k gets discarded outright.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-task-scheduler.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Max-heap of frequencies</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">compare = (a,b) =&gt; b - a</text>
+      <path d="M160,85 L160,103" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="123" fill="#a8710a">most-frequent task scheduled first</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Flipping the compare function</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">turns the same min-heap code</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">into a max-heap.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-meeting-rooms-ii.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Min-heap of end times</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="75" fill="#14202e">while peek() &lt;= start: pop()</text>
+      <path d="M160,85 L160,103" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="123" fill="#a8710a">heap size = rooms in simultaneous use</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A while-loop (not if) frees</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">every room that's genuinely</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">available, not just one.</text>
+  </g>
+
+  <text x="32" y="1320" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/data-structures/06-heap-priority-queue/ — README.md · problems.md · 01–05*.js</text>
+</svg>
