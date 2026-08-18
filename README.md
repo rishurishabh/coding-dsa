@@ -2,7 +2,7 @@
 
 [![Deploy Pages](https://github.com/rishurishabh/coding-dsa/actions/workflows/pages.yml/badge.svg)](https://github.com/rishurishabh/coding-dsa/actions/workflows/pages.yml)
 
-**🔗 Live roadmap: [rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)**
+**🔗 Live roadmap: [rishurishabh.github.io/coding-dsa/roadmap.html](https://rishurishabh.github.io/coding-dsa/roadmap.html)**
 
 A pattern-by-pattern DSA practice repo in JavaScript — 28 modules
 (1 prerequisite + 27 interview patterns), each with theory, a visual
@@ -11,7 +11,7 @@ mechanism map, a practice list, and runnable code for every variant.
 ![DSA roadmap progress map: 22 of 28 modules complete, grouped by section](roadmap.svg)
 
 **[Full roadmap → index.md](index.md)** · **[Interactive roadmap (live) →
-rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)**
+rishurishabh.github.io/coding-dsa/roadmap.html](https://rishurishabh.github.io/coding-dsa/roadmap.html)**
 (click any done module there to jump straight to its README — the
 [roadmap.html](roadmap.html) source link above just shows as code on GitHub,
 since GitHub doesn't execute the tab-switching script there)
