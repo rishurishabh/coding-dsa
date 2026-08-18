@@ -2,7 +2,7 @@
 
 ![DSA roadmap progress map: 22 of 28 modules complete, grouped by section](roadmap.svg)
 
-Interactive version (live): [rishurishabh.github.io/coding-dsa](https://rishurishabh.github.io/coding-dsa/)
+Interactive version (live): [rishurishabh.github.io/coding-dsa/roadmap.html](https://rishurishabh.github.io/coding-dsa/roadmap.html)
 (click any done pattern to jump to its README — the [roadmap.html](roadmap.html)
 link here just shows as source code on GitHub, since it doesn't run the script)
 
