@@ -8,7 +8,7 @@ A pattern-by-pattern DSA practice repo in JavaScript — 28 modules
 (1 prerequisite + 27 interview patterns), each with theory, a visual
 mechanism map, a practice list, and runnable code for every variant.
 
-![DSA roadmap progress map: 22 of 28 modules complete, grouped by section](roadmap.svg)
+![DSA roadmap progress map: 24 of 28 modules complete, grouped by section](roadmap.svg)
 
 **[Full roadmap → index.md](index.md)** · **[Interactive roadmap (live) →
 rishurishabh.github.io/coding-dsa/roadmap.html](https://rishurishabh.github.io/coding-dsa/roadmap.html)**
@@ -35,7 +35,7 @@ Variant counts aren't padded to a round number — some patterns have 3
 genuinely distinct mechanisms, others have 11. The README for each module
 says so explicitly where the count is unusually low or high.
 
-## Progress: 22 / 28
+## Progress: 24 / 28
 
 | # | Module | Status |
 |---|---|---|
@@ -61,8 +61,8 @@ says so explicitly where the count is unusually low or high.
 | 19 | [0/1 Knapsack](19-01-knapsack/README.md) | ✅ |
 | 20 | [Unbounded Knapsack](20-unbounded-knapsack/README.md) | ✅ |
 | 21 | [LCS Family](21-lcs-family/README.md) | ✅ |
-| 22 | Palindromic Subsequence | ⬜ |
-| 23 | DP on Grids | ⬜ |
+| 22 | [Palindromic Subsequence](22-palindromic-subsequence/README.md) | ✅ |
+| 23 | [DP on Grids](23-dp-on-grids/README.md) | ✅ |
 | 24 | Greedy | ⬜ |
 | 25 | Trie | ⬜ |
 | 26 | Segment / Fenwick Tree | ⬜ |
