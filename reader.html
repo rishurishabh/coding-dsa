@@ -1,4 +1,14 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="coding_dsa — pattern-based DSA practice in JavaScript. Theory, mechanism maps, and runnable code for interview patterns and core data structures.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="coding_dsa">
+<meta property="og:title" content="coding_dsa">
+<meta property="og:description" content="coding_dsa — pattern-based DSA practice in JavaScript.">
+<meta property="og:url" content="https://rishurishabh.github.io/coding-dsa/reader.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="coding_dsa">
+<meta name="twitter:description" content="coding_dsa — pattern-based DSA practice in JavaScript.">
 <script src="https://cdn.tailwindcss.com"></script>
 <title>coding_dsa — Reader</title>
 <style>
@@ -128,6 +138,23 @@
 
   function slugify(text) {
     return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  function setPageMeta(title, description, path) {
+    const fullTitle = title + ' — coding_dsa';
+    const desc = description.length > 160 ? description.slice(0, 157).trim() + '...' : description;
+    const url = 'https://rishurishabh.github.io/coding-dsa/reader.html?path=' + path;
+    document.title = fullTitle;
+    const setContent = (selector, value) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute('content', value);
+    };
+    setContent('meta[name="description"]', desc);
+    setContent('meta[property="og:title"]', fullTitle);
+    setContent('meta[property="og:description"]', desc);
+    setContent('meta[property="og:url"]', url);
+    setContent('meta[name="twitter:title"]', fullTitle);
+    setContent('meta[name="twitter:description"]', desc);
   }
 
   const JS_KEYWORDS = /\b(?:function|const|let|var|if|else|for|while|do|return|class|new|this|typeof|instanceof|throw|try|catch|finally|break|continue|switch|case|default|extends|super|import|export|from|require|module|exports|async|await|yield|static|get|set|of|in|null|undefined|true|false|void|delete)\b/;
@@ -378,15 +405,27 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const text = await res.text();
       statusEl.textContent = '';
+      let pageTitle = path;
+      let pageDescription = 'coding_dsa — pattern-based DSA practice in JavaScript.';
       if (isCode) {
         const filename = path.split('/').pop();
         docEl.innerHTML = '<h1>' + filename + '</h1>' + renderCodeView(text);
+        pageTitle = filename;
+        pageDescription = 'Runnable source for ' + filename + ' — part of the coding_dsa pattern-based DSA course. ' + path;
       } else {
         docEl.innerHTML = renderMarkdown(text, baseDir);
+        // Read title/description BEFORE inserting sticky notes — those add
+        // their own <p> tags, which would otherwise get picked up instead
+        // of the page's real first paragraph.
+        const h1 = docEl.querySelector('h1');
+        const firstP = docEl.querySelector('p');
+        pageTitle = h1 ? h1.textContent : path;
+        pageDescription = firstP ? firstP.textContent : pageDescription;
         buildTOC(docEl);
         buildStickyNotes(docEl, path);
       }
       cardEl.classList.remove('hidden');
+      setPageMeta(pageTitle, pageDescription, path);
     } catch (err) {
       statusEl.innerHTML =
         '<div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 max-w-[70ch] shadow-sm">' +
