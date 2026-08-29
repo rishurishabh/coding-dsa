@@ -1,0 +1,156 @@
+<svg width="1040" height="1380" viewBox="0 0 1040 1380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trie mechanism map: shared character paths forming a tree, and four application diagrams built on the same walk.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1380" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Trie — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 25-TRIE</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Each edge is one character; a path from the root spells a prefix — words</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">that share a prefix share the same path through the tree.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#4a5a70"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">node</text>
+  <rect x="150" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="172" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">shared prefix path</text>
+  <rect x="340" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="362" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">end of word</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Shared prefixes share a path — "cat", "car", "dog"</text>
+
+  <rect x="32" y="266" width="976" height="250" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+    <!-- root -->
+    <circle cx="520" cy="300" r="14" fill="#ffffff" stroke="#4a5a70" stroke-width="1.8"></circle>
+    <text x="520" y="304" font-size="10" fill="#4a5a70">•</text>
+
+    <!-- root -> c -->
+    <path d="M508,310 L438,342" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+    <text x="455" y="318" fill="#0f7a72">c</text>
+    <!-- root -> d -->
+    <path d="M532,310 L602,342" fill="none" stroke="#4a5a70" stroke-width="1.8" marker-end="url(#arrow-ink)"></path>
+    <text x="590" y="318" fill="#4a5a70">d</text>
+
+    <circle cx="430" cy="350" r="14" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></circle>
+    <circle cx="610" cy="350" r="14" fill="#ffffff" stroke="#4a5a70" stroke-width="1.8"></circle>
+
+    <!-- c -> a -->
+    <path d="M430,364 L430,386" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+    <text x="445" y="378" fill="#0f7a72">a</text>
+    <!-- d -> o -->
+    <path d="M610,364 L610,386" fill="none" stroke="#4a5a70" stroke-width="1.8" marker-end="url(#arrow-ink)"></path>
+    <text x="625" y="378" fill="#4a5a70">o</text>
+
+    <circle cx="430" cy="400" r="14" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></circle>
+    <circle cx="610" cy="400" r="14" fill="#ffffff" stroke="#4a5a70" stroke-width="1.8"></circle>
+
+    <!-- a -> t -->
+    <path d="M420,412 L380,442" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+    <text x="388" y="422" fill="#a8710a">t</text>
+    <!-- a -> r -->
+    <path d="M440,412 L480,442" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+    <text x="472" y="422" fill="#a8710a">r</text>
+    <!-- o -> g -->
+    <path d="M610,414 L610,442" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+    <text x="625" y="432" fill="#a8710a">g</text>
+
+    <circle cx="370" cy="454" r="14" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></circle>
+    <circle cx="490" cy="454" r="14" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></circle>
+    <circle cx="610" cy="454" r="14" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></circle>
+
+    <text x="370" y="486" fill="#a8710a" font-size="12">"cat"</text>
+    <text x="490" y="486" fill="#a8710a" font-size="12">"car"</text>
+    <text x="610" y="486" fill="#a8710a" font-size="12">"dog"</text>
+  </g>
+
+  <text x="32" y="560" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">"ca" is walked once and shared by both "cat" and "car" — the node itself</text>
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">never stores a string, the path taken to reach it IS the string.</text>
+
+  <text x="32" y="618" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE VARIANTS</text>
+  <text x="32" y="644" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">One structure, four ways of walking it</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-trie-core.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Core structure</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">insert / search / startsWith</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">O(word length) per op</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Every other variant is this</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">same walk, with a different</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">rule for what to do at each node.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-word-search-ii.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Trie + grid backtracking</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">one DFS, all target words</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">found: oath, eat</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A shared trie prefix prunes</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">every remaining candidate</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">word together, not one by one.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,664)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-add-and-search-word.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Wildcard branching search</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">'.' tries every child</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">"b.." matches "bad"</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">One step per '.' becomes a</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">small DFS instead of following</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">a single child.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-longest-word-in-dictionary.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">DFS restricted to "buildable" paths</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">only step into end-of-word nodes</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">longest: "world"</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The trie enforces "every prefix</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">is also a word" for free — no</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">separate check needed.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,988)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-replace-words.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Shortest-prefix match</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">stop at first end-of-word hit</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">"cattle" → "cat"</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Walking char by char visits</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">prefixes shortest-first — the</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">first match is the shortest one.</text>
+  </g>
+
+  <text x="32" y="1340" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/25-trie/ — README.md · problems.md · 01–05*.js</text>
+</svg>

@@ -1,6 +1,6 @@
 # DSA Roadmap
 
-![DSA roadmap progress map: 24 of 28 modules complete, grouped by section](roadmap.svg)
+![DSA roadmap progress map: 28 of 28 modules complete, grouped by section](roadmap.svg)
 
 Interactive version (live): [rishurishabh.github.io/coding-dsa/roadmap.html](https://rishurishabh.github.io/coding-dsa/roadmap.html)
 (click any done pattern to jump to its README — the [roadmap.html](roadmap.html)
@@ -53,12 +53,12 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] 23. [DP on Grids](23-dp-on-grids/README.md) — unique paths, min path sum
 
 ## Greedy
-- [ ] 24. Greedy — interval scheduling, jump game
+- [x] 24. [Greedy](24-greedy/README.md) — interval scheduling, jump game
 
 ## Advanced Structures (as needed)
-- [ ] 25. Trie — prefix search, autocomplete
-- [ ] 26. Segment Tree / Fenwick Tree — range query + update
-- [ ] 27. Graph Shortest Path — Dijkstra, Bellman-Ford
+- [x] 25. [Trie](25-trie/README.md) — prefix search, autocomplete
+- [x] 26. [Segment Tree / Fenwick Tree](26-segment-fenwick-tree/README.md) — range query + update
+- [x] 27. [Graph Shortest Path](27-graph-shortest-path/README.md) — Dijkstra, Bellman-Ford
 
 ## Conventions for this repo
 - Language: JavaScript (Node, plain `.js`, `module.exports` + inline demo run).
@@ -67,7 +67,7 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - Run any file directly: `node 01-sliding-window/01-fixed-size.js`.
 
 ## Data Structures track
-The 27 patterns above assume familiarity with the underlying data
+The 28 patterns above assume familiarity with the underlying data
 structures. **[data-structures/index.md](data-structures/index.md)** is a
 separate track that builds those structures from scratch — same
 README/problems.md/diagram convention. 7 of 8 built so far: Stack, Queue,
@@ -75,4 +75,6 @@ README/problems.md/diagram convention. 7 of 8 built so far: Stack, Queue,
 [Hash Map](data-structures/04-hash-map/README.md),
 [Binary Search Tree](data-structures/05-binary-search-tree/README.md),
 [Heap / Priority Queue](data-structures/06-heap-priority-queue/README.md),
-and [Graph](data-structures/08-graph/README.md). Only Trie is left.
+and [Graph](data-structures/08-graph/README.md). Only Trie is left as its
+own from-scratch module, though [25-trie/01-trie-core.js](25-trie/01-trie-core.js)
+already builds the same structure as part of the pattern track.

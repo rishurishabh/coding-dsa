@@ -1,0 +1,149 @@
+<svg width="1040" height="1380" viewBox="0 0 1040 1380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Segment Tree and Fenwick Tree mechanism map: a binary tree of combined ranges, the Fenwick bit trick, and five variant diagrams.">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5a70"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1380" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Segment / Fenwick Tree — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / 26-SEGMENT-FENWICK-TREE</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Range query + update, both in O(log n) — a tree of combined ranges, or a</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">flat array walked by lowest-set-bit steps.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#4a5a70"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">leaf</text>
+  <rect x="140" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="162" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">combined range</text>
+  <rect x="330" y="146" width="14" height="14" rx="3" fill="#a8710a"></rect>
+  <text x="352" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">query result</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">A range decomposes into O(log n) tree nodes</text>
+
+  <rect x="32" y="266" width="976" height="270" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+    <rect x="365" y="290" width="90" height="40" rx="8" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></rect>
+    <text x="410" y="315" fill="#a8710a">[0,3]=16</text>
+
+    <path d="M385,330 L280,362" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+    <path d="M435,330 L540,362" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+
+    <rect x="235" y="362" width="90" height="40" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+    <text x="280" y="387" fill="#0f7a72">[0,1]=4</text>
+    <rect x="495" y="362" width="90" height="40" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.8"></rect>
+    <text x="540" y="387" fill="#0f7a72">[2,3]=12</text>
+
+    <path d="M260,402 L200,434" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+    <path d="M300,402 L340,434" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+    <path d="M520,402 L460,434" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+    <path d="M560,402 L620,434" fill="none" stroke="#4a5a70" stroke-width="1.6" marker-end="url(#arrow-ink)"></path>
+
+    <rect x="160" y="434" width="80" height="36" rx="7" fill="#ffffff" stroke="#4a5a70" stroke-width="1.4"></rect>
+    <text x="200" y="457" fill="#4a5a70">[0]=1</text>
+    <rect x="300" y="434" width="80" height="36" rx="7" fill="#ffffff" stroke="#4a5a70" stroke-width="1.4"></rect>
+    <text x="340" y="457" fill="#4a5a70">[1]=3</text>
+    <rect x="420" y="434" width="80" height="36" rx="7" fill="#ffffff" stroke="#4a5a70" stroke-width="1.4"></rect>
+    <text x="460" y="457" fill="#4a5a70">[2]=5</text>
+    <rect x="580" y="434" width="80" height="36" rx="7" fill="#ffffff" stroke="#4a5a70" stroke-width="1.4"></rect>
+    <text x="620" y="457" fill="#4a5a70">[3]=7</text>
+
+    <text x="410" y="500" font-size="11.5" fill="#4a5a70" font-family="-apple-system, Segoe UI, Arial, sans-serif">rangeSum(1,3) visits [1]=3 and [2,3]=12 — two nodes, not four leaves</text>
+  </g>
+
+  <text x="680" y="330" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FENWICK TREE — i &amp; -i</text>
+  <text x="680" y="356" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Index i owns a range of size</text>
+  <text x="680" y="376" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">(i &amp; -i), its lowest set bit.</text>
+  <text x="680" y="396" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Query walks DOWN by clearing</text>
+  <text x="680" y="416" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">that bit; update walks UP by</text>
+  <text x="680" y="436" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">adding it. Same O(log n), no</text>
+  <text x="680" y="456" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">recursion, one flat array.</text>
+
+  <text x="32" y="578" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">Segment tree: general combine operator, heavier structure. Fenwick tree:</text>
+  <text x="32" y="596" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13" fill="#4a5a70">sum/count only, a fraction of the code and memory.</text>
+
+  <text x="32" y="636" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">FIVE VARIANTS</text>
+  <text x="32" y="662" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Point vs. range, sum vs. count — same O(log n) shape underneath</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,682)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-segment-tree-range-sum.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Segment tree, point update</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">4n-size tree, recursive build</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">rangeSum(1,3) = 15</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">General-purpose baseline —</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">works for min/max/gcd too,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">not just sum.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(372,682)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-fenwick-tree-range-sum.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Fenwick tree, point update</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">flat array, i +-= i &amp; -i</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">same result, less code</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same workload as variant 1,</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">sum-only — smaller structure,</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">no recursion.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(712,682)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-segment-tree-lazy-propagation.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Segment tree + lazy tags</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">tag node, push on next visit</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">addRange(1,3,10) in O(log n)</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A fully-covered node updates</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">itself and defers its children</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">until they're actually visited.</text>
+  </g>
+
+  <!-- CARD 4 -->
+  <g transform="translate(32,1006)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">04-fenwick-range-update-point-query.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Fenwick over a difference array</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">diff[l]+=val, diff[r+1]-=val</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">pointQuery = prefix sum</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">A range update becomes two</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">point updates on the diff array</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">— no lazy tags needed.</text>
+  </g>
+
+  <!-- CARD 5 -->
+  <g transform="translate(372,1006)">
+    <rect x="0" y="0" width="320" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">05-count-smaller-after-self.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Fenwick tree for order statistics</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="160" y="70" fill="#14202e">BIT counts ranks, not sums</text>
+      <path d="M160,80 L160,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="160" y="118" fill="#a8710a">[5,2,6,1] → [2,1,1,0]</text>
+    </g>
+    <text x="16" y="235" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same walk as every other</text>
+    <text x="16" y="251" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">variant, storing frequencies by</text>
+    <text x="16" y="267" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">compressed rank instead of sums.</text>
+  </g>
+
+  <text x="32" y="1350" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/26-segment-fenwick-tree/ — README.md · problems.md · 01–05*.js</text>
+</svg>

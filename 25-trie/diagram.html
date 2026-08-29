@@ -1,0 +1,207 @@
+<title>Trie — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--add)"></path></marker>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--remove)"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--result)"></path></marker>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to 25-trie/</p>
+  <h1>Trie: shared prefixes share a path</h1>
+  <p class="lede">
+    Each edge is one character; a path from the root spells a prefix.
+    Words that share a prefix share the same path through the tree.
+    Code lives in <code>25-trie/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--ink-soft)"></span>node</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>shared prefix path</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result)"></span>end of word</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Shared prefixes share a path — "cat", "car", "dog"</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 640 220" role="img" aria-label="A tree where the root branches into c and d; c leads to a shared node a, which then branches into t and r, spelling cat and car; d leads separately to o then g, spelling dog." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+        <circle cx="320" cy="20" r="14" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.8"></circle>
+        <text x="320" y="24" font-size="10" fill="var(--ink-soft)">•</text>
+
+        <path d="M308,30 L238,62" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+        <text x="255" y="38" fill="var(--add)">c</text>
+        <path d="M332,30 L402,62" fill="none" stroke="var(--ink-soft)" stroke-width="1.8" marker-end="url(#arrow-ink)"></path>
+        <text x="390" y="38" fill="var(--ink-soft)">d</text>
+
+        <circle cx="230" cy="70" r="14" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+        <circle cx="410" cy="70" r="14" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.8"></circle>
+
+        <path d="M230,84 L230,106" fill="none" stroke="var(--add)" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+        <text x="245" y="98" fill="var(--add)">a</text>
+        <path d="M410,84 L410,106" fill="none" stroke="var(--ink-soft)" stroke-width="1.8" marker-end="url(#arrow-ink)"></path>
+        <text x="425" y="98" fill="var(--ink-soft)">o</text>
+
+        <circle cx="230" cy="120" r="14" fill="var(--add-soft)" stroke="var(--add)" stroke-width="1.8"></circle>
+        <circle cx="410" cy="120" r="14" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.8"></circle>
+
+        <path d="M220,132 L180,162" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+        <text x="188" y="142" fill="var(--result)">t</text>
+        <path d="M240,132 L280,162" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+        <text x="272" y="142" fill="var(--result)">r</text>
+        <path d="M410,134 L410,162" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+        <text x="425" y="152" fill="var(--result)">g</text>
+
+        <circle cx="170" cy="174" r="14" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.4"></circle>
+        <circle cx="290" cy="174" r="14" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.4"></circle>
+        <circle cx="410" cy="174" r="14" fill="var(--result-soft)" stroke="var(--result)" stroke-width="2.4"></circle>
+
+        <text x="170" y="206" fill="var(--result)">"cat"</text>
+        <text x="290" y="206" fill="var(--result)">"car"</text>
+        <text x="410" y="206" fill="var(--result)">"dog"</text>
+      </svg>
+    </figure>
+    <figcaption>
+      "ca" is walked once and shared by both "cat" and "car" — the node
+      itself never stores a string, the path taken to reach it IS the
+      string.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Five variants</h2>
+    <p class="section-title">One structure, four ways of walking it</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-trie-core.js</span>
+        <h3>Core structure</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="Insert, search, and startsWith, each costing time proportional to word length, independent of how many other words are stored." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="70" fill="var(--ink)">insert / search / startsWith</text>
+            <path d="M160,80 L160,98" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="160" y="118" fill="var(--result)">O(word length) per op</text>
+          </svg>
+        </div>
+        <p>Every other variant is this same walk, with a different rule for what to do at each node.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-word-search-ii.js</span>
+        <h3>Trie + grid backtracking</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A single depth-first search over the grid checking against the trie for all target words at once, finding oath and eat." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="70" fill="var(--ink)">one DFS, all target words</text>
+            <path d="M160,80 L160,98" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="160" y="118" fill="var(--result)">found: oath, eat</text>
+          </svg>
+        </div>
+        <p>A shared trie prefix prunes every remaining candidate word together, not one by one.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-add-and-search-word.js</span>
+        <h3>Wildcard branching search</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A wildcard dot character causing the search to branch into every child at that position instead of following a single path." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="70" fill="var(--ink)">'.' tries every child</text>
+            <path d="M160,80 L160,98" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="160" y="118" fill="var(--result)">"b.." matches "bad"</text>
+          </svg>
+        </div>
+        <p>One step per '.' becomes a small DFS instead of following a single child.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <span class="card-tag">04-longest-word-in-dictionary.js</span>
+        <h3>DFS restricted to "buildable" paths</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A depth-first search that only steps into a child node when that node also marks the end of a word, finding world as the longest buildable word." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="70" fill="var(--ink)">only step into end-of-word nodes</text>
+            <path d="M160,80 L160,98" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="160" y="118" fill="var(--result)">longest: "world"</text>
+          </svg>
+        </div>
+        <p>The trie enforces "every prefix is also a word" for free — no separate check needed.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <span class="card-tag">05-replace-words.js</span>
+        <h3>Shortest-prefix match</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 190" role="img" aria-label="A walk through the trie stopping at the first end-of-word node reached, replacing cattle with its shortest matching root cat." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="70" fill="var(--ink)">stop at first end-of-word hit</text>
+            <path d="M160,80 L160,98" fill="none" stroke="var(--result)" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+            <text x="160" y="118" fill="var(--result)">"cattle" → "cat"</text>
+          </svg>
+        </div>
+        <p>Walking char by char visits prefixes shortest-first — the first match is the shortest one.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/25-trie/ — README.md (theory) · problems.md (5 practice problems) · 01–05*.js (runnable code)
+  </footer>
+
+</div>
