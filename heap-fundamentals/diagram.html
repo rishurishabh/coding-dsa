@@ -1,0 +1,217 @@
+<title>Heap Fundamentals — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame.warn { border: 1.6px dashed var(--remove); }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card.warn { border-color: var(--remove); }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card.warn h3 { color: var(--remove); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+  .trees { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+  .memory-boxes { display: flex; gap: 20px; align-items: stretch; flex-wrap: wrap; }
+  .mem-box { width: 220px; border-radius: 8px; padding: 16px; font-family: var(--font-mono); font-size: 12px; }
+  .mem-box.stack { background: var(--ink-soft); background: color-mix(in srgb, var(--ink-soft) 12%, transparent); border: 1.6px solid var(--ink-soft); color: var(--ink); }
+  .mem-box.heap { background: var(--remove-soft); border: 2px solid var(--remove); color: var(--remove); }
+  .mem-box h4 { margin: 0 0 8px; font-size: 13px; }
+  .mem-box p { margin: 3px 0; font-size: 11.5px; opacity: 0.9; }
+  .mem-note { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); max-width: 280px; }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to heap-fundamentals/</p>
+  <h1>Same tree shape, one flipped rule</h1>
+  <p class="lede">
+    One tree shape, one flipped comparison — and a second, unrelated
+    "heap" living in your program's memory, not in this diagram at all.
+    Code lives in <code>heap-fundamentals/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>root (the extreme value)</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--surface);border:1px solid var(--line)"></span>node</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove-soft);border:1px solid var(--remove)"></span>unrelated to the trees</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Same tree shape, one flipped rule</p>
+    <div class="fig-frame">
+      <div class="trees">
+        <svg viewBox="0 0 300 220" width="300" role="img" aria-label="A max-heap tree with 9 at the root, children 5 and 6, and grandchildren 1, 4, and 2 — every parent is greater than or equal to its children." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+          <text x="150" y="16" font-size="13" font-weight="700" fill="var(--ink)">MAX-HEAP — parent ≥ children</text>
+          <path d="M150,52 L80,82" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M150,52 L220,82" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M80,102 L40,132" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M80,102 L120,132" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M220,102 L220,132" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <rect x="128" y="30" width="44" height="36" rx="7" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.2"></rect>
+          <text x="150" y="54" fill="var(--add)">9</text>
+          <rect x="58" y="82" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="80" y="106" fill="var(--ink-soft)">5</text>
+          <rect x="198" y="82" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="220" y="106" fill="var(--ink-soft)">6</text>
+          <rect x="18" y="132" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="40" y="156" fill="var(--ink-soft)">1</text>
+          <rect x="98" y="132" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="120" y="156" fill="var(--ink-soft)">4</text>
+          <rect x="198" y="132" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="220" y="156" fill="var(--ink-soft)">2</text>
+          <text x="150" y="200" font-size="12" fill="var(--result)">array: [9, 5, 6, 1, 4, 2]</text>
+        </svg>
+        <svg viewBox="0 0 300 220" width="300" role="img" aria-label="A min-heap tree with 1 at the root, children 3 and 2, and grandchildren 8, 4, and 9 — every parent is less than or equal to its children." font-family="var(--font-mono)" font-size="14" text-anchor="middle">
+          <text x="150" y="16" font-size="13" font-weight="700" fill="var(--ink)">MIN-HEAP — parent ≤ children</text>
+          <path d="M150,52 L80,82" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M150,52 L220,82" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M80,102 L40,132" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M80,102 L120,132" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <path d="M220,102 L220,132" fill="none" stroke="var(--ink-soft)" stroke-width="1.6"></path>
+          <rect x="128" y="30" width="44" height="36" rx="7" fill="var(--add-soft)" stroke="var(--add)" stroke-width="2.2"></rect>
+          <text x="150" y="54" fill="var(--add)">1</text>
+          <rect x="58" y="82" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="80" y="106" fill="var(--ink-soft)">3</text>
+          <rect x="198" y="82" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="220" y="106" fill="var(--ink-soft)">2</text>
+          <rect x="18" y="132" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="40" y="156" fill="var(--ink-soft)">8</text>
+          <rect x="98" y="132" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="120" y="156" fill="var(--ink-soft)">4</text>
+          <rect x="198" y="132" width="44" height="36" rx="7" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"></rect>
+          <text x="220" y="156" fill="var(--ink-soft)">9</text>
+          <text x="150" y="200" font-size="12" fill="var(--result)">array: [1, 3, 2, 8, 4, 9]</text>
+        </svg>
+      </div>
+    </div>
+    <figcaption>
+      Building either one is the SAME algorithm with ONE comparison
+      flipped — see <a href="01-heap-property-check.js">01-heap-property-check.js</a>
+      and <a href="02-heapify-array.js">02-heapify-array.js</a>.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>A completely different "heap"</h2>
+    <p class="section-title">The memory heap has nothing to do with the trees above</p>
+    <div class="fig-frame warn">
+      <div class="memory-boxes">
+        <div class="mem-box stack">
+          <h4>CALL STACK</h4>
+          <p>local variables,</p>
+          <p>function calls</p>
+          <p>LIFO, strict order</p>
+        </div>
+        <div class="mem-box heap">
+          <h4>MEMORY HEAP</h4>
+          <p>objects, arrays,</p>
+          <p>dynamic allocation</p>
+          <p>no imposed order</p>
+        </div>
+        <p class="mem-note">
+          Same word, unrelated concept: "heapUsed" here is about WHERE
+          data lives in RAM. The max/min trees above are about the ORDER
+          of values inside an array. See
+          <a href="03-nodejs-memory-heap-demo.js">03-nodejs-memory-heap-demo.js</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Three variants</h2>
+    <p class="section-title">Check it, build it, then meet the other kind of heap</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-heap-property-check.js</span>
+        <h3>Validate the property</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 260 110" role="img" aria-label="Checking whether an array satisfies the max-heap or min-heap property, returning true or false." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="130" y="35" fill="var(--ink)">isMaxHeap / isMinHeap</text>
+            <path d="M130,45 L130,63" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="130" y="83" fill="var(--result)">true / false</text>
+          </svg>
+        </div>
+        <p>Confirm an array is a heap, or learn the index math.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-heapify-array.js</span>
+        <h3>Build a heap from scratch</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 260 110" role="img" aria-label="Sifting down an unsorted array into either a max-heap or a min-heap using the same algorithm with one comparison flipped." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="130" y="35" fill="var(--ink)">siftDown, one flipped compare</text>
+            <path d="M130,45 L130,63" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="130" y="83" fill="var(--result)">max-heap or min-heap</text>
+          </svg>
+        </div>
+        <p>Same algorithm, opposite root, one line different.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card warn">
+        <span class="card-tag">03-nodejs-memory-heap-demo.js</span>
+        <h3>The OTHER heap, for real</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 260 110" role="img" aria-label="Reading Node's process.memoryUsage() to show real heapUsed and heapTotal numbers, unrelated to the max-heap and min-heap property." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="130" y="35" fill="var(--ink)">process.memoryUsage()</text>
+            <path d="M130,45 L130,63" fill="none" stroke="var(--remove)" stroke-width="1.8"></path>
+            <text x="130" y="83" fill="var(--remove)">heapUsed / heapTotal (MB)</text>
+          </svg>
+        </div>
+        <p>Unrelated to max/min-heap — proven with real numbers.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/heap-fundamentals/ — README.md (theory) · problems.md (4 practice problems) · 01–03*.js (runnable code)
+  </footer>
+
+</div>

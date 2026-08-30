@@ -89,6 +89,17 @@ tracks above but explained slowly, with analogies. See
 Binary Basics, Bitwise Operators, Shift Operators, Bit Tricks, Bitmasking
 for Subsets).
 
+## Heap Fundamentals
+
+A fourth, deliberately small track: one focused page on max-heap vs
+min-heap, and the much bigger source of confusion — why "heap" also
+names a completely unrelated region of program memory. See
+**[heap-fundamentals/README.md](heap-fundamentals/README.md)**. Read it
+before [data-structures/06-heap-priority-queue](data-structures/06-heap-priority-queue/README.md)
+(the full from-scratch build) or the heap-based patterns
+([13](13-two-heaps/README.md), [14](14-top-k-elements/README.md),
+[15](15-k-way-merge/README.md)).
+
 ## Running the code
 
 No dependencies — just Node:

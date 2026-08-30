@@ -44,7 +44,7 @@
 
 <div class="font-body max-w-[1100px] mx-auto px-6 py-14 pb-24">
 
-  <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 mb-5 font-mono text-[11px] font-medium tracking-wide text-[var(--ink-soft)]">coding_dsa · three tracks, Grokking-style order</span>
+  <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 mb-5 font-mono text-[11px] font-medium tracking-wide text-[var(--ink-soft)]">coding_dsa · four tracks, Grokking-style order</span>
   <h1 class="font-mono font-bold text-[clamp(28px,4.2vw,42px)] tracking-[-0.01em] leading-[1.1] mb-4 [text-wrap:balance]">DSA Roadmap: where to start, and what's next</h1>
   <p class="text-base leading-[1.65] text-[var(--ink-soft)] max-w-[68ch] mb-8">
     Work top to bottom, section by section — each pattern builds on ones
@@ -55,7 +55,7 @@
     Bit Manipulation tab — it assumes nothing.
   </p>
 
-  <div class="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
     <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
       <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Patterns</p>
       <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">28<span class="text-base font-normal text-[var(--ink-soft)]"> / 28</span></p>
@@ -69,15 +69,20 @@
       <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">5<span class="text-base font-normal text-[var(--ink-soft)]"> / 5</span></p>
     </div>
     <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+      <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Heap Fundamentals</p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">1<span class="text-base font-normal text-[var(--ink-soft)]"> / 1</span></p>
+    </div>
+    <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
       <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Overall</p>
-      <p class="mt-1 font-mono text-2xl font-bold text-[var(--add)]">40<span class="text-base font-normal text-[var(--ink-soft)]"> / 41</span></p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--add)]">41<span class="text-base font-normal text-[var(--ink-soft)]"> / 42</span></p>
     </div>
   </div>
 
-  <div class="mb-10 inline-flex gap-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-1" role="tablist">
+  <div class="mb-10 inline-flex flex-wrap gap-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-1" role="tablist">
     <button class="tab-btn active rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
     <button class="tab-btn rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
     <button class="tab-btn rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-bit" id="tab-bit" onclick="showTab('bit')">Bit Manipulation</button>
+    <button class="tab-btn rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-heap" id="tab-heap" onclick="showTab('heap')">Heap</button>
   </div>
 
   <div class="panel" id="panel-patterns" role="tabpanel" aria-labelledby="tab-patterns">
@@ -461,10 +466,48 @@
     assumes nothing and builds up from "what is a bit" to the point where
     the XOR pattern actually makes sense. See
     <a href="reader.html?path=bit-manipulation/index.md" class="underline decoration-dotted hover:text-[var(--add)]">bit-manipulation/index.md</a>
-    for how all three tracks relate.
+    for how all four tracks relate.
   </p>
 
   </div><!-- /panel-bit -->
+
+  <div class="panel" id="panel-heap" role="tabpanel" aria-labelledby="tab-heap" hidden>
+
+  <div class="mb-8 flex flex-wrap items-center gap-2">
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] text-[var(--ink-soft)]"><span class="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--add)] text-[8px] font-bold text-[var(--paper)]">✓</span>done — click to open</span>
+  </div>
+
+  <p class="mb-8 max-w-[68ch] font-mono text-[12.5px] leading-[1.6] text-[var(--ink-soft)]">
+    One focused page, not a whole track: max-heap vs min-heap, and the
+    much bigger source of confusion — why "heap" also means a completely
+    unrelated region of program memory. Read this before
+    <a href="reader.html?path=data-structures/06-heap-priority-queue/README.md" class="underline decoration-dotted hover:text-[var(--add)]">data-structures/06-heap-priority-queue</a>
+    (the full from-scratch build) or the heap-based patterns
+    (<a href="reader.html?path=13-two-heaps/README.md" class="underline decoration-dotted hover:text-[var(--add)]">13</a>,
+    <a href="reader.html?path=14-top-k-elements/README.md" class="underline decoration-dotted hover:text-[var(--add)]">14</a>,
+    <a href="reader.html?path=15-k-way-merge/README.md" class="underline decoration-dotted hover:text-[var(--add)]">15</a>).
+  </p>
+
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">HEAP FUNDAMENTALS</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">1 / 1</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <a class="group relative flex min-h-[100px] flex-col justify-between rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:border-[var(--add)] hover:shadow-[0_18px_34px_-18px_var(--add)]" href="reader.html?path=heap-fundamentals/README.md">
+        <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">01</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+        <span class="mt-4 block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Max-Heap vs Min-Heap vs Memory Heap</span>
+      </a>
+    </div>
+  </section>
+
+  <p class="max-w-[68ch] font-mono text-[12.5px] leading-[1.6] text-[var(--ink-soft)]">
+    A fourth, deliberately small track: one page answering exactly the
+    two questions that trip people up about heaps, instead of a full
+    from-scratch build (that already lives in Data Structures).
+  </p>
+
+  </div><!-- /panel-heap -->
 
   <footer class="mt-16 flex flex-col gap-2 border-t border-[var(--line)] pt-6 font-mono text-[13px] text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between">
     <p>coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg</p>
@@ -474,7 +517,7 @@
 
 <script>
   function showTab(name) {
-    const names = ['patterns', 'ds', 'bit'];
+    const names = ['patterns', 'ds', 'bit', 'heap'];
     for (const n of names) {
       const panel = document.getElementById('panel-' + n);
       const tab = document.getElementById('tab-' + n);

@@ -88,3 +88,15 @@ built: [Binary Basics](bit-manipulation/01-binary-basics/README.md),
 [Shift Operators](bit-manipulation/03-shift-operators/README.md),
 [Bit Tricks](bit-manipulation/04-bit-tricks/README.md), and
 [Bitmasking for Subsets](bit-manipulation/05-bitmasking-subsets/README.md).
+
+## Heap Fundamentals
+A fourth, deliberately small track: one page,
+**[heap-fundamentals/README.md](heap-fundamentals/README.md)**, answering
+exactly the two questions that trip people up about heaps — max-heap vs
+min-heap, and why "heap" also names a completely unrelated region of
+program memory. Meant to be read before
+[data-structures/06-heap-priority-queue](data-structures/06-heap-priority-queue/README.md)
+(the full from-scratch build) or the heap-based patterns
+([13-two-heaps](13-two-heaps/README.md),
+[14-top-k-elements](14-top-k-elements/README.md),
+[15-k-way-merge](15-k-way-merge/README.md)).
