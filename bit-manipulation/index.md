@@ -10,6 +10,48 @@ uses bits to solve problems) actually makes sense.
 If a sentence like `n & (n - 1)` looks like nonsense right now, that's
 exactly who this track is for. By the end of module 4 it'll look obvious.
 
+## Why do we need bit manipulation, really?
+Fair question — if you can already write `n % 2`, `arr.includes(x)`, or
+`Math.pow(2, k)`, why learn a whole second way to do similar things? Four
+honest reasons:
+
+**1. It's the fastest thing a computer can do.** Every other operation
+you use — `+`, `*`, `%`, array lookups — is eventually BUILT from bit
+operations happening in the processor's hardware. AND/OR/XOR/shift aren't
+an abstraction layer on top of "real" math; they're closer to the metal
+than the math is. That's why `n & 1` (module 4) to check even/odd is
+faster than `n % 2` — modulo has to do actual division work; `& 1` just
+reads one wire.
+
+**2. It packs a LOT of information into very little space.** A single
+32-bit number can represent 32 independent yes/no flags at once (module
+5's whole idea). Instead of an array of 32 booleans — 32 separate memory
+slots — you get one number, one variable, one comparison. This isn't a
+micro-optimization: file permissions (`chmod 755`), network subnet masks,
+RGB colors packed into one hex value, and database "bitmap indexes" all
+lean on exactly this trick because the space savings are real at scale.
+
+**3. A specific, recurring category of interview problems gets MUCH
+easier.** "Find the one element that doesn't repeat," "does this number
+have a repeating power-of-two pattern," "generate every possible
+subset" — these have obvious `O(n)` extra-space solutions (a hash set, a
+recursive tree) and much less obvious `O(1)`-space bit solutions. Once
+you've seen the trick you can't unsee it, but it does have to be seen
+once — nobody derives `n & (n-1)` from first principles under interview
+pressure without having met it before.
+
+**4. It explains things you've probably already used without knowing
+why they work.** `chmod 755`, IP subnet masks like `/24`, hex colors
+like `#FF8800`, "flags" arguments in APIs that accept combinations like
+`READ | WRITE` — all of these ARE bitmasks. This track won't just make
+you faster at LeetCode, it'll make several corners of "how computers
+actually work" stop feeling like memorized trivia.
+
+None of this means you should reach for bit tricks by default — a
+readable `arr.includes(x)` beats a clever bitmask nobody else on your
+team can read, most of the time. The point is having the tool available
+for the specific, recurring situations where it's the right one.
+
 Legend: `[ ]` not started · `[x]` done
 
 - [x] 01. [Binary Basics](01-binary-basics/README.md) — what a bit even is, and how to read/write binary by hand
