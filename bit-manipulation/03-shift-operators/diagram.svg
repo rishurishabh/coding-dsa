@@ -1,0 +1,109 @@
+<svg width="1040" height="980" viewBox="0 0 1040 980" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shift operators diagram: bits sliding left with a zero filling in behind, and bits sliding right with the last bit falling off the end.">
+  <defs>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="980" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Shift Operators — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / BIT-MANIPULATION / 03-SHIFT-OPERATORS</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Sliding digits left multiplies by 10 in decimal — sliding bits left</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">multiplies by 2 in binary. Same move, different base.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">bit = 1</text>
+  <rect x="150" y="146" width="14" height="14" rx="3" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+  <text x="172" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">bit = 0</text>
+  <rect x="270" y="146" width="14" height="14" rx="3" fill="#b3467c14" stroke="#b3467c" stroke-width="1.4"></rect>
+  <text x="292" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">falls off the end</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Slide every bit one column, fill or drop the gap</text>
+
+  <rect x="32" y="266" width="976" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <text x="60" y="304" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">5 &lt;&lt; 1 — slide left, fill with 0</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="60" y="316" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="80" y="341" fill="#4a5a70">0</text>
+    <rect x="104" y="316" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="124" y="341" fill="#4a5a70">0</text>
+    <rect x="148" y="316" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="168" y="341" fill="#4a5a70">0</text>
+    <rect x="192" y="316" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="212" y="341" fill="#4a5a70">0</text>
+    <rect x="236" y="316" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="256" y="341" fill="#4a5a70">0</text>
+    <rect x="280" y="316" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="300" y="341" fill="#0f7a72">1</text>
+    <rect x="324" y="316" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="344" y="341" fill="#4a5a70">0</text>
+    <rect x="368" y="316" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="388" y="341" fill="#0f7a72">1</text>
+    <path d="M60,336 L370,336" fill="none" stroke="#0f7a72" stroke-width="0" ></path>
+  </g>
+  <path d="M420,336 L470,336" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+  <g transform="translate(490,316)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="0" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="20" y="25" fill="#4a5a70">0</text>
+    <rect x="44" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="64" y="25" fill="#4a5a70">0</text>
+    <rect x="88" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="108" y="25" fill="#4a5a70">0</text>
+    <rect x="132" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="152" y="25" fill="#4a5a70">0</text>
+    <rect x="176" y="0" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="196" y="25" fill="#0f7a72">1</text>
+    <rect x="220" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="240" y="25" fill="#4a5a70">0</text>
+    <rect x="264" y="0" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="284" y="25" fill="#0f7a72">1</text>
+    <rect x="308" y="0" width="40" height="40" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></rect><text x="328" y="25" fill="#a8710a">0</text>
+  </g>
+  <text x="490" y="390" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#a8710a">= 10 — a fresh 0 fills the gap on the right</text>
+
+  <text x="60" y="450" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">20 &gt;&gt; 1 — slide right, drop the end</text>
+  <g transform="translate(60,462)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="0" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="20" y="25" fill="#4a5a70">0</text>
+    <rect x="44" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="64" y="25" fill="#4a5a70">0</text>
+    <rect x="88" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="108" y="25" fill="#4a5a70">0</text>
+    <rect x="132" y="0" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="152" y="25" fill="#0f7a72">1</text>
+    <rect x="176" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="196" y="25" fill="#4a5a70">0</text>
+    <rect x="220" y="0" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="240" y="25" fill="#0f7a72">1</text>
+    <rect x="264" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="284" y="25" fill="#4a5a70">0</text>
+    <rect x="308" y="0" width="40" height="40" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="2" stroke-dasharray="4,3"></rect><text x="328" y="25" fill="#b3467c">0</text>
+  </g>
+  <path d="M420,482 L470,482" fill="none" stroke="#0f7a72" stroke-width="1.8" marker-end="url(#arrow-add)"></path>
+  <g transform="translate(490,462)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" text-anchor="middle">
+    <rect x="0" y="0" width="40" height="40" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="2.4"></rect><text x="20" y="25" fill="#a8710a">0</text>
+    <rect x="44" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="64" y="25" fill="#4a5a70">0</text>
+    <rect x="88" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="108" y="25" fill="#4a5a70">0</text>
+    <rect x="132" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="152" y="25" fill="#4a5a70">0</text>
+    <rect x="176" y="0" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="196" y="25" fill="#0f7a72">1</text>
+    <rect x="220" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="240" y="25" fill="#4a5a70">0</text>
+    <rect x="264" y="0" width="40" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect><text x="284" y="25" fill="#0f7a72">1</text>
+    <rect x="308" y="0" width="40" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect><text x="328" y="25" fill="#4a5a70">0</text>
+  </g>
+  <text x="490" y="536" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#a8710a">= 10 — the last bit is gone for good</text>
+
+  <text x="32" y="606" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">TWO VARIANTS</text>
+  <text x="32" y="632" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Fast ×2 and ÷2, no arithmetic required</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-left-shift.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Slide left, fill with 0</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">5 &lt;&lt; 2 doubles twice</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">= 20 (5 × 4)</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">×2, ×4, ×8... without multiplying,</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">or building a bitmask bit by bit.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(524,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-right-shift.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Slide right, drop the end</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">(low + high) &gt;&gt; 1</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">binary search's midpoint</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">÷2 rounding down, or reading bits</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">off a number one at a time.</text>
+  </g>
+
+  <text x="32" y="950" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/bit-manipulation/03-shift-operators/ — README.md · problems.md · 01–02*.js</text>
+</svg>

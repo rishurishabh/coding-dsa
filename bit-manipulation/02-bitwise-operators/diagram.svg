@@ -1,0 +1,101 @@
+<svg width="1040" height="980" viewBox="0 0 1040 980" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bitwise operators diagram: truth tables for AND, OR, and XOR, plus a worked example combining the numbers 12 and 10 column by column.">
+  <defs>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="980" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Bitwise Operators — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / BIT-MANIPULATION / 02-BITWISE-OPERATORS</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Four tiny rules, applied one column at a time — no carrying, no order,</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">just a lookup per column.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">result = 1</text>
+  <rect x="170" y="146" width="14" height="14" rx="3" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+  <text x="192" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">result = 0</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Three truth tables, one column at a time</text>
+
+  <rect x="32" y="266" width="976" height="290" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <!-- AND table -->
+  <g transform="translate(70,300)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+    <text x="64" y="-14" font-size="14" font-weight="700" fill="#14202e">AND — both must be on</text>
+    <rect x="0" y="0" width="60" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="30" y="25" fill="#4a5a70">0,0→0</text>
+    <rect x="66" y="0" width="60" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="96" y="25" fill="#4a5a70">0,1→0</text>
+    <rect x="0" y="46" width="60" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="30" y="71" fill="#4a5a70">1,0→0</text>
+    <rect x="66" y="46" width="60" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></rect>
+    <text x="96" y="71" fill="#0f7a72" font-weight="700">1,1→1</text>
+  </g>
+
+  <!-- OR table -->
+  <g transform="translate(400,300)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+    <text x="64" y="-14" font-size="14" font-weight="700" fill="#14202e">OR — at least one is on</text>
+    <rect x="0" y="0" width="60" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="30" y="25" fill="#4a5a70">0,0→0</text>
+    <rect x="66" y="0" width="60" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></rect>
+    <text x="96" y="25" fill="#0f7a72" font-weight="700">0,1→1</text>
+    <rect x="0" y="46" width="60" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></rect>
+    <text x="30" y="71" fill="#0f7a72" font-weight="700">1,0→1</text>
+    <rect x="66" y="46" width="60" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></rect>
+    <text x="96" y="71" fill="#0f7a72" font-weight="700">1,1→1</text>
+  </g>
+
+  <!-- XOR table -->
+  <g transform="translate(730,300)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+    <text x="64" y="-14" font-size="14" font-weight="700" fill="#14202e">XOR — exactly one is on</text>
+    <rect x="0" y="0" width="60" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="30" y="25" fill="#4a5a70">0,0→0</text>
+    <rect x="66" y="0" width="60" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></rect>
+    <text x="96" y="25" fill="#0f7a72" font-weight="700">0,1→1</text>
+    <rect x="0" y="46" width="60" height="40" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2.2"></rect>
+    <text x="30" y="71" fill="#0f7a72" font-weight="700">1,0→1</text>
+    <rect x="66" y="46" width="60" height="40" rx="6" fill="#ffffff" stroke="#d7dee8" stroke-width="1.4"></rect>
+    <text x="96" y="71" fill="#4a5a70">1,1→0</text>
+  </g>
+
+  <text x="60" y="470" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">Worked example: 12 and 10</text>
+  <text x="60" y="494" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#4a5a70">12 = 1100    10 = 1010</text>
+  <text x="60" y="516" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#0f7a72">AND = 1000 (8)    OR = 1110 (14)    XOR = 0110 (6)</text>
+  <text x="60" y="540" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">Each column is answered on its own — no column needs to know what happened in another.</text>
+
+  <text x="32" y="616" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">TWO VARIANTS</text>
+  <text x="32" y="642" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Sameness-blind rules vs. the one that spots differences</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,662)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-and-or-not.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">AND / OR / NOT</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">n &amp; 1 keeps only the last column</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">7 &amp; 1 = 1 (odd)</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Combining or filtering bits where</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">order and "sameness" don't matter.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(524,662)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-xor-basics.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">XOR + cancellation identity</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">a ^ a = 0, a ^ 0 = a</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">[4,1,2,1,2] → 4</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">You need "different" or "toggle" —</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">the seed of a whole pattern later.</text>
+  </g>
+
+  <text x="32" y="950" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/bit-manipulation/02-bitwise-operators/ — README.md · problems.md · 01–02*.js</text>
+</svg>

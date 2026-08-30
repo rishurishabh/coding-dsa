@@ -79,6 +79,16 @@ operations cost what they cost. See **[data-structures/index.md](data-structures
 for the full list (7 of 8 built so far: Stack, Queue, Linked List, Hash
 Map, Binary Search Tree, Heap / Priority Queue, Graph).
 
+## Bit Manipulation track
+
+A third track, for anyone starting from zero — not even assuming you
+remember what binary is. Five modules building up from "what is a bit"
+to bitmasking, each with the same theory/problems/diagram shape as the
+tracks above but explained slowly, with analogies. See
+**[bit-manipulation/index.md](bit-manipulation/index.md)** (5 of 5 built:
+Binary Basics, Bitwise Operators, Shift Operators, Bit Tricks, Bitmasking
+for Subsets).
+
 ## Running the code
 
 No dependencies — just Node:

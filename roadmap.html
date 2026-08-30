@@ -6,17 +6,17 @@
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A pattern-by-pattern DSA practice roadmap in JavaScript — theory, visual mechanism maps, and runnable code for every variant across 22 interview patterns and 7 core data structures built from scratch.">
+<meta name="description" content="A pattern-by-pattern DSA practice roadmap in JavaScript — theory, visual mechanism maps, and runnable code for every variant across 28 interview patterns, 8 core data structures, and a from-zero bit manipulation track.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="DSA Roadmap — coding_dsa">
-<meta property="og:description" content="A pattern-by-pattern DSA practice roadmap in JavaScript — theory, visual mechanism maps, and runnable code for every variant across 22 interview patterns and 7 core data structures built from scratch.">
+<meta property="og:description" content="A pattern-by-pattern DSA practice roadmap in JavaScript — theory, visual mechanism maps, and runnable code for every variant across 28 interview patterns, 8 core data structures, and a from-zero bit manipulation track.">
 <meta property="og:url" content="https://rishurishabh.github.io/coding-dsa/roadmap.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DSA Roadmap — coding_dsa">
-<meta name="twitter:description" content="A pattern-by-pattern DSA practice roadmap in JavaScript — theory, visual mechanism maps, and runnable code for every variant across 22 interview patterns and 7 core data structures built from scratch.">
+<meta name="twitter:description" content="A pattern-by-pattern DSA practice roadmap in JavaScript — theory, visual mechanism maps, and runnable code for every variant across 28 interview patterns, 8 core data structures, and a from-zero bit manipulation track.">
 <link rel="canonical" href="https://rishurishabh.github.io/coding-dsa/roadmap.html">
 <script src="https://cdn.tailwindcss.com"></script>
-<title>DSA Roadmap — coding_dsa | Patterns &amp; Data Structures in JavaScript</title>
+<title>DSA Roadmap — coding_dsa | Patterns, Data Structures &amp; Bit Manipulation in JavaScript</title>
 <style>
   :root {
     --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
@@ -44,17 +44,18 @@
 
 <div class="font-body max-w-[1100px] mx-auto px-6 py-14 pb-24">
 
-  <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 mb-5 font-mono text-[11px] font-medium tracking-wide text-[var(--ink-soft)]">coding_dsa · two tracks, Grokking-style order</span>
+  <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 mb-5 font-mono text-[11px] font-medium tracking-wide text-[var(--ink-soft)]">coding_dsa · three tracks, Grokking-style order</span>
   <h1 class="font-mono font-bold text-[clamp(28px,4.2vw,42px)] tracking-[-0.01em] leading-[1.1] mb-4 [text-wrap:balance]">DSA Roadmap: where to start, and what's next</h1>
   <p class="text-base leading-[1.65] text-[var(--ink-soft)] max-w-[68ch] mb-8">
     Work top to bottom, section by section — each pattern builds on ones
     before it more than it builds on the ones after. Click a done module to
     open its README (theory + diagrams); every folder also has a
     <code class="font-mono text-[0.9em] bg-[var(--surface)] border border-[var(--line)] rounded px-[0.4em] py-[0.05em]">problems.md</code> practice list and runnable
-    <code class="font-mono text-[0.9em] bg-[var(--surface)] border border-[var(--line)] rounded px-[0.4em] py-[0.05em]">.js</code> for every variant.
+    <code class="font-mono text-[0.9em] bg-[var(--surface)] border border-[var(--line)] rounded px-[0.4em] py-[0.05em]">.js</code> for every variant. New to bits entirely? Start on the
+    Bit Manipulation tab — it assumes nothing.
   </p>
 
-  <div class="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
+  <div class="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
     <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
       <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Patterns</p>
       <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">28<span class="text-base font-normal text-[var(--ink-soft)]"> / 28</span></p>
@@ -64,14 +65,19 @@
       <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">7<span class="text-base font-normal text-[var(--ink-soft)]"> / 8</span></p>
     </div>
     <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
+      <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Bit Manipulation</p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--ink)]">5<span class="text-base font-normal text-[var(--ink-soft)]"> / 5</span></p>
+    </div>
+    <div class="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-4">
       <p class="font-mono text-[11px] uppercase tracking-wide text-[var(--ink-soft)]">Overall</p>
-      <p class="mt-1 font-mono text-2xl font-bold text-[var(--add)]">35<span class="text-base font-normal text-[var(--ink-soft)]"> / 36</span></p>
+      <p class="mt-1 font-mono text-2xl font-bold text-[var(--add)]">40<span class="text-base font-normal text-[var(--ink-soft)]"> / 41</span></p>
     </div>
   </div>
 
   <div class="mb-10 inline-flex gap-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-1" role="tablist">
     <button class="tab-btn active rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="true" aria-controls="panel-patterns" id="tab-patterns" onclick="showTab('patterns')">Patterns</button>
     <button class="tab-btn rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" onclick="showTab('ds')">Data Structures</button>
+    <button class="tab-btn rounded-lg px-4 py-2 font-mono text-[13px] font-semibold text-[var(--ink-soft)] transition-colors duration-150 hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--add)]" role="tab" aria-selected="false" aria-controls="panel-bit" id="tab-bit" onclick="showTab('bit')">Bit Manipulation</button>
   </div>
 
   <div class="panel" id="panel-patterns" role="tabpanel" aria-labelledby="tab-patterns">
@@ -383,6 +389,83 @@
 
   </div><!-- /panel-ds -->
 
+  <div class="panel" id="panel-bit" role="tabpanel" aria-labelledby="tab-bit" hidden>
+
+  <div class="mb-8 flex flex-wrap items-center gap-2">
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 font-mono text-[11px] text-[var(--ink-soft)]"><span class="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--add)] text-[8px] font-bold text-[var(--paper)]">✓</span>done — click to open</span>
+  </div>
+
+  <p class="mb-8 max-w-[68ch] font-mono text-[12.5px] leading-[1.6] text-[var(--ink-soft)]">
+    Starts from zero — not even assuming you remember what binary is.
+    Do these in order; each one leans on the one before it. By the end,
+    <a href="reader.html?path=18-bitwise-xor/README.md" class="underline decoration-dotted hover:text-[var(--add)]">18-bitwise-xor</a>
+    in the Patterns tab will make a lot more sense.
+  </p>
+
+  <div class="mb-10">
+    <div class="mb-2 flex items-center justify-between">
+      <p class="font-mono text-[13px] text-[var(--ink-soft)]">5 of 5 modules complete</p>
+      <p class="font-mono text-[13px] font-bold text-[var(--add)]">100%</p>
+    </div>
+    <div class="h-2.5 overflow-hidden rounded-full bg-[var(--line)]">
+      <div class="h-full rounded-full bg-[var(--add)]" style="width: 100%"></div>
+    </div>
+  </div>
+
+  <section class="mb-9">
+    <div class="mb-3 flex items-baseline justify-between border-b border-[var(--line)] pb-2">
+      <p class="font-mono text-xs font-bold tracking-[0.03em] text-[var(--ink)]">BIT MANIPULATION — FROM ZERO</p>
+      <p class="font-mono text-[11px] text-[var(--ink-soft)]">5 / 5</p>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:border-[var(--add)] hover:shadow-[0_18px_34px_-18px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="reader.html?path=bit-manipulation/01-binary-basics/README.md" aria-label="Binary Basics README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">01</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Binary Basics</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="bit-manipulation/01-binary-basics/diagram.html">diagram ↗</a>
+      </div>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:border-[var(--add)] hover:shadow-[0_18px_34px_-18px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="reader.html?path=bit-manipulation/02-bitwise-operators/README.md" aria-label="Bitwise Operators README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">02</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Bitwise Operators</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="bit-manipulation/02-bitwise-operators/diagram.html">diagram ↗</a>
+      </div>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:border-[var(--add)] hover:shadow-[0_18px_34px_-18px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="reader.html?path=bit-manipulation/03-shift-operators/README.md" aria-label="Shift Operators README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">03</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Shift Operators</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="bit-manipulation/03-shift-operators/diagram.html">diagram ↗</a>
+      </div>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:border-[var(--add)] hover:shadow-[0_18px_34px_-18px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="reader.html?path=bit-manipulation/04-bit-tricks/README.md" aria-label="Bit Tricks README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">04</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Bit Tricks</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="bit-manipulation/04-bit-tricks/diagram.html">diagram ↗</a>
+      </div>
+      <div class="group relative flex min-h-[100px] flex-col justify-between rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all duration-200 ease-out hover:-translate-y-1 hover:scale-[1.015] hover:border-[var(--add)] hover:shadow-[0_18px_34px_-18px_var(--add)]">
+        <a class="absolute top-0 left-0 right-0 bottom-5 flex flex-col justify-between p-4" href="reader.html?path=bit-manipulation/05-bitmasking-subsets/README.md" aria-label="Bitmasking for Subsets README">
+          <span class="flex items-center justify-between"><span class="font-mono text-[10.5px] text-[var(--ink-soft)]">05</span><span class="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--add)] text-[11px] font-bold text-[var(--paper)]">✓</span></span>
+          <span class="block font-mono text-[13px] font-semibold leading-snug text-[var(--ink)]">Bitmasking for Subsets</span>
+        </a>
+        <a class="absolute bottom-2 right-3 font-mono text-[9.5px] text-[var(--ink-soft)] underline decoration-dotted hover:text-[var(--add)]" href="bit-manipulation/05-bitmasking-subsets/diagram.html">diagram ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <p class="max-w-[68ch] font-mono text-[12.5px] leading-[1.6] text-[var(--ink-soft)]">
+    A third track, separate from Patterns and Data Structures: this one
+    assumes nothing and builds up from "what is a bit" to the point where
+    the XOR pattern actually makes sense. See
+    <a href="reader.html?path=bit-manipulation/index.md" class="underline decoration-dotted hover:text-[var(--add)]">bit-manipulation/index.md</a>
+    for how all three tracks relate.
+  </p>
+
+  </div><!-- /panel-bit -->
+
   <footer class="mt-16 flex flex-col gap-2 border-t border-[var(--line)] pt-6 font-mono text-[13px] text-[var(--ink-soft)] sm:flex-row sm:items-center sm:justify-between">
     <p>coding_dsa/ — index.md (full roadmap) · each numbered folder has README.md, problems.md, and diagram.svg</p>
     <a class="underline decoration-dotted hover:text-[var(--add)]" href="https://github.com/rishurishabh/coding-dsa">github.com/rishurishabh/coding-dsa</a>
@@ -391,17 +474,14 @@
 
 <script>
   function showTab(name) {
-    const patternsPanel = document.getElementById('panel-patterns');
-    const dsPanel = document.getElementById('panel-ds');
-    const patternsTab = document.getElementById('tab-patterns');
-    const dsTab = document.getElementById('tab-ds');
-    const showPatterns = name === 'patterns';
-
-    patternsPanel.hidden = !showPatterns;
-    dsPanel.hidden = showPatterns;
-    patternsTab.classList.toggle('active', showPatterns);
-    dsTab.classList.toggle('active', !showPatterns);
-    patternsTab.setAttribute('aria-selected', String(showPatterns));
-    dsTab.setAttribute('aria-selected', String(!showPatterns));
+    const names = ['patterns', 'ds', 'bit'];
+    for (const n of names) {
+      const panel = document.getElementById('panel-' + n);
+      const tab = document.getElementById('tab-' + n);
+      const active = n === name;
+      panel.hidden = !active;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    }
   }
 </script>

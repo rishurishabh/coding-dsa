@@ -1,0 +1,153 @@
+<title>Bit Tricks — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+  .recipes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .recipes { grid-template-columns: repeat(2, 1fr); } }
+  .recipe { border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+  .recipe h4 { font-family: var(--font-mono); font-size: 13px; margin: 0 0 4px; color: var(--ink); }
+  .recipe .formula { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin: 0 0 10px; }
+  .recipe .desc { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-soft); margin: 0 0 14px; line-height: 1.5; }
+  .recipe .ex { font-family: var(--font-mono); font-size: 11.5px; color: var(--add); margin: 0; }
+  .recipe .res { font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; color: var(--result); margin: 2px 0 0; }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to bit-manipulation/04-bit-tricks/</p>
+  <h1>Four recipes, one bit position, one mask</h1>
+  <p class="lede">
+    Four recipes, all built from the same mask: 1&lt;&lt;i lights up exactly
+    one bit position and keeps every other position dark.
+    Code lives in <code>bit-manipulation/04-bit-tricks/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>the mask (1&lt;&lt;i)</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result-soft);border:1px solid var(--result)"></span>result</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Four recipes, one bit position, one mask</p>
+    <div class="fig-frame">
+      <div class="recipes">
+        <div class="recipe">
+          <h4>CHECK</h4>
+          <p class="formula">(n &gt;&gt; i) &amp; 1</p>
+          <p class="desc">slide bit i down, read the last column</p>
+          <p class="ex">n=1010, i=1</p>
+          <p class="res">→ true (set)</p>
+        </div>
+        <div class="recipe">
+          <h4>SET</h4>
+          <p class="formula">n | (1&lt;&lt;i)</p>
+          <p class="desc">OR forces that bit to 1, leaves rest alone</p>
+          <p class="ex">n=1010, i=2</p>
+          <p class="res">→ 1110 (14)</p>
+        </div>
+        <div class="recipe">
+          <h4>CLEAR</h4>
+          <p class="formula">n &amp; ~(1&lt;&lt;i)</p>
+          <p class="desc">AND forces that bit to 0, leaves rest alone</p>
+          <p class="ex">n=1110, i=2</p>
+          <p class="res">→ 1010 (10)</p>
+        </div>
+        <div class="recipe">
+          <h4>TOGGLE</h4>
+          <p class="formula">n ^ (1&lt;&lt;i)</p>
+          <p class="desc">XOR flips that bit, leaves rest alone</p>
+          <p class="ex">n=1010, i=2</p>
+          <p class="res">→ 1110 (14)</p>
+        </div>
+      </div>
+    </div>
+    <figcaption>
+      Every recipe reuses modules 2 and 3's operators — nothing new here,
+      just combined in a specific short way to touch one bit.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Two variants</h2>
+    <p class="section-title">One bit at a time, then a whole-number shortcut</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-check-set-clear-toggle-bit.js</span>
+        <h3>The four single-bit recipes</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Building a mask with 1 shifted left by i, then using it to check, set, clear, or toggle that one bit." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="45" fill="var(--ink)">mask = 1 &lt;&lt; i</text>
+            <path d="M160,55 L160,73" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="160" y="93" fill="var(--result)">check / set / clear / toggle</text>
+          </svg>
+        </div>
+        <p>Read or flip ONE specific bit position, nothing else moves.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-power-of-two-and-bit-count.js</span>
+        <h3>n &amp; (n-1) shortcuts</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Using n and n minus 1 together to clear the lowest set bit, which powers both a power-of-two check and a set-bit counter." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="45" fill="var(--ink)">clears the lowest set bit</text>
+            <path d="M160,55 L160,73" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="160" y="93" fill="var(--result)">power-of-two check, bit count</text>
+          </svg>
+        </div>
+        <p>"Is this a power of two" or "how many bits are set".</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/bit-manipulation/04-bit-tricks/ — README.md (theory) · problems.md (5 practice problems) · 01–02*.js (runnable code)
+  </footer>
+
+</div>

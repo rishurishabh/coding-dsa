@@ -78,3 +78,13 @@ README/problems.md/diagram convention. 7 of 8 built so far: Stack, Queue,
 and [Graph](data-structures/08-graph/README.md). Only Trie is left as its
 own from-scratch module, though [25-trie/01-trie-core.js](25-trie/01-trie-core.js)
 already builds the same structure as part of the pattern track.
+
+## Bit Manipulation track
+A third track: **[bit-manipulation/index.md](bit-manipulation/index.md)**
+assumes nothing, not even what binary is, and builds up to the point
+where [18-bitwise-xor](18-bitwise-xor/README.md) above makes sense. 5 of 5
+built: [Binary Basics](bit-manipulation/01-binary-basics/README.md),
+[Bitwise Operators](bit-manipulation/02-bitwise-operators/README.md),
+[Shift Operators](bit-manipulation/03-shift-operators/README.md),
+[Bit Tricks](bit-manipulation/04-bit-tricks/README.md), and
+[Bitmasking for Subsets](bit-manipulation/05-bitmasking-subsets/README.md).
