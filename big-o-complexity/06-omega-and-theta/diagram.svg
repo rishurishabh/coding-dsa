@@ -1,0 +1,75 @@
+<svg width="1040" height="980" viewBox="0 0 1040 980" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Big-Omega and Big-Theta diagram: Big-O as an upper bound ceiling, Big-Omega as a lower bound floor, and Big-Theta as a tight band where the two meet.">
+  <defs>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="980" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Big-Omega and Big-Theta — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / BIG-O-COMPLEXITY / 06-OMEGA-AND-THETA</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">O is a ceiling ("never worse than"). Ω is a floor ("never better than").</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Θ is when the ceiling and floor are the same height.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#a8710a14" stroke="#a8710a" stroke-width="1.4"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">O — upper bound</text>
+  <rect x="220" y="146" width="14" height="14" rx="3" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.4"></rect>
+  <text x="242" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">Ω — lower bound</text>
+  <rect x="410" y="146" width="14" height="14" rx="3" fill="#b3467c14" stroke="#b3467c" stroke-width="1.4"></rect>
+  <text x="432" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">Θ — tight bound</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">A ceiling, a floor, and when they meet</text>
+
+  <rect x="32" y="266" width="976" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <text x="230" y="300" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">linear search — O and Ω DIFFER</text>
+  <rect x="110" y="330" width="240" height="16" rx="6" fill="#a8710a14" stroke="#a8710a" stroke-width="1.6"></rect>
+  <text x="360" y="343" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#a8710a">O(n) ceiling</text>
+  <rect x="110" y="480" width="30" height="16" rx="6" fill="#0f7a7214" stroke="#0f7a72" stroke-width="1.6"></rect>
+  <text x="150" y="493" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#0f7a72">Ω(1) floor</text>
+  <line x1="125" y1="346" x2="125" y2="480" stroke="#d7dee8" stroke-width="1.5" stroke-dasharray="4,3"></line>
+  <text x="230" y="530" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">a wide gap — depends on WHERE the target is</text>
+
+  <line x1="500" y1="290" x2="500" y2="546" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="740" y="300" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">findMax — O and Ω MATCH -> Θ</text>
+  <rect x="640" y="400" width="200" height="20" rx="6" fill="#b3467c14" stroke="#b3467c" stroke-width="2.2"></rect>
+  <text x="740" y="414" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#b3467c">Θ(n) — one single band</text>
+  <text x="740" y="460" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">no gap — every element must be</text>
+  <text x="740" y="478" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">checked, every single time</text>
+
+  <text x="32" y="606" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">TWO VARIANTS</text>
+  <text x="32" y="632" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">A real gap, then a case where the gap closes</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-best-and-worst-case.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Ω vs. O</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">target first vs. target last</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">1 op vs 1000 ops</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">An algorithm's cost genuinely</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">depends on the input's arrangement.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(524,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-when-bounds-match-theta.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Θ (tight bound)</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">max at front, back, or middle</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">always exactly n-1 ops</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Same work every time — no</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">best/worst gap at all.</text>
+  </g>
+
+  <text x="32" y="944" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/big-o-complexity/06-omega-and-theta/ — README.md · problems.md · 01–02*.js</text>
+</svg>

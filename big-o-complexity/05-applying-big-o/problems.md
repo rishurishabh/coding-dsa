@@ -34,8 +34,11 @@
      answer: what's its time complexity? Its space complexity? What
      would the "naive" alternative have cost instead?
 
-## This is the last module in this track
-See [../index.md](../index.md) for the full list. From here: apply this
-vocabulary while working through [the pattern roadmap](../../index.md) —
-every module's README already states its complexity, now you can verify
-those claims yourself instead of taking them on faith.
+## After this module
+See [../index.md](../index.md) — next up is
+[06-omega-and-theta](../06-omega-and-theta/README.md), which fills in
+the two notations every earlier module quietly left out (Big-O is only
+an upper bound). From there: apply this vocabulary while working through
+[the pattern roadmap](../../index.md) — every module's README already
+states its complexity, now you can verify those claims yourself instead
+of taking them on faith.

@@ -106,11 +106,12 @@ A fifth track: **[big-o-complexity/index.md](big-o-complexity/index.md)**
 is where the Big-O claims every other module's README makes ("O(n)",
 "O(log n)") actually get explained and derived, starting from "why count
 steps instead of timing with a stopwatch" and building up to real
-time-space tradeoffs. 5 of 5 built:
-[What is Big-O](big-o-complexity/01-what-is-big-o/README.md),
+time-space tradeoffs and the two notations Big-O alone leaves out. 6 of
+6 built: [What is Big-O](big-o-complexity/01-what-is-big-o/README.md),
 [Time Complexity Classes](big-o-complexity/02-time-complexity-classes/README.md),
 [Calculating Time Complexity](big-o-complexity/03-calculating-time-complexity/README.md),
-[Space Complexity](big-o-complexity/04-space-complexity/README.md), and
-[Applying Big-O](big-o-complexity/05-applying-big-o/README.md). Worth
-reading before the patterns above — every pattern's README leans on this
-vocabulary.
+[Space Complexity](big-o-complexity/04-space-complexity/README.md),
+[Applying Big-O](big-o-complexity/05-applying-big-o/README.md), and
+[Big-Omega and Big-Theta](big-o-complexity/06-omega-and-theta/README.md).
+Worth reading before the patterns above — every pattern's README leans
+on this vocabulary.

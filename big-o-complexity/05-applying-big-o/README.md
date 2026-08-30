@@ -79,10 +79,16 @@ Each file is runnable standalone: `node 0X-name.js` prints a demo run.
 
 See [problems.md](problems.md) for a suggested practice order.
 
-## You made it
-That's the whole track. Big-O isn't a separate skill from the patterns
-and data structures elsewhere in this repo — it's the lens that explains
-WHY each of them is shaped the way it is. Worth re-reading a module or
-two from [Patterns](../../index.md) with this track's vocabulary fresh —
-"why does this use a heap instead of sorting" or "why does this DP table
-have this shape" usually has a Big-O answer now.
+## One more distinction before you're done
+Everything in this module — and every complexity claim in modules 1-4 —
+has quietly been about Big-O specifically, the UPPER bound on how bad
+things can get. That's not the only standard notation:
+[06-omega-and-theta](../06-omega-and-theta/README.md) covers the other
+two-thirds of the picture — Big-Omega (the lower bound) and Big-Theta
+(when the upper and lower bounds meet). Big-O isn't a separate skill
+from the patterns and data structures elsewhere in this repo — it's the
+lens that explains WHY each of them is shaped the way it is. Worth
+re-reading a module or two from [Patterns](../../index.md) with this
+track's vocabulary fresh — "why does this use a heap instead of sorting"
+or "why does this DP table have this shape" usually has a Big-O answer
+now.

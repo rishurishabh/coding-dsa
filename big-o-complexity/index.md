@@ -20,13 +20,15 @@ Legend: `[ ]` not started · `[x]` done
 - [x] 03. [Calculating Time Complexity](03-calculating-time-complexity/README.md) — the add-vs-multiply technique, for loops and recursion
 - [x] 04. [Space Complexity](04-space-complexity/README.md) — the same growth question, aimed at memory instead of time
 - [x] 05. [Applying Big-O](05-applying-big-o/README.md) — time-space tradeoffs, and why it matters outside an interview
+- [x] 06. [Big-Omega and Big-Theta](06-omega-and-theta/README.md) — the other two-thirds: lower bounds, tight bounds, and why "Big-O" alone isn't the whole story
 
 ## How to actually use this track
 Do them in order — module 3's technique assumes module 2's vocabulary,
-and module 5's tradeoffs assume module 4's space vocabulary. This is the
-one track in this repo worth reading start to finish BEFORE diving into
-[the pattern roadmap](../index.md), since every pattern module's README
-leans on the vocabulary built here.
+module 5's tradeoffs assume module 4's space vocabulary, and module 6
+assumes you already have Big-O itself solid before complicating the
+picture with Ω and Θ. This is the one track in this repo worth reading
+start to finish BEFORE diving into [the pattern roadmap](../index.md),
+since every pattern module's README leans on the vocabulary built here.
 
 ## Conventions
 Same shape as the other tracks: each numbered folder has a `README.md`
@@ -37,7 +39,7 @@ per module that COUNT or TIME real operations instead of just asserting
 a complexity class.
 
 ## Where this leads
-Once module 5 clicks, the complexity claims sprinkled through every
+Once module 6 clicks, the complexity claims sprinkled through every
 other module in this repo ("O(n) time, O(1) space", "O(log n) per
 operation") stop being things to take on faith — you'll be able to
 derive them yourself, and to notice when a "clever" solution is

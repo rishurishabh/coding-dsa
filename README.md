@@ -104,15 +104,16 @@ before [data-structures/06-heap-priority-queue](data-structures/06-heap-priority
 
 A fifth track: every other module's README USES Big-O ("this is
 O(n log n)") without explaining where that comes from — this is where
-that explanation lives. Five modules building from "what is Big-O" up
+that explanation lives. Six modules building from "what is Big-O" up
 through time complexity classes, how to calculate complexity from code
-you've never seen, space complexity, and real time-space tradeoffs —
+you've never seen, space complexity, real time-space tradeoffs, and
+finally Big-Omega/Big-Theta (the two notations Big-O alone leaves out) —
 every JS file counts or times real operations instead of just asserting
 a complexity class. See **[big-o-complexity/index.md](big-o-complexity/index.md)**
-(5 of 5 built: What is Big-O, Time Complexity Classes, Calculating Time
-Complexity, Space Complexity, Applying Big-O). Worth reading before the
-Patterns track above, since every pattern's README leans on this
-vocabulary.
+(6 of 6 built: What is Big-O, Time Complexity Classes, Calculating Time
+Complexity, Space Complexity, Applying Big-O, Big-Omega and Big-Theta).
+Worth reading before the Patterns track above, since every pattern's
+README leans on this vocabulary.
 
 ## Running the code
 
