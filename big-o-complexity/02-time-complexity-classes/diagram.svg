@@ -1,0 +1,99 @@
+<svg width="1040" height="1300" viewBox="0 0 1040 1300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Time complexity classes diagram: six growth curves ranked from flat (O(1)) to explosive (O(2^n)), plotted against increasing input size, plus three variant diagrams.">
+  <defs>
+    <marker id="arrow-remove" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b3467c"></path></marker>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1300" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Time Complexity Classes — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / BIG-O-COMPLEXITY / 02-TIME-COMPLEXITY-CLASSES</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Same x-axis (input size), six very different shapes for how work grows —</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">this ranking is the single most useful thing to memorize in this track.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">O(1) / O(log n) — efficient</text>
+  <rect x="270" y="146" width="14" height="14" rx="3" fill="#a8710a14" stroke="#a8710a" stroke-width="1.4"></rect>
+  <text x="292" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">O(n) / O(n log n) — moderate</text>
+  <rect x="530" y="146" width="14" height="14" rx="3" fill="#b3467c14" stroke="#b3467c" stroke-width="1.4"></rect>
+  <text x="552" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">O(n²) / O(2ⁿ) — expensive</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Six shapes, ranked flat to explosive</text>
+
+  <rect x="32" y="266" width="976" height="340" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <!-- axes -->
+  <line x1="100" y1="580" x2="950" y2="580" stroke="#d7dee8" stroke-width="1.5"></line>
+  <line x1="100" y1="286" x2="100" y2="580" stroke="#d7dee8" stroke-width="1.5"></line>
+  <text x="525" y="600" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">input size (n) →</text>
+  <text x="70" y="440" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70" transform="rotate(-90,70,440)">work →</text>
+
+  <!-- O(1) -->
+  <polyline points="100,580 270,579 440,578 610,577 780,576 950,575" fill="none" stroke="#0f7a72" stroke-width="2.4"></polyline>
+  <text x="958" y="578" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#0f7a72">O(1)</text>
+
+  <!-- O(log n) -->
+  <polyline points="100,580 270,558 440,545 610,536 780,529 950,524" fill="none" stroke="#0f7a72" stroke-width="2" stroke-dasharray="6,4"></polyline>
+  <text x="958" y="526" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#0f7a72">O(log n)</text>
+
+  <!-- O(n) -->
+  <polyline points="100,580 270,526 440,472 610,418 780,364 950,310" fill="none" stroke="#a8710a" stroke-width="2.4"></polyline>
+  <text x="958" y="312" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#a8710a">O(n)</text>
+
+  <!-- O(n log n) -->
+  <polyline points="100,580 270,505 440,415 610,315 780,300 950,290" fill="none" stroke="#a8710a" stroke-width="2" stroke-dasharray="6,4"></polyline>
+  <text x="958" y="292" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#a8710a">O(n log n)</text>
+
+  <!-- O(n^2) -->
+  <polyline points="100,580 270,465 440,330 610,286 610,286" fill="none" stroke="#b3467c" stroke-width="2" stroke-dasharray="6,4"></polyline>
+  <text x="622" y="286" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#b3467c">O(n²)</text>
+
+  <!-- O(2^n) -->
+  <polyline points="100,580 270,530 440,286 440,286" fill="none" stroke="#b3467c" stroke-width="2.6"></polyline>
+  <path d="M440,286 L440,254" fill="none" stroke="#b3467c" stroke-width="2.2" marker-end="url(#arrow-remove)"></path>
+  <text x="452" y="262" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#b3467c">O(2ⁿ) — off the chart by here</text>
+
+  <text x="32" y="646" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THREE VARIANTS</text>
+  <text x="32" y="672" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">From the cheap end of the scale to the expensive end</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,692)">
+    <rect x="0" y="0" width="300" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-constant-and-logarithmic.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#14202e">O(1) and O(log n)</text>
+    <text x="16" y="90" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#14202e">binary search, array access</text>
+    <path d="M150,100 L150,118" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+    <text x="150" y="140" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#a8710a">10,000x n → 16 ops</text>
+    <text x="16" y="200" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The flattest, cheapest end</text>
+    <text x="16" y="216" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">of the scale.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(370,692)">
+    <rect x="0" y="0" width="300" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-linear-and-linearithmic.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#14202e">O(n) and O(n log n)</text>
+    <text x="16" y="90" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#14202e">linear scan, merge sort</text>
+    <path d="M150,100 L150,118" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+    <text x="150" y="140" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#a8710a">comparisons ≈ n·log2(n)</text>
+    <text x="16" y="200" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The "touch everything, maybe</text>
+    <text x="16" y="216" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">more than once" middle.</text>
+  </g>
+
+  <!-- CARD 3 -->
+  <g transform="translate(708,692)">
+    <rect x="0" y="0" width="300" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">03-quadratic-and-exponential.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#14202e">O(n²) and O(2ⁿ)</text>
+    <text x="16" y="90" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#14202e">all-pairs, naive Fibonacci</text>
+    <path d="M150,100 L150,118" fill="none" stroke="#b3467c" stroke-width="1.8" marker-end="url(#arrow-remove)"></path>
+    <text x="150" y="140" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#b3467c">n=25 → 242,785 ops</text>
+    <text x="16" y="200" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">The expensive end — why DP</text>
+    <text x="16" y="216" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">and better algorithms matter.</text>
+  </g>
+
+  <text x="32" y="1264" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/big-o-complexity/02-time-complexity-classes/ — README.md · problems.md · 01–03*.js</text>
+</svg>

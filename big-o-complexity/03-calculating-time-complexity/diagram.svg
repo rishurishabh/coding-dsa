@@ -1,0 +1,84 @@
+<svg width="1040" height="1080" viewBox="0 0 1040 1080" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Calculating time complexity diagram: sequential loops adding their complexities, nested loops multiplying theirs, and a recursion tree showing depth times work-per-level.">
+  <defs>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+    <marker id="arrow-add" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a72"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1080" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Calculating Time Complexity — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / BIG-O-COMPLEXITY / 03-CALCULATING-TIME-COMPLEXITY</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Sequential steps ADD their complexities. Nested steps MULTIPLY theirs.</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">That single rule resolves almost every "what's the complexity" question.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">sequential (add)</text>
+  <rect x="220" y="146" width="14" height="14" rx="3" fill="#a8710a14" stroke="#a8710a" stroke-width="1.4"></rect>
+  <text x="242" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">nested (multiply)</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Add when steps are side by side, multiply when they're inside each other</text>
+
+  <rect x="32" y="266" width="976" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <text x="270" y="300" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">SEQUENTIAL — two loops, one after another</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+    <rect x="150" y="320" width="100" height="50" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="200" y="350" fill="#0f7a72">O(n)</text>
+    <text x="255" y="350" fill="#4a5a70" font-size="18">+</text>
+    <rect x="290" y="320" width="100" height="50" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+    <text x="340" y="350" fill="#0f7a72">O(n)</text>
+  </g>
+  <path d="M270,382 L270,400" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+  <text x="270" y="424" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#a8710a">O(n) — drop the constant</text>
+
+  <line x1="500" y1="290" x2="500" y2="536" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="740" y="300" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">NESTED — one loop inside another</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" text-anchor="middle">
+    <rect x="620" y="320" width="240" height="90" rx="8" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+    <text x="740" y="345" fill="#a8710a">O(n) outer</text>
+    <rect x="640" y="358" width="200" height="40" rx="6" fill="#ffffff" stroke="#a8710a" stroke-width="1.6"></rect>
+    <text x="740" y="382" fill="#a8710a">O(n) inner, EACH TIME</text>
+  </g>
+  <path d="M740,412 L740,430" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+  <text x="740" y="454" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#a8710a">O(n) × O(n) = O(n²)</text>
+
+  <text x="32" y="500" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4a5a70">A triangular nested loop (inner bound depends on outer) still multiplies to O(n²) — see 01-analyzing-loops.js.</text>
+  <text x="32" y="520" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4a5a70">Recursion: depth (how many levels) × work done per level — merge sort's O(log n) depth × O(n) work per level = O(n log n).</text>
+
+  <text x="32" y="606" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">TWO VARIANTS</text>
+  <text x="32" y="632" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Loops first, then the same idea applied to recursion</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-analyzing-loops.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Add vs. multiply</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">triangular loop: sum 1..n</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">still O(n²), smaller constant</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Deriving complexity from loop</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">shapes, including sneaky cases.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(524,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-analyzing-recursion.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Depth × work-per-level</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">factorial: 1 call per level</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">calls === n, this IS O(n)</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Deriving complexity from recursive</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">code: linear, divide-and-conquer, branching.</text>
+  </g>
+
+  <text x="32" y="1044" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/big-o-complexity/03-calculating-time-complexity/ — README.md · problems.md · 01–02*.js</text>
+</svg>

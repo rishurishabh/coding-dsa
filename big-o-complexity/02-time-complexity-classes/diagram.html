@@ -1,0 +1,159 @@
+<title>Time Complexity Classes — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --remove: #b3467c; --remove-soft: #b3467c14;
+    --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+      --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --remove: #e0568f; --remove-soft: #e0568f1f;
+    --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to big-o-complexity/02-time-complexity-classes/</p>
+  <h1>Six shapes, ranked flat to explosive</h1>
+  <p class="lede">
+    Same x-axis (input size), six very different shapes for how work
+    grows — this ranking is the single most useful thing to memorize in
+    this track.
+    Code lives in <code>big-o-complexity/02-time-complexity-classes/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>O(1) / O(log n) — efficient</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result-soft);border:1px solid var(--result)"></span>O(n) / O(n log n) — moderate</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--remove-soft);border:1px solid var(--remove)"></span>O(n²) / O(2ⁿ) — expensive</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Six shapes, ranked flat to explosive</p>
+    <figure class="fig-frame">
+      <svg viewBox="0 0 1000 340" role="img" aria-label="Six growth curves plotted against increasing input size: O(1) flat, O(log n) barely rising, O(n) a straight diagonal, O(n log n) steeper, O(n squared) curving up fast, and O(2 to the n) shooting off the top of the chart almost immediately." font-family="var(--font-mono)" font-size="12">
+        <line x1="60" y1="310" x2="960" y2="310" stroke="var(--line)" stroke-width="1.5"></line>
+        <line x1="60" y1="16" x2="60" y2="310" stroke="var(--line)" stroke-width="1.5"></line>
+        <text x="510" y="332" text-anchor="middle" fill="var(--ink-soft)">input size (n) →</text>
+
+        <polyline points="60,310 230,309 400,308 570,307 740,306 910,305" fill="none" stroke="var(--add)" stroke-width="2.4"></polyline>
+        <text x="918" y="308" fill="var(--add)">O(1)</text>
+
+        <polyline points="60,310 230,288 400,275 570,266 740,259 910,254" fill="none" stroke="var(--add)" stroke-width="2" stroke-dasharray="6,4"></polyline>
+        <text x="918" y="256" fill="var(--add)">O(log n)</text>
+
+        <polyline points="60,310 230,256 400,202 570,148 740,94 910,40" fill="none" stroke="var(--result)" stroke-width="2.4"></polyline>
+        <text x="918" y="42" fill="var(--result)">O(n)</text>
+
+        <polyline points="60,310 230,235 400,145 570,45 740,30 910,20" fill="none" stroke="var(--result)" stroke-width="2" stroke-dasharray="6,4"></polyline>
+        <text x="918" y="22" fill="var(--result)" font-size="11">O(n log n)</text>
+
+        <polyline points="60,310 230,195 400,60 570,16" fill="none" stroke="var(--remove)" stroke-width="2" stroke-dasharray="6,4"></polyline>
+        <text x="582" y="20" fill="var(--remove)">O(n²)</text>
+
+        <polyline points="60,310 230,260 400,16" fill="none" stroke="var(--remove)" stroke-width="2.6"></polyline>
+        <text x="230" y="10" fill="var(--remove)" font-weight="700" font-size="11">O(2ⁿ) — off the chart by here</text>
+      </svg>
+    </figure>
+    <figcaption>
+      Every curve starts from the same point — what separates them is
+      purely how fast they climb as n grows. That climb rate is the
+      entire content of a Big-O label.
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Three variants</h2>
+    <p class="section-title">From the cheap end of the scale to the expensive end</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-constant-and-logarithmic.js</span>
+        <h3>O(1) and O(log n)</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 300 130" role="img" aria-label="Binary search barely growing in operation count even as the input size grows ten thousand times larger." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="150" y="45" fill="var(--ink)">binary search, array access</text>
+            <path d="M150,55 L150,73" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="150" y="93" fill="var(--result)">10,000x n → 16 ops</text>
+          </svg>
+        </div>
+        <p>The flattest, cheapest end of the scale.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-linear-and-linearithmic.js</span>
+        <h3>O(n) and O(n log n)</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 300 130" role="img" aria-label="Merge sort's comparison count closely tracking the mathematical n log n formula." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="150" y="45" fill="var(--ink)">linear scan, merge sort</text>
+            <path d="M150,55 L150,73" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="150" y="93" fill="var(--result)">comparisons ≈ n·log2(n)</text>
+          </svg>
+        </div>
+        <p>The "touch everything, maybe more than once" middle.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <span class="card-tag">03-quadratic-and-exponential.js</span>
+        <h3>O(n²) and O(2ⁿ)</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 300 130" role="img" aria-label="Naive recursive Fibonacci needing nearly 250,000 operations for an input of just 25." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="150" y="45" fill="var(--ink)">all-pairs, naive Fibonacci</text>
+            <path d="M150,55 L150,73" fill="none" stroke="var(--remove)" stroke-width="1.8"></path>
+            <text x="150" y="93" fill="var(--remove)">n=25 → 242,785 ops</text>
+          </svg>
+        </div>
+        <p>The expensive end — why DP and better algorithms matter.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/big-o-complexity/02-time-complexity-classes/ — README.md (theory) · problems.md (4 practice problems) · 01–03*.js (runnable code)
+  </footer>
+
+</div>

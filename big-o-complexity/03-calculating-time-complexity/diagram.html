@@ -1,0 +1,148 @@
+<title>Calculating Time Complexity — Mechanism Map</title>
+<style>
+  :root {
+    --ink: #14202e; --ink-soft: #4a5a70; --paper: #eef2f7; --surface: #ffffff; --line: #d7dee8;
+    --add: #0f7a72; --add-soft: #0f7a7214; --result: #a8710a; --result-soft: #a8710a14;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+      --add: #3fc9be; --add-soft: #3fc9be1f; --result: #e0a84a; --result-soft: #e0a84a1f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e7ecf3; --ink-soft: #94a3b8; --paper: #0b0f16; --surface: #131a24; --line: #232d3b;
+    --add: #3fc9be; --add-soft: #3fc9be1f; --result: #e0a84a; --result-soft: #e0a84a1f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--add); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--add); outline-offset: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  h1 { font-family: var(--font-mono); font-weight: 700; font-size: clamp(28px, 4.2vw, 40px); letter-spacing: -0.01em; line-height: 1.12; margin: 0 0 18px; text-wrap: balance; }
+  .lede { font-size: 16.5px; line-height: 1.65; color: var(--ink-soft); max-width: 66ch; margin: 0 0 36px; }
+  .lede code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0.05em 0.4em; }
+  .legend { display: flex; flex-wrap: wrap; gap: 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 44px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+  section { margin-bottom: 56px; }
+  h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px; }
+  .section-title { font-family: var(--font-mono); font-weight: 700; font-size: 22px; color: var(--ink); margin: 0 0 18px; }
+  figure { margin: 0; }
+  .fig-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+  .fig-frame svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin-top: 12px; max-width: 68ch; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .card-tag { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .card h3 { font-family: var(--font-mono); font-size: 14.5px; font-weight: 700; margin: 0; color: var(--ink); }
+  .card .fig-frame { padding: 10px; overflow-x: visible; }
+  .card p { font-size: 12.8px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  footer { border-top: 1px solid var(--line); padding-top: 22px; font-size: 13px; color: var(--ink-soft); font-family: var(--font-mono); }
+  .compare { display: flex; gap: 40px; flex-wrap: wrap; }
+  .compare-col { flex: 1; min-width: 260px; }
+  .compare-col h4 { font-family: var(--font-mono); font-size: 13px; margin: 0 0 14px; color: var(--ink); }
+  .box-row { display: flex; align-items: center; gap: 10px; }
+  .box { width: 100px; height: 50px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; background: var(--add-soft); border: 2px solid var(--add); color: var(--add); }
+  .plus { font-family: var(--font-mono); font-size: 18px; color: var(--ink-soft); }
+  .nest-outer { width: 240px; padding: 14px; border-radius: 8px; background: var(--result-soft); border: 2px solid var(--result); }
+  .nest-outer p { margin: 0 0 8px; font-family: var(--font-mono); font-size: 13px; color: var(--result); }
+  .nest-inner { padding: 10px; border-radius: 6px; background: var(--surface); border: 1.6px solid var(--result); font-family: var(--font-mono); font-size: 13px; color: var(--result); text-align: center; }
+  .result-line { margin-top: 16px; font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--result); }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">Visual Guide — companion to big-o-complexity/03-calculating-time-complexity/</p>
+  <h1>Add when steps are side by side, multiply when they're inside each other</h1>
+  <p class="lede">
+    Sequential steps ADD their complexities. Nested steps MULTIPLY
+    theirs. That single rule resolves almost every "what's the
+    complexity" question.
+    Code lives in <code>big-o-complexity/03-calculating-time-complexity/*.js</code>.
+  </p>
+
+  <div class="legend">
+    <div class="legend-item"><span class="swatch" style="background:var(--add)"></span>sequential (add)</div>
+    <div class="legend-item"><span class="swatch" style="background:var(--result-soft);border:1px solid var(--result)"></span>nested (multiply)</div>
+  </div>
+
+  <section>
+    <h2>The core move</h2>
+    <p class="section-title">Add when steps are side by side, multiply when they're inside each other</p>
+    <div class="fig-frame">
+      <div class="compare">
+        <div class="compare-col">
+          <h4>SEQUENTIAL — two loops, one after another</h4>
+          <div class="box-row">
+            <div class="box">O(n)</div>
+            <span class="plus">+</span>
+            <div class="box">O(n)</div>
+          </div>
+          <p class="result-line">↓ O(n) — drop the constant</p>
+        </div>
+        <div class="compare-col">
+          <h4>NESTED — one loop inside another</h4>
+          <div class="nest-outer">
+            <p>O(n) outer</p>
+            <div class="nest-inner">O(n) inner, EACH TIME</div>
+          </div>
+          <p class="result-line">↓ O(n) × O(n) = O(n²)</p>
+        </div>
+      </div>
+    </div>
+    <figcaption>
+      A triangular nested loop (inner bound depends on outer) still
+      multiplies to O(n²) — see
+      <a href="01-analyzing-loops.js">01-analyzing-loops.js</a>. Recursion:
+      depth (how many levels) × work done per level — merge sort's
+      O(log n) depth × O(n) work per level = O(n log n).
+    </figcaption>
+  </section>
+
+  <section>
+    <h2>Two variants</h2>
+    <p class="section-title">Loops first, then the same idea applied to recursion</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <span class="card-tag">01-analyzing-loops.js</span>
+        <h3>Add vs. multiply</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 130" role="img" aria-label="A triangular nested loop summing 1 through n still producing O(n squared) growth, just with a smaller constant factor." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="45" fill="var(--ink)">triangular loop: sum 1..n</text>
+            <path d="M160,55 L160,73" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="160" y="93" fill="var(--result)">still O(n²), smaller constant</text>
+          </svg>
+        </div>
+        <p>Deriving complexity from loop shapes, including sneaky cases.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <span class="card-tag">02-analyzing-recursion.js</span>
+        <h3>Depth × work-per-level</h3>
+        <div class="fig-frame">
+          <svg viewBox="0 0 320 130" role="img" aria-label="Factorial recursion making exactly one call per level of depth, so the call count equals n directly." font-family="var(--font-mono)" font-size="12" text-anchor="middle">
+            <text x="160" y="45" fill="var(--ink)">factorial: 1 call per level</text>
+            <path d="M160,55 L160,73" fill="none" stroke="var(--result)" stroke-width="1.8"></path>
+            <text x="160" y="93" fill="var(--result)">calls === n, this IS O(n)</text>
+          </svg>
+        </div>
+        <p>Deriving complexity from recursive code: linear, divide-and-conquer, branching.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    coding_dsa/big-o-complexity/03-calculating-time-complexity/ — README.md (theory) · problems.md (4 practice problems) · 01–02*.js (runnable code)
+  </footer>
+
+</div>

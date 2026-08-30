@@ -1,0 +1,81 @@
+<svg width="1040" height="1080" viewBox="0 0 1040 1080" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Applying Big-O diagram: an O(n squared) time, O(1) space nested-loop duplicate check versus an O(n) time, O(n) space hash-set version, plus a timing table showing the gap widen as input size grows.">
+  <defs>
+    <marker id="arrow-result" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a8710a"></path></marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="1080" fill="#eef2f7"></rect>
+
+  <text x="32" y="60" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="28" font-weight="700" fill="#14202e">Applying Big-O — Mechanism Map</text>
+  <text x="32" y="84" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="1" fill="#4a5a70">COMPANION TO CODING_DSA / BIG-O-COMPLEXITY / 05-APPLYING-BIG-O</text>
+  <text x="32" y="110" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">Spend one resource to save the other — and watch the abstract shapes turn</text>
+  <text x="32" y="128" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="13.5" fill="#4a5a70">into a real, measurable gap once n actually gets large.</text>
+
+  <rect x="32" y="146" width="14" height="14" rx="3" fill="#0f7a72"></rect>
+  <text x="54" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">O(1) space, O(n²) time</text>
+  <rect x="230" y="146" width="14" height="14" rx="3" fill="#a8710a14" stroke="#a8710a" stroke-width="1.4"></rect>
+  <text x="252" y="157" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#4a5a70">O(n) space, O(n) time</text>
+
+  <line x1="32" y1="188" x2="1008" y2="188" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="32" y="222" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">THE CORE MOVE</text>
+  <text x="32" y="248" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">Same question, two resource budgets</text>
+
+  <rect x="32" y="266" width="976" height="300" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+
+  <text x="270" y="300" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">nested loop</text>
+  <rect x="150" y="316" width="240" height="70" rx="8" fill="#0f7a7214" stroke="#0f7a72" stroke-width="2"></rect>
+  <text x="270" y="346" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#0f7a72">1,999,000 operations</text>
+  <text x="270" y="366" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#0f7a72">O(1) extra space</text>
+
+  <line x1="500" y1="290" x2="500" y2="556" stroke="#d7dee8" stroke-width="1"></line>
+
+  <text x="740" y="300" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#14202e">hash set</text>
+  <rect x="620" y="316" width="240" height="70" rx="8" fill="#a8710a14" stroke="#a8710a" stroke-width="2"></rect>
+  <text x="740" y="346" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="13" fill="#a8710a">2,000 operations</text>
+  <text x="740" y="366" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#a8710a">O(n) extra space</text>
+
+  <text x="270" y="420" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4a5a70">~1000x more operations than the</text>
+  <text x="270" y="438" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12.5" fill="#4a5a70">Set version, for n = 2,000</text>
+
+  <text x="270" y="480" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">MEASURED, NOT JUST COUNTED</text>
+  <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+    <text x="270" y="504" fill="#4a5a70">n=1000   5.3ms vs 0.2ms</text>
+    <text x="270" y="522" fill="#4a5a70">n=8000  14.7ms vs 0.3ms</text>
+  </g>
+  <text x="740" y="480" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">n doubles four times -></text>
+  <text x="740" y="498" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">O(n²) roughly quadruples each</text>
+  <text x="740" y="516" text-anchor="middle" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="12" fill="#4a5a70">time, O(n) barely moves.</text>
+
+  <text x="32" y="606" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="1" fill="#4a5a70">TWO VARIANTS</text>
+  <text x="32" y="632" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#14202e">The tradeoff, then its consequence at scale</text>
+
+  <!-- CARD 1 -->
+  <g transform="translate(32,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">01-time-space-tradeoff.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">Trade memory for speed</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">nested loop vs. hash set</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">~1000x fewer ops, O(n) space</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Comparing two correct solutions</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">with different resource costs.</text>
+  </g>
+
+  <!-- CARD 2 -->
+  <g transform="translate(524,652)">
+    <rect x="0" y="0" width="460" height="280" rx="12" fill="#ffffff" stroke="#d7dee8" stroke-width="1.5"></rect>
+    <text x="16" y="24" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#4a5a70">02-why-it-matters-at-scale.js</text>
+    <text x="16" y="44" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14.5" font-weight="700" fill="#14202e">The abstract made concrete</text>
+    <g transform="translate(16,56) scale(0.9)" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" text-anchor="middle">
+      <text x="230" y="70" fill="#14202e">real ms, growing n</text>
+      <path d="M230,80 L230,98" fill="none" stroke="#a8710a" stroke-width="1.8" marker-end="url(#arrow-result)"></path>
+      <text x="230" y="118" fill="#a8710a">gap widens as n grows</text>
+    </g>
+    <text x="16" y="230" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">Why "it's just a constant factor"</text>
+    <text x="16" y="246" font-family="-apple-system, Segoe UI, Arial, sans-serif" font-size="11.5" fill="#4a5a70">stops being true at real scale.</text>
+  </g>
+
+  <text x="32" y="1044" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#4a5a70">coding_dsa/big-o-complexity/05-applying-big-o/ — README.md · problems.md · 01–02*.js</text>
+</svg>
